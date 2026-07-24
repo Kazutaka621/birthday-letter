@@ -3,556 +3,542 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>It's Your Day! 💙</title>
-    <!-- Google Fonts -->
+    <title>Happy Birthday! 💙</title>
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Nunito', sans-serif;
-            background-color: #b1d4f8;
-            background-image: radial-gradient(#ffffff 15%, transparent 15%);
-            background-size: 20px 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            color: #4a5568;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #030a16;
+            color: #e2e8f0;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* ---------------------------------- */
-        /* EXACT CANDLE ANIMATION FROM VIDEO  */
-        /* ---------------------------------- */
-        #loader {
+        /* Starry Particles Background */
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 9999;
+            background: radial-gradient(circle at 50% 50%, rgba(15, 32, 67, 0.8) 0%, rgba(3, 10, 22, 1) 100%),
+                        radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                        radial-gradient(2px 2px at 150px 120px, #60a5fa, rgba(0,0,0,0)),
+                        radial-gradient(1.5px 1.5px at 280px 70px, #ffffff, rgba(0,0,0,0)),
+                        radial-gradient(2px 2px at 400px 250px, #93c5fd, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 100% 100%, 500px 500px, 400px 400px, 300px 300px, 450px 450px;
+            z-index: -1;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            z-index: 100;
+            background: rgba(3, 10, 22, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #93c5fd;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #60a5fa;
+        }
+
+        /* ---------------------------------- */
+        /* ENVELOPE OPENING OVERLAY           */
+        /* ---------------------------------- */
+        #envelopeOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #030a16;
+            z-index: 999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            animation: roomLightSwitch 3.2s infinite ease-in-out;
             transition: opacity 0.8s ease, visibility 0.8s;
         }
 
-        /* Screen darkens when flame is blown out */
-        @keyframes roomLightSwitch {
-            0%, 28%, 70%, 100% { background-color: #a2c9f5; }
-            35%, 63% { background-color: #172a45; }
-        }
-
-        .loading-text {
-            font-family: 'Fredoka', sans-serif;
-            letter-spacing: 6px;
-            font-size: 1.2rem;
-            color: #ffffff;
-            margin-bottom: 45px;
-            display: flex;
-            align-items: center;
-        }
-
-        /* Candles Base Line */
-        .candles-stage {
-            position: relative;
-            width: 240px;
-            height: 110px;
-            border-bottom: 4px solid #332d56;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: 22px;
-            padding-bottom: 2px;
-        }
-
-        .candle {
-            background: #ffffff;
-            border: 3.5px solid #332d56;
-            border-radius: 4px 4px 0 0;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Short Candle (Left) */
-        .candle-short { 
-            width: 44px; 
-            height: 52px; 
-        }
-
-        /* Tall Candle (Right) - Leans left to blow out the flame */
-        .candle-tall { 
-            width: 32px; 
-            height: 80px; 
-            transform-origin: bottom center;
-            animation: tallBlowing 3.2s infinite ease-in-out;
-        }
-
-        @keyframes tallBlowing {
-            0%, 15%, 70%, 100% { transform: rotate(0deg); }
-            28%, 35% { transform: rotate(-12deg); }
-        }
-
-        /* Face & Expressions */
-        .face {
-            position: absolute;
-            top: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .eyes-normal {
-            display: flex;
-            gap: 8px;
-        }
-
-        .eye-dot {
-            width: 3.5px;
-            height: 3.5px;
-            background: #332d56;
-            border-radius: 50%;
-        }
-
-        /* Squinting eyes (> <) on short candle */
-        .eyes-squint {
-            display: none;
-            font-size: 11px;
-            font-weight: 800;
-            color: #d9534f;
-            letter-spacing: 5px;
-            line-height: 1;
-            margin-left: 2px;
-        }
-
-        /* Open mouth (o) on tall candle when blowing */
-        .mouth-open {
-            width: 6px;
-            height: 7px;
-            border: 2px solid #332d56;
-            border-radius: 50%;
-            margin-top: 3px;
-            display: none;
-        }
-
-        /* Short Candle Face Switch */
-        .candle-short .eyes-normal {
-            animation: hideNormalEyes 3.2s infinite;
-        }
-        .candle-short .eyes-squint {
-            display: block;
-            animation: showSquintEyes 3.2s infinite;
-        }
-
-        @keyframes hideNormalEyes {
-            0%, 30%, 68%, 100% { opacity: 1; }
-            35%, 63% { opacity: 0; }
-        }
-
-        @keyframes showSquintEyes {
-            0%, 30%, 68%, 100% { opacity: 0; }
-            35%, 63% { opacity: 1; }
-        }
-
-        /* Tall Candle Blowing Mouth Switch */
-        .candle-tall .mouth-open {
-            display: block;
-            animation: showMouth 3.2s infinite;
-        }
-
-        @keyframes showMouth {
-            0%, 20%, 68%, 100% { opacity: 0; transform: scale(0.5); }
-            28%, 35% { opacity: 1; transform: scale(1); }
-        }
-
-        /* Flame on Short Candle */
-        .flame-container {
-            position: absolute;
-            top: -26px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: flameToggle 3.2s infinite ease-in-out;
-        }
-
-        .flame {
-            width: 14px;
-            height: 20px;
-            background: #ffca28;
-            border: 2.5px solid #332d56;
-            border-radius: 50% 50% 35% 35%;
-            animation: flameFlicker 0.3s infinite alternate;
-        }
-
-        /* Glowing ring around flame */
-        .flame-halo {
-            position: absolute;
-            width: 32px;
-            height: 32px;
-            border: 1.5px dashed rgba(255, 255, 255, 0.7);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        @keyframes flameFlicker {
-            0% { transform: scale(1) rotate(-3deg); }
-            100% { transform: scale(1.1) rotate(3deg); }
-        }
-
-        @keyframes flameToggle {
-            0%, 28%, 68%, 100% { opacity: 1; transform: scale(1); }
-            35%, 63% { opacity: 0; transform: scale(0.1); }
-        }
-
-        /* ---------------------------------- */
-        /* MAIN PAGE CONTENT                 */
-        /* ---------------------------------- */
-        .header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .header h1 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 3.2rem;
-            color: #ffffff;
-            text-shadow: 0 3px 6px rgba(0,0,0,0.1);
-        }
-
-        .header p {
+        .envelope-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #60a5fa;
             font-size: 0.9rem;
-            color: #ffffff;
-            letter-spacing: 2px;
-            font-weight: 700;
-            text-transform: uppercase;
-            opacity: 0.9;
+            margin-bottom: 10px;
         }
 
-        /* Music Player Widget */
-        .music-player {
-            background: #ffffff;
-            width: 100%;
-            max-width: 380px;
-            border-radius: 30px;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        .envelope-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            color: #f8fafc;
             margin-bottom: 30px;
         }
 
-        .song-info {
+        .envelope-box {
+            width: 220px;
+            height: 140px;
+            background: rgba(30, 58, 138, 0.3);
+            border: 1.5px solid #60a5fa;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(96, 165, 250, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .envelope-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(96, 165, 250, 0.4);
+        }
+
+        .envelope-icon {
+            font-size: 3rem;
+            color: #93c5fd;
+        }
+
+        .click-hint {
+            margin-top: 25px;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: #64748b;
+            text-transform: uppercase;
+        }
+
+        /* ---------------------------------- */
+        /* HERO SECTION                       */
+        /* ---------------------------------- */
+        .section {
+            min-height: 100vh;
+            padding: 120px 20px 60px 20px;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #93c5fd;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            color: #ffffff;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(147, 197, 253, 0.3);
+        }
+
+        .hero-desc {
+            max-width: 500px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Music Player Glass Card */
+        .music-card {
+            position: absolute;
+            left: 50px;
+            bottom: 80px;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .album-art {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .music-info {
             text-align: left;
         }
 
-        .song-title {
-            font-weight: 700;
-            color: #3b82f6;
-            font-size: 1rem;
+        .music-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #f8fafc;
         }
 
-        .song-artist {
-            font-size: 0.8rem;
-            color: #94a3b8;
-        }
-
-        .play-btn {
-            background: #edf5ff;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #3b82f6;
-            font-size: 1.2rem;
-            transition: background 0.2s;
-        }
-
-        .play-btn:hover {
-            background: #dbeafe;
-        }
-
-        /* Action Cards Grid */
-        .cards-grid {
-            display: flex;
-            gap: 20px;
-            width: 100%;
-            max-width: 450px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            background: #ffffff;
-            flex: 1;
-            min-width: 180px;
-            border-radius: 24px;
-            padding: 25px 15px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-
-        .card-icon {
-            font-size: 2.2rem;
-            background: #f0f7ff;
-            width: 60px;
-            height: 60px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .card-title {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 1.05rem;
+        .music-artist {
+            font-size: 0.75rem;
             color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .footer-note {
-            margin-top: 40px;
-            font-size: 0.8rem;
-            color: #ffffff;
-            letter-spacing: 2px;
-            font-weight: 700;
-        }
-
-        /* Modal Overlay */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(4px);
+        /* ---------------------------------- */
+        /* PHOTO SHOWCASE & LETTER            */
+        /* ---------------------------------- */
+        .showcase-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            z-index: 100;
-            padding: 20px;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .modal-card {
-            background: #ffffff;
-            border-radius: 28px;
-            max-width: 480px;
+            gap: 30px;
+            max-width: 1100px;
             width: 100%;
-            padding: 35px 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            position: relative;
-            max-height: 80vh;
-            overflow-y: auto;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
+            margin-top: 40px;
         }
 
-        .modal-overlay.active .modal-card {
-            transform: scale(1);
+        .side-photo {
+            width: 260px;
+            height: 360px;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            filter: grayscale(80%) contrast(110%);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            transition: filter 0.3s;
         }
 
-        .close-icon {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 1.2rem;
-            color: #cbd5e1;
-            cursor: pointer;
+        .side-photo:hover {
+            filter: grayscale(0%);
         }
 
-        .modal-header-title {
-            font-family: 'Fredoka', sans-serif;
+        .center-glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            border-radius: 24px;
+            padding: 40px 30px;
+            flex: 1;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .letter-card {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            border-radius: 24px;
+            padding: 50px 40px;
+            max-width: 650px;
+            width: 100%;
+            text-align: left;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .letter-header {
+            font-family: 'Cinzel', serif;
             font-size: 2.2rem;
-            color: #3b82f6;
+            color: #ffffff;
             margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .modal-letter-text {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: #475569;
+        .letter-content {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #cbd5e1;
             white-space: pre-line;
+        }
+
+        /* ---------------------------------- */
+        /* REASONS GRID                       */
+        /* ---------------------------------- */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1000px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .reason-card {
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(96, 165, 250, 0.4);
+        }
+
+        .reason-icon {
+            font-size: 2rem;
+            color: #60a5fa;
+            margin-bottom: 15px;
+        }
+
+        .reason-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: #f8fafc;
+            margin-bottom: 10px;
+        }
+
+        .reason-desc {
+            font-size: 0.82rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        /* ---------------------------------- */
+        /* MUSEUM OF MEMORIES GALLERY         */
+        /* ---------------------------------- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1000px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .gallery-card {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+
+        .gallery-card:hover {
+            transform: scale(1.03);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            filter: grayscale(70%);
+            transition: filter 0.3s;
+        }
+
+        .gallery-card:hover .gallery-img {
+            filter: grayscale(0%);
+        }
+
+        @media (max-width: 768px) {
+            .showcase-container { flex-direction: column; }
+            .reasons-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .side-photo { display: none; }
+            .music-card { position: static; margin-top: 30px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Candle Loading Overlay -->
-    <div id="loader">
-        <div class="loading-text">
-            LOADING <span id="loadingDots">...</span>
+    <!-- 1. ENVELOPE OPENING OVERLAY -->
+    <div id="envelopeOverlay">
+        <div class="envelope-subtitle">a little surprise</div>
+        <div class="envelope-title">You Got A Mail</div>
+        <div class="envelope-box" onclick="openSite()">
+            <div class="envelope-icon">✉️</div>
         </div>
-        <div class="candles-stage">
-            <!-- Short Candle (Left) -->
-            <div class="candle candle-short">
-                <div class="flame-container">
-                    <div class="flame-halo"></div>
-                    <div class="flame"></div>
-                </div>
-                <div class="face">
-                    <div class="eyes-normal">
-                        <div class="eye-dot"></div>
-                        <div class="eye-dot"></div>
-                    </div>
-                    <div class="eyes-squint">&gt;&lt;</div>
-                </div>
+        <div class="click-hint">CLICK THE MAIL TO OPEN</div>
+    </div>
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <div class="nav-logo">♡ Birthday</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#letter">Letter</a></li>
+            <li><a href="#reasons">Reasons</a></li>
+            <li><a href="#memories">Memory</a></li>
+        </ul>
+    </nav>
+
+    <!-- 2. HERO SECTION -->
+    <section class="section" id="home">
+        <div class="hero-subtitle">For Maelo, on Her Birthday</div>
+        <h1 class="hero-title">Happy Birthday,<br>My Love</h1>
+        <p class="hero-desc">Every moment with you becomes a beautiful memory. Today marks your birthday—the day a remarkable person came into this world.</p>
+        <div style="color: #60a5fa; font-size: 1.5rem; margin-top: 10px;">💙</div>
+
+        <!-- Music Player Widget -->
+        <div class="music-card">
+            <div class="album-art">🎵</div>
+            <div class="music-info">
+                <div class="music-title">Shape of My Heart</div>
+                <div class="music-artist">Backstreet Boys</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. PHOTO SHOWCASE SECTION -->
+    <section class="section">
+        <div class="showcase-container">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500" class="side-photo" alt="Photo 1">
+            
+            <div class="center-glass-card">
+                <div style="color: #60a5fa; font-size: 1.2rem; margin-bottom: 10px;">💙 ✨ 💙</div>
+                <div style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">from the bottom of my heart</div>
+                <h2 style="font-family: 'Cinzel', serif; font-size: 2.2rem; color: #ffffff; line-height: 1.3; margin-bottom: 20px;">Today is the day the world became more beautiful.</h2>
+                <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.7;">The day you were born is the best thing that ever happened to this world—and to me.<br><br>I hope we will always be together until the very end, and that I can be the home you always return to.</p>
             </div>
 
-            <!-- Tall Candle (Right) -->
-            <div class="candle candle-tall">
-                <div class="face">
-                    <div class="eyes-normal">
-                        <div class="eye-dot"></div>
-                        <div class="eye-dot"></div>
-                    </div>
-                    <div class="mouth-open"></div>
-                </div>
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500" class="side-photo" alt="Photo 2">
+        </div>
+    </section>
+
+    <!-- 4. MAIN LETTER SECTION -->
+    <section class="section" id="letter">
+        <div class="envelope-subtitle">a little letter</div>
+        <div class="letter-card">
+            <div class="letter-header">Dear Maelo,</div>
+            <div class="letter-content">
+Today is a special day, because a beautiful and remarkable person was born. I am grateful to know you and to be a part of your journey through life.
+
+Thank you for every moment we have shared. To me, every moment spent with you becomes a beautiful memory. Your presence brings so much happiness into my life.
+
+As you begin this new year of your life, I hope you are always blessed with good health, happiness, and the strength to achieve all the dreams you wish for. I hope we can continue to stay together for a long time.
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Header Section -->
-    <div class="header">
-        <h1>It's Your Day!</h1>
-        <p>A Special Gift For Maelo 💙</p>
-    </div>
+    <!-- 5. REASONS SECTION -->
+    <section class="section" id="reasons">
+        <h2 style="font-family: 'Cinzel', serif; font-size: 2.8rem; color: #ffffff; margin-bottom: 10px;">The Reason I Love You</h2>
+        <div style="width: 40px; height: 2px; background: #60a5fa; margin-bottom: 40px;"></div>
 
-    <!-- Music Player -->
-    <div class="music-player">
-        <div class="song-info">
-            <span class="song-title">Blue</span>
-            <span class="song-artist">Yung Kai</span>
+        <div class="reasons-grid">
+            <div class="reason-card">
+                <div class="reason-icon">☕</div>
+                <div class="reason-title">Your Smile</div>
+                <div class="reason-desc">Your smile brightens even my darkest days. It has a way of bringing warmth, comfort, and happiness into my heart.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-icon">❄️</div>
+                <div class="reason-title">Your Soul</div>
+                <div class="reason-desc">Your soul is beautiful—kind, genuine, and rare. The way you see the world inspires me more than you know.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-icon">🧿</div>
+                <div class="reason-title">Your Kindness</div>
+                <div class="reason-desc">Your kindness touches everyone around you. The way you care for others makes me admire you more every day.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-icon">🌊</div>
+                <div class="reason-title">Your Voice</div>
+                <div class="reason-desc">Your voice brings me comfort in ways words cannot explain, no matter how my day goes.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-icon">🌀</div>
+                <div class="reason-title">Your Strength</div>
+                <div class="reason-desc">No matter what challenges come your way, you keep moving forward. Your strength is truly incredible.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-icon">💙</div>
+                <div class="reason-title">Simply You</div>
+                <div class="reason-desc">More than anything else, I love you simply because you are you. There is no one else like you in the world.</div>
+            </div>
         </div>
-        <button class="play-btn" id="playBtn" onclick="toggleAudio()">▶</button>
-    </div>
+    </section>
 
-    <audio id="bgMusic" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3"></audio>
+    <!-- 6. MUSEUM OF MEMORIES -->
+    <section class="section" id="memories">
+        <div class="envelope-subtitle">every picture tells a story</div>
+        <h2 style="font-family: 'Cinzel', serif; font-size: 3rem; color: #ffffff; margin-bottom: 30px;">Museum of Memories</h2>
 
-    <!-- Cards Section -->
-    <div class="cards-grid">
-        <div class="card" onclick="openLetter(1)">
-            <div class="card-icon">📬</div>
-            <div class="card-title">Birthday Letter</div>
+        <div class="gallery-grid">
+            <div class="gallery-card">
+                <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400" class="gallery-img" alt="Memory 1">
+            </div>
+            <div class="gallery-card">
+                <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400" class="gallery-img" alt="Memory 2">
+            </div>
+            <div class="gallery-card">
+                <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400" class="gallery-img" alt="Memory 3">
+            </div>
+            <div class="gallery-card">
+                <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400" class="gallery-img" alt="Memory 4">
+            </div>
         </div>
+    </section>
 
-        <div class="card" onclick="openLetter(2)">
-            <div class="card-icon">⭐</div>
-            <div class="card-title">Special Wishes</div>
-        </div>
-    </div>
-
-    <div class="footer-note">TAP THE CARDS TO OPEN</div>
-
-    <!-- Modal Popup Window -->
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal-card">
-            <span class="close-icon" onclick="closeLetter()">✕</span>
-            <div class="modal-header-title" id="modalTitle">Title</div>
-            <div class="modal-letter-text" id="modalBody">Text goes here...</div>
-        </div>
-    </div>
-
+    <!-- Confetti Script -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
-        // Animate loading dots
-        let dotCount = 0;
-        const dotsElem = document.getElementById('loadingDots');
-        setInterval(() => {
-            dotCount = (dotCount + 1) % 4;
-            dotsElem.innerText = '.'.repeat(dotCount);
-        }, 400);
-
-        // Hide loader after 3.2 seconds
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.style.opacity = '0';
-                loader.style.visibility = 'hidden';
-            }, 3200);
-        });
-
-        // Letter Contents
-        const letters = {
-            1: {
-                title: "Dear Maelo... 📬",
-                text: "Happy birthday to my best friend, Maelo! 💙 I hope this new age brings you endless happiness, more success, and all the love you deserve. May your day be filled with your favorite things, lots of laughter, and maybe a little bit of chaos, the good kind, of course!\n\nYou've always been such a bright light to everyone around you, so I truly hope this year treats you extra kind and all your big dreams start to fall into place. Cheers to another year of you being awesome!\n\nOn a side note, I also wanted to say a huge thank you. Thank you for being such a genuine friend and for always being someone I can count on, no matter what."
-            },
-            2: {
-                title: "My Wishes ✨",
-                text: "Once again, Happy Birthday! My wish for you is simple: I hope you always find a reason to smile every single day.\n\nMay your heart be light, your path be clear, and your year be filled with beautiful surprises that you never saw coming.\n\nI hope you stay healthy, reach all the goals you've set, and never lose that kind heart of yours. May this chapter be the best one yet. You deserve all the stars in the sky! 💙"
-            }
-        };
-
-        function openLetter(id) {
-            const letter = letters[id];
-            if (letter) {
-                document.getElementById('modalTitle').innerText = letter.title;
-                document.getElementById('modalBody').innerText = letter.text;
-                document.getElementById('modalOverlay').classList.add('active');
-                confetti({ particleCount: 60, spread: 60, origin: { y: 0.7 } });
-            }
-        }
-
-        function closeLetter() {
-            document.getElementById('modalOverlay').classList.remove('active');
-        }
-
-        // Music Toggle
-        const audio = document.getElementById('bgMusic');
-        const playBtn = document.getElementById('playBtn');
-
-        function toggleAudio() {
-            if (audio.paused) {
-                audio.play();
-                playBtn.innerText = '⏸';
-            } else {
-                audio.pause();
-                playBtn.innerText = '▶';
-            }
+        function openSite() {
+            const overlay = document.getElementById('envelopeOverlay');
+            overlay.style.opacity = '0';
+            overlay.style.visibility = 'hidden';
+            
+            // Trigger blue confetti burst
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#60a5fa', '#3b82f6', '#93c5fd', '#ffffff']
+            });
         }
     </script>
 </body>
