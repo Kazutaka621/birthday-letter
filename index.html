@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday! 💌</title>
+    <title>The Digital Letter Vault 💌</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,10 +18,10 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
             min-height: 100vh;
             padding: 40px 20px;
-            color: #333;
+            color: #2c3e50;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -29,107 +29,113 @@
 
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            color: #fff;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            margin-bottom: 25px;
+            color: #1a2a3a;
         }
 
         .header h1 {
             font-family: 'Caveat', cursive;
-            font-size: 3.5rem;
-            letter-spacing: 1px;
+            font-size: 3.8rem;
+            line-height: 1.1;
         }
 
         .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 5px;
         }
 
-        /* Letter Envelopes Grid */
-        .letters-grid {
+        /* Filter Pills */
+        .filter-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            border: 2px solid transparent;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: #4a5568;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #ffffff;
+            color: #3182ce;
+            border-color: #3182ce;
+            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.2);
+            transform: translateY(-2deg);
+        }
+
+        /* Letter Grid */
+        .vault-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 20px;
-            max-width: 900px;
+            max-width: 950px;
             width: 100%;
             margin-bottom: 40px;
         }
 
-        .envelope-card {
+        .letter-card {
             background: #ffffff;
             border-radius: 20px;
             padding: 25px 20px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.06);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid transparent;
+            transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
-        .envelope-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            border-color: #ff80ab;
+        .letter-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
         }
 
-        .envelope-icon {
+        .card-icon {
             font-size: 3rem;
-            margin-bottom: 10px;
-            display: block;
+            margin-bottom: 12px;
         }
 
-        .envelope-title {
+        .card-title {
             font-family: 'Caveat', cursive;
-            font-size: 1.6rem;
-            color: #d81b60;
-            margin-bottom: 5px;
+            font-size: 1.7rem;
+            color: #2b6cb0;
+            line-height: 1.2;
+            margin-bottom: 6px;
         }
 
-        .envelope-subtitle {
+        .card-subtitle {
             font-size: 0.85rem;
-            color: #888;
+            color: #718096;
         }
 
-        .badge {
+        .badge-lock {
             position: absolute;
             top: 12px;
             right: 12px;
-            background: #ff4081;
+            background: #e53e3e;
             color: white;
             font-size: 0.7rem;
             padding: 3px 8px;
             border-radius: 12px;
             font-weight: 600;
-            text-transform: uppercase;
         }
 
-        /* Interactive Celebration Section */
-        .action-area {
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .btn-party {
-            background: linear-gradient(45deg, #ff4081, #ff80ab);
-            color: white;
-            border: none;
-            padding: 14px 35px;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            box-shadow: 0 8px 20px rgba(255, 64, 129, 0.35);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .btn-party:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 25px rgba(255, 64, 129, 0.5);
-        }
-
-        /* Modal / Pop-up Window for Reading Letters */
+        /* Modal / Window */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -137,7 +143,7 @@
             width: 100vw;
             height: 100vh;
             background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(6px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -153,38 +159,41 @@
             pointer-events: auto;
         }
 
-        .modal-body {
+        .modal-content {
             background: #fffdf9;
-            border-radius: 20px;
-            max-width: 550px;
+            border-radius: 24px;
+            max-width: 580px;
             width: 100%;
-            padding: 35px 30px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             position: relative;
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-            border: 2px dashed #f48fb1;
             max-height: 85vh;
             overflow-y: auto;
-        }
-
-        .modal-overlay.active .modal-body {
-            transform: translateY(0);
+            border: 2px dashed #90cdf4;
         }
 
         .modal-title {
             font-family: 'Caveat', cursive;
-            font-size: 2.5rem;
-            color: #d81b60;
-            margin-bottom: 15px;
+            font-size: 2.6rem;
+            color: #2b6cb0;
             text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .modal-img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .modal-text {
             font-family: 'Caveat', cursive;
             font-size: 1.6rem;
             line-height: 1.5;
-            color: #333;
+            color: #2d3748;
             white-space: pre-line;
             margin-bottom: 25px;
         }
@@ -192,185 +201,213 @@
         .close-btn {
             display: block;
             margin: 0 auto;
-            background: #e0e0e0;
-            color: #333;
+            background: #edf2f7;
+            color: #4a5568;
             border: none;
             padding: 10px 25px;
             border-radius: 20px;
             cursor: pointer;
             font-weight: 600;
-            transition: background 0.2s;
         }
 
-        .close-btn:hover {
-            background: #d6d6d6;
+        /* Password Form Style */
+        .password-box {
+            text-align: center;
+            padding: 20px 0;
         }
 
-        /* Background Animated Floating Elements */
-        .floating-bg {
-            position: fixed;
-            font-size: 1.5rem;
-            opacity: 0.6;
-            animation: floatUp 7s linear infinite;
-            z-index: -1;
-            bottom: -50px;
+        .password-input {
+            padding: 10px 15px;
+            font-size: 1rem;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            margin-top: 15px;
+            outline: none;
+            text-align: center;
+            width: 200px;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
-            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        .password-btn {
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            border-radius: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
 
-    <!-- Animated Background Elements -->
-    <div id="bg-container"></div>
-
-    <!-- Page Header -->
     <div class="header">
-        <h1>Happy Birthday! 🥳</h1>
-        <p>You've got mail! Click an envelope below to open each letter.</p>
+        <h1>Letter Vault 💌</h1>
+        <p>A collection of special notes, memories, and secrets.</p>
     </div>
 
-    <!-- Letter Selection Grid -->
-    <div class="letters-grid">
-        
-        <!-- LETTER 1 -->
-        <div class="envelope-card" onclick="openLetter(1)">
-            <span class="badge">Start Here</span>
-            <span class="envelope-icon">💌</span>
-            <div class="envelope-title">Open Me First!</div>
-            <div class="envelope-subtitle">A quick welcome note</div>
-        </div>
-
-        <!-- LETTER 2 -->
-        <div class="envelope-card" onclick="openLetter(2)">
-            <span class="envelope-icon">🎂</span>
-            <div class="envelope-title">Birthday Wish</div>
-            <div class="envelope-subtitle">My wish for your year ahead</div>
-        </div>
-
-        <!-- LETTER 3 -->
-        <div class="envelope-card" onclick="openLetter(3)">
-            <span class="envelope-icon">📸</span>
-            <div class="envelope-title">Favorite Memory</div>
-            <div class="envelope-subtitle">Remember that time?</div>
-        </div>
-
-        <!-- LETTER 4 -->
-        <div class="envelope-card" onclick="openLetter(4)">
-            <span class="envelope-icon">✨</span>
-            <div class="envelope-title">Why You're Awesome</div>
-            <div class="envelope-subtitle">A few things I love about you</div>
-        </div>
-
-        <!-- LETTER 5 -->
-        <div class="envelope-card" onclick="openLetter(5)">
-            <span class="envelope-icon">🎁</span>
-            <div class="envelope-title">Open When Happy</div>
-            <div class="envelope-subtitle">A little reminder</div>
-        </div>
-
-        <!-- LETTER 6 -->
-        <div class="envelope-card" onclick="openLetter(6)">
-            <span class="envelope-icon">🌟</span>
-            <div class="envelope-title">Final Thoughts</div>
-            <div class="envelope-subtitle">Wrapping it all up</div>
-        </div>
-
+    <!-- Category Filters -->
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterCategory('all', this)">All Letters</button>
+        <button class="filter-btn" onclick="filterCategory('open-when', this)">Open When...</button>
+        <button class="filter-btn" onclick="filterCategory('memories', this)">Memories</button>
+        <button class="filter-btn" onclick="filterCategory('secrets', this)">Secrets 🔒</button>
     </div>
 
-    <!-- Action Button -->
-    <div class="action-area">
-        <button class="btn-party" onclick="triggerConfetti()">Press For Birthday Magic! 🎊</button>
-    </div>
+    <!-- Grid of Letters -->
+    <div class="vault-grid" id="vaultGrid"></div>
 
-    <!-- MODAL WINDOW FOR DISPLAYING LETTERS -->
+    <!-- Reader Modal Window -->
     <div class="modal-overlay" id="letterModal">
-        <div class="modal-body">
-            <h2 class="modal-title" id="modalTitle">Title</h2>
-            <div class="modal-text" id="modalText">Letter text content goes here...</div>
-            <button class="close-btn" onclick="closeLetter()">Close Letter</button>
-        </div>
+        <div class="modal-content" id="modalContent"></div>
     </div>
 
-    <!-- Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    
     <script>
-        /* EDIT YOUR LETTER CONTENTS HERE! */
-        const letters = {
-            1: {
-                title: "Welcome! 💌",
-                text: "Happy Birthday!\n\nI built this little digital corner just for you. Instead of a standard paper card, you have a whole bundle of letters here to open whenever you want. Take your time clicking through them!"
+        /* 
+           =========================================================
+           EDIT & ADD YOUR LETTERS HERE IN THIS LIST!
+           =========================================================
+           Categories: 'open-when', 'memories', 'secrets'
+        */
+        const vaultData = [
+            {
+                id: 1,
+                category: "open-when",
+                icon: "🎂",
+                title: "Open On Your Birthday",
+                subtitle: "Start here on your special day!",
+                text: "Dear [Name],\n\nHappy Birthday! I hope your day is filled with so much joy, cake, and laughter. Welcome to your personal digital letter vault!",
+                image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=500",
+                password: "" // Empty means no password needed
             },
-            2: {
-                title: "My Birthday Wish For You 🎂",
-                text: "Dear [Name],\n\nI hope this year brings you endless happiness, exciting new adventures, and success in everything you do. May all your hard work pay off and all your dreams come true."
+            {
+                id: 2,
+                category: "open-when",
+                icon: "🌧️",
+                title: "Open When You're Sad",
+                subtitle: "A little hug in text form",
+                text: "Whenever things feel tough, just remember how strong you are.\n\nYou have survived 100% of your hardest days so far. Take a breath, make a cup of warm tea, and treat yourself gently today. ❤️",
+                image: "",
+                password: ""
             },
-            3: {
-                title: "A Favorite Memory 📸",
-                text: "Looking back on all our memories, one of my absolute favorites has to be [Insert Memory/Inside Joke Here].\n\nThank you for always making moments so special and full of laughter!"
+            {
+                id: 3,
+                category: "memories",
+                icon: "📸",
+                title: "That One Unforgettable Day",
+                subtitle: "Remember when...",
+                text: "I was looking back at old photos and found this!\n\nRemember when we [insert fun story or trip here]? That will always be one of my absolute favorite memories with you.",
+                image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500",
+                password: ""
             },
-            4: {
-                title: "Reasons You're Awesome ✨",
-                text: "Here are just a few reasons why you are so loved:\n\n1. You always know how to brighten up the room.\n2. Your kindness to everyone around you.\n3. You are determined and inspiring.\n4. You have the best sense of humor!"
-            },
-            5: {
-                title: "A Little Reminder 🎁",
-                text: "Never forget how capable, strong, and incredible you are!\n\nWhenever you're having a tough day, come back here and remember that you've got people cheering for you every step of the way."
-            },
-            6: {
-                title: "Cheers to You! 🌟",
-                text: "Have the most amazing birthday celebration today. Eat lots of cake, enjoy every second, and let's make this year the best one yet!\n\nWith love,\n[Your Name] ❤️"
+            {
+                id: 4,
+                category: "secrets",
+                icon: "🔒",
+                title: "Top Secret Letter",
+                subtitle: "Requires secret PIN to open!",
+                text: "🎉 You unlocked it!\n\nThe secret code was [your birthday/year/pin]. You mean the absolute world to me, and I hope this secret note brought a smile to your face!",
+                image: "",
+                password: "1234" // CHANGE THIS TO YOUR SECRET PIN CODE
             }
-        };
+        ];
+
+        // Render Letters dynamically to Grid
+        function renderVault(category = 'all') {
+            const grid = document.getElementById('vaultGrid');
+            grid.innerHTML = '';
+
+            const filtered = category === 'all' 
+                ? vaultData 
+                : vaultData.filter(item => item.category === category);
+
+            filtered.forEach(letter => {
+                const card = document.createElement('div');
+                card.className = 'letter-card';
+                card.onclick = () => openLetter(letter.id);
+
+                const lockBadge = letter.password ? `<span class="badge-lock">Locked 🔒</span>` : '';
+
+                card.innerHTML = `
+                    ${lockBadge}
+                    <div class="card-icon">${letter.icon}</div>
+                    <div class="card-title">${letter.title}</div>
+                    <div class="card-subtitle">${letter.subtitle}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCategory(cat, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderVault(cat);
+        }
 
         function openLetter(id) {
-            const letter = letters[id];
-            if (letter) {
-                document.getElementById('modalTitle').innerText = letter.title;
-                document.getElementById('modalText').innerText = letter.text;
-                document.getElementById('letterModal').classList.add('active');
-                triggerConfetti();
+            const letter = vaultData.find(l => l.id === id);
+            const modalContent = document.getElementById('modalContent');
+
+            if (letter.password) {
+                // Password prompt view
+                modalContent.innerHTML = `
+                    <div class="password-box">
+                        <div class="card-icon">🔒</div>
+                        <h2 class="modal-title">Locked Secret</h2>
+                        <p style="color: #718096; font-size: 0.9rem;">Enter the passcode to open this letter:</p>
+                        <input type="password" id="passInput" class="password-input" placeholder="Passcode">
+                        <br>
+                        <button class="password-btn" onclick="checkPassword(${letter.id})">Unlock</button>
+                        <br><br>
+                        <button class="close-btn" onclick="closeModal()">Cancel</button>
+                    </div>
+                `;
+            } else {
+                // Standard letter view
+                showLetterContent(letter);
+            }
+
+            document.getElementById('letterModal').classList.add('active');
+        }
+
+        function checkPassword(id) {
+            const letter = vaultData.find(l => l.id === id);
+            const input = document.getElementById('passInput').value;
+
+            if (input === letter.password) {
+                confetti({ particleCount: 70, spread: 60 });
+                showLetterContent(letter);
+            } else {
+                alert("Incorrect PIN! Try again.");
             }
         }
 
-        function closeLetter() {
+        function showLetterContent(letter) {
+            const modalContent = document.getElementById('modalContent');
+            const imgHtml = letter.image ? `<img src="${letter.image}" class="modal-img" alt="Memory">` : '';
+
+            modalContent.innerHTML = `
+                <h2 class="modal-title">${letter.title}</h2>
+                ${imgHtml}
+                <div class="modal-text">${letter.text}</div>
+                <button class="close-btn" onclick="closeModal()">Close Note</button>
+            `;
+            confetti({ particleCount: 50, spread: 50, origin: { y: 0.7 } });
+        }
+
+        function closeModal() {
             document.getElementById('letterModal').classList.remove('active');
         }
 
-        // Close modal if clicking outside the box
+        // Close on backdrop click
         document.getElementById('letterModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeLetter();
-            }
+            if (e.target === this) closeModal();
         });
 
-        // Floating elements animation
-        const icons = ['✨', '💖', '🎈', '⭐', '🌸'];
-        function createFloatingElement() {
-            const el = document.createElement('div');
-            el.classList.add('floating-bg');
-            el.innerText = icons[Math.floor(Math.random() * icons.length)];
-            el.style.left = Math.random() * 95 + 'vw';
-            el.style.animationDuration = Math.random() * 3 + 4 + 's';
-            el.style.fontSize = Math.random() * 15 + 15 + 'px';
-            document.getElementById('bg-container').appendChild(el);
-
-            setTimeout(() => { el.remove(); }, 7000);
-        }
-        setInterval(createFloatingElement, 500);
-
-        // Confetti burst
-        function triggerConfetti() {
-            confetti({
-                particleCount: 80,
-                spread: 60,
-                origin: { y: 0.7 }
-            });
-        }
+        // Initialize vault on page load
+        renderVault();
     </script>
 </body>
 </html>
