@@ -83,7 +83,8 @@
         .nav-links a:hover {
             color: #60a5fa;
         }
-/* CANDLE LOADING SCREEN ANIMATION */
+
+        /* CANDLE LOADING SCREEN ANIMATION */
         #loader {
             position: fixed;
             top: 0;
@@ -166,6 +167,7 @@
             0% { transform: scale(1) rotate(-2deg); }
             100% { transform: scale(1.1) rotate(2deg); }
         }
+
         /* ---------------------------------- */
         /* ENVELOPE OPENING OVERLAY           */
         /* ---------------------------------- */
@@ -472,7 +474,21 @@
 </head>
 <body>
 
-    <!-- 1. ENVELOPE OPENING OVERLAY -->
+    <!-- CANDLE LOADING OVERLAY (FIRST SCREEN) -->
+    <div id="loader">
+        <div class="loading-text">L O A D I N G . .</div>
+        <div class="candles-container">
+            <div class="candle candle-1">
+                <div class="flame"></div>
+                <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
+            </div>
+            <div class="candle candle-2">
+                <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1. ENVELOPE OPENING OVERLAY (SECOND SCREEN) -->
     <div id="envelopeOverlay">
         <div class="envelope-subtitle">a little surprise</div>
         <div class="envelope-title">You Got A Mail</div>
@@ -609,6 +625,18 @@ As you begin this new year of your life, I hope you are always blessed with good
     <!-- Confetti Script -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
+        // 1. Auto-dismiss Candle Loader after 3 seconds
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                if (loader) {
+                    loader.style.opacity = '0';
+                    loader.style.visibility = 'hidden';
+                }
+            }, 3000);
+        });
+
+        // 2. Open site when Envelope is clicked
         function openSite() {
             const overlay = document.getElementById('envelopeOverlay');
             overlay.style.opacity = '0';
