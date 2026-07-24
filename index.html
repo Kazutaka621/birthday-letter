@@ -1016,14 +1016,11 @@ To add more letters in the future, just duplicate one of the blocks in the HTML 
             }, 7000);
         });
 
-        // Open site when Envelope is clicked
+        // Open site when Envelope is clicked (removed automatic window.scrollTo to prevent forcing scroll up)
         function openSite() {
             const overlay = document.getElementById('envelopeOverlay');
             overlay.style.opacity = '0';
             overlay.style.visibility = 'hidden';
-
-            // Ensure page scrolls back to top when opened
-            window.scrollTo({ top: 0, behavior: 'smooth' });
 
             // Autoplay Standalone Audio without pausing external Spotify playback
             const audio = document.getElementById('bgMusic');
