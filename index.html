@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday! 🎂</title>
+    <title>Happy Birthday! 💌</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -18,214 +18,357 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            color: #4a4a4a;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 650px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 40px 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            position: relative;
-            z-index: 10;
-        }
-
-        h1 {
-            font-family: 'Caveat', cursive;
-            font-size: 3.2rem;
-            color: #d81b60;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            font-size: 1rem;
-            color: #777;
-            margin-bottom: 25px;
-        }
-
-        /* Letter Container */
-        .letter-card {
-            background: #fffdf9;
-            border: 2px dashed #f48fb1;
-            border-radius: 16px;
-            padding: 25px;
-            text-align: left;
-            margin-bottom: 25px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
-        }
-
-        .letter-text {
-            font-family: 'Caveat', cursive;
-            font-size: 1.7rem;
-            line-height: 1.5;
+            padding: 40px 20px;
             color: #333;
-            white-space: pre-line;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* Polaroid Photo Grid */
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .polaroid {
-            background: white;
-            padding: 10px 10px 20px 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            transform: rotate(-2deg);
-            transition: transform 0.3s ease;
-        }
-
-        .polaroid:nth-child(even) {
-            transform: rotate(3deg);
-        }
-
-        .polaroid:hover {
-            transform: scale(1.05) rotate(0deg);
-            z-index: 5;
-        }
-
-        .polaroid img {
-            width: 100%;
-            height: 130px;
-            object-fit: cover;
-            border-radius: 4px;
-        }
-
-        .polaroid p {
-            font-family: 'Caveat', cursive;
-            font-size: 1.2rem;
-            margin-top: 8px;
-            color: #555;
+        .header {
             text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
 
-        /* Confetti Button */
-        .btn {
+        .header h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 3.5rem;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Letter Envelopes Grid */
+        .letters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .envelope-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .envelope-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            border-color: #ff80ab;
+        }
+
+        .envelope-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .envelope-title {
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+            color: #d81b60;
+            margin-bottom: 5px;
+        }
+
+        .envelope-subtitle {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #ff4081;
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Interactive Celebration Section */
+        .action-area {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .btn-party {
             background: linear-gradient(45deg, #ff4081, #ff80ab);
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 14px 35px;
             font-size: 1.1rem;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 64, 129, 0.4);
-            transition: all 0.3s ease;
-            font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            margin-top: 25px;
+            box-shadow: 0 8px 20px rgba(255, 64, 129, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 64, 129, 0.6);
+        .btn-party:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(255, 64, 129, 0.5);
         }
 
-        /* Floating Hearts Animation */
-        .heart {
+        /* Modal / Pop-up Window for Reading Letters */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 100;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-body {
+            background: #fffdf9;
+            border-radius: 20px;
+            max-width: 550px;
+            width: 100%;
+            padding: 35px 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            border: 2px dashed #f48fb1;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal-body {
+            transform: translateY(0);
+        }
+
+        .modal-title {
+            font-family: 'Caveat', cursive;
+            font-size: 2.5rem;
+            color: #d81b60;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .modal-text {
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+            line-height: 1.5;
+            color: #333;
+            white-space: pre-line;
+            margin-bottom: 25px;
+        }
+
+        .close-btn {
+            display: block;
+            margin: 0 auto;
+            background: #e0e0e0;
+            color: #333;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #d6d6d6;
+        }
+
+        /* Background Animated Floating Elements */
+        .floating-bg {
             position: fixed;
             font-size: 1.5rem;
-            color: rgba(255, 105, 180, 0.6);
-            animation: float 6s linear infinite;
-            z-index: 1;
+            opacity: 0.6;
+            animation: floatUp 7s linear infinite;
+            z-index: -1;
             bottom: -50px;
         }
 
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Floating Background Hearts -->
-    <div id="hearts-container"></div>
+    <!-- Animated Background Elements -->
+    <div id="bg-container"></div>
 
-    <div class="container">
-        <!-- EDIT YOUR HEADER BELOW -->
-        <h1>Happy Birthday! 🎉</h1>
-        <p class="subtitle">A special page made just for you.</p>
-
-        <!-- EDIT YOUR LETTER MESSAGE BELOW -->
-        <div class="letter-card">
-            <div class="letter-text">
-Dear [Name],
-
-Wishing you the happiest of birthdays! I wanted to build something special for you to show how much you mean to me. 
-
-Thank you for always being such an amazing person and bringing so much joy and laughter into my life. I hope this year brings you all the happiness, success, and love you deserve.
-
-Here’s to making many more wonderful memories together!
-
-With love,
-[Your Name] ❤️
-            </div>
-        </div>
-
-        <!-- PHOTO SECTION -->
-        <h3 style="color: #888; font-weight: 400; font-size: 0.95rem;">Favorite Moments 📸</h3>
-        <div class="photo-grid">
-            <div class="polaroid">
-                <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400" alt="Celebration">
-                <p>Celebrations! 🥳</p>
-            </div>
-            <div class="polaroid">
-                <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400" alt="Memories">
-                <p>Best Times ✨</p>
-            </div>
-            <div class="polaroid">
-                <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400" alt="Cake">
-                <p>Make a Wish 🎂</p>
-            </div>
-        </div>
-
-        <button class="btn" onclick="celebrate()">Click for a Surprise! 🎊</button>
+    <!-- Page Header -->
+    <div class="header">
+        <h1>Happy Birthday! 🥳</h1>
+        <p>You've got mail! Click an envelope below to open each letter.</p>
     </div>
 
-    <!-- Script for interactive effects -->
+    <!-- Letter Selection Grid -->
+    <div class="letters-grid">
+        
+        <!-- LETTER 1 -->
+        <div class="envelope-card" onclick="openLetter(1)">
+            <span class="badge">Start Here</span>
+            <span class="envelope-icon">💌</span>
+            <div class="envelope-title">Open Me First!</div>
+            <div class="envelope-subtitle">A quick welcome note</div>
+        </div>
+
+        <!-- LETTER 2 -->
+        <div class="envelope-card" onclick="openLetter(2)">
+            <span class="envelope-icon">🎂</span>
+            <div class="envelope-title">Birthday Wish</div>
+            <div class="envelope-subtitle">My wish for your year ahead</div>
+        </div>
+
+        <!-- LETTER 3 -->
+        <div class="envelope-card" onclick="openLetter(3)">
+            <span class="envelope-icon">📸</span>
+            <div class="envelope-title">Favorite Memory</div>
+            <div class="envelope-subtitle">Remember that time?</div>
+        </div>
+
+        <!-- LETTER 4 -->
+        <div class="envelope-card" onclick="openLetter(4)">
+            <span class="envelope-icon">✨</span>
+            <div class="envelope-title">Why You're Awesome</div>
+            <div class="envelope-subtitle">A few things I love about you</div>
+        </div>
+
+        <!-- LETTER 5 -->
+        <div class="envelope-card" onclick="openLetter(5)">
+            <span class="envelope-icon">🎁</span>
+            <div class="envelope-title">Open When Happy</div>
+            <div class="envelope-subtitle">A little reminder</div>
+        </div>
+
+        <!-- LETTER 6 -->
+        <div class="envelope-card" onclick="openLetter(6)">
+            <span class="envelope-icon">🌟</span>
+            <div class="envelope-title">Final Thoughts</div>
+            <div class="envelope-subtitle">Wrapping it all up</div>
+        </div>
+
+    </div>
+
+    <!-- Action Button -->
+    <div class="action-area">
+        <button class="btn-party" onclick="triggerConfetti()">Press For Birthday Magic! 🎊</button>
+    </div>
+
+    <!-- MODAL WINDOW FOR DISPLAYING LETTERS -->
+    <div class="modal-overlay" id="letterModal">
+        <div class="modal-body">
+            <h2 class="modal-title" id="modalTitle">Title</h2>
+            <div class="modal-text" id="modalText">Letter text content goes here...</div>
+            <button class="close-btn" onclick="closeLetter()">Close Letter</button>
+        </div>
+    </div>
+
+    <!-- Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
     <script>
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '💖';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
-            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
-            document.getElementById('hearts-container').appendChild(heart);
+        /* EDIT YOUR LETTER CONTENTS HERE! */
+        const letters = {
+            1: {
+                title: "Welcome! 💌",
+                text: "Happy Birthday!\n\nI built this little digital corner just for you. Instead of a standard paper card, you have a whole bundle of letters here to open whenever you want. Take your time clicking through them!"
+            },
+            2: {
+                title: "My Birthday Wish For You 🎂",
+                text: "Dear [Name],\n\nI hope this year brings you endless happiness, exciting new adventures, and success in everything you do. May all your hard work pay off and all your dreams come true."
+            },
+            3: {
+                title: "A Favorite Memory 📸",
+                text: "Looking back on all our memories, one of my absolute favorites has to be [Insert Memory/Inside Joke Here].\n\nThank you for always making moments so special and full of laughter!"
+            },
+            4: {
+                title: "Reasons You're Awesome ✨",
+                text: "Here are just a few reasons why you are so loved:\n\n1. You always know how to brighten up the room.\n2. Your kindness to everyone around you.\n3. You are determined and inspiring.\n4. You have the best sense of humor!"
+            },
+            5: {
+                title: "A Little Reminder 🎁",
+                text: "Never forget how capable, strong, and incredible you are!\n\nWhenever you're having a tough day, come back here and remember that you've got people cheering for you every step of the way."
+            },
+            6: {
+                title: "Cheers to You! 🌟",
+                text: "Have the most amazing birthday celebration today. Eat lots of cake, enjoy every second, and let's make this year the best one yet!\n\nWith love,\n[Your Name] ❤️"
+            }
+        };
 
-            setTimeout(() => {
-                heart.remove();
-            }, 6000);
+        function openLetter(id) {
+            const letter = letters[id];
+            if (letter) {
+                document.getElementById('modalTitle').innerText = letter.title;
+                document.getElementById('modalText').innerText = letter.text;
+                document.getElementById('letterModal').classList.add('active');
+                triggerConfetti();
+            }
         }
-        setInterval(createHeart, 400);
 
-        function celebrate() {
+        function closeLetter() {
+            document.getElementById('letterModal').classList.remove('active');
+        }
+
+        // Close modal if clicking outside the box
+        document.getElementById('letterModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLetter();
+            }
+        });
+
+        // Floating elements animation
+        const icons = ['✨', '💖', '🎈', '⭐', '🌸'];
+        function createFloatingElement() {
+            const el = document.createElement('div');
+            el.classList.add('floating-bg');
+            el.innerText = icons[Math.floor(Math.random() * icons.length)];
+            el.style.left = Math.random() * 95 + 'vw';
+            el.style.animationDuration = Math.random() * 3 + 4 + 's';
+            el.style.fontSize = Math.random() * 15 + 15 + 'px';
+            document.getElementById('bg-container').appendChild(el);
+
+            setTimeout(() => { el.remove(); }, 7000);
+        }
+        setInterval(createFloatingElement, 500);
+
+        // Confetti burst
+        function triggerConfetti() {
             confetti({
-                particleCount: 120,
-                spread: 70,
-                origin: { y: 0.6 }
+                particleCount: 80,
+                spread: 60,
+                origin: { y: 0.7 }
             });
         }
     </script>
