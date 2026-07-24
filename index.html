@@ -25,7 +25,7 @@
             position: relative;
         }
 
-        /* Starry Particles Background */
+        /* Starry Background */
         body::before {
             content: '';
             position: fixed;
@@ -85,7 +85,7 @@
         }
 
         /* ============================================== */
-        /* EXACT CANDLE LEANING & RECANDLING LOADER       */
+        /* CANDLE ANIMATION - BLOW OUT & RE-CANDLE        */
         /* ============================================== */
         #loader {
             position: fixed;
@@ -104,8 +104,8 @@
         }
 
         @keyframes bgFlashSequence {
-            0%, 45%, 90%, 100% { background-color: #a2c9f5; }
-            50%, 85% { background-color: #1e2846; }
+            0%, 40%, 88%, 100% { background-color: #a2c9f5; }
+            48%, 80% { background-color: #1a233d; }
         }
 
         .loading-text {
@@ -124,8 +124,8 @@
         }
 
         @keyframes dotColor {
-            0%, 45%, 90%, 100% { color: #ffffff; }
-            50%, 85% { color: #f43f5e; }
+            0%, 40%, 88%, 100% { color: #ffffff; }
+            48%, 80% { color: #f43f5e; }
         }
 
         .candles-container {
@@ -149,7 +149,7 @@
             justify-content: center;
         }
 
-        /* Wick lines on top of candles */
+        /* Wick lines */
         .candle::before {
             content: '';
             position: absolute;
@@ -159,36 +159,27 @@
             background: #3d2b4e;
         }
 
-        /* Short Candle */
+        /* Short Candle (Stays stationary) */
         .candle-1 {
             width: 42px;
             height: 55px;
-            transform-origin: bottom center;
-            animation: shortCandleLean 3.5s infinite linear;
         }
 
-        /* Tall Candle */
+        /* Tall Candle (Leans over to blow out the flame) */
         .candle-2 {
             width: 36px;
             height: 88px;
             transform-origin: bottom center;
-            animation: tallCandleLean 3.5s infinite linear;
+            animation: tallCandleBlow 3.5s infinite linear;
         }
 
-        /* Leaning Motions */
-        @keyframes tallCandleLean {
+        @keyframes tallCandleBlow {
             0%, 100% { transform: rotate(0deg); }
-            20%, 35% { transform: rotate(-14deg); } /* Leans over toward short candle */
-            45%, 90% { transform: rotate(0deg); }
+            20%, 42% { transform: rotate(-16deg); } /* Leans towards short candle to blow */
+            52%, 90% { transform: rotate(0deg); }  /* Returns back */
         }
 
-        @keyframes shortCandleLean {
-            0%, 100% { transform: rotate(0deg); }
-            22%, 35% { transform: rotate(6deg); } /* Slight reaction lean */
-            45%, 90% { transform: rotate(0deg); }
-        }
-
-        /* Candle 1 (Short) Expressions */
+        /* Short Candle Expressions */
         .candle-1 .normal-eyes {
             position: absolute;
             top: 14px;
@@ -214,7 +205,7 @@
             animation: eyeSquint1 3.5s infinite linear;
         }
 
-        /* Candle 2 (Tall) Expressions */
+        /* Tall Candle Expressions */
         .candle-2 .eyes {
             position: absolute;
             top: 12px;
@@ -232,14 +223,14 @@
         .candle-2 .mouth {
             position: absolute;
             top: 20px;
-            width: 6px;
-            height: 6px;
+            width: 7px;
+            height: 7px;
             background: #3d2b4e;
             border-radius: 50%;
-            animation: mouth2 3.5s infinite linear;
+            animation: mouthBlowing 3.5s infinite linear;
         }
 
-        /* Flame 1 (Short Candle Flame with Recandling animation) */
+        /* Flame on Short Candle */
         .flame-1 {
             position: absolute;
             top: -24px;
@@ -249,53 +240,32 @@
             border: 2px solid #3d2b4e;
             border-radius: 50% 50% 35% 35%;
             box-shadow: 0 0 12px rgba(251, 191, 36, 0.8);
-            animation: flame1Sequence 3.5s infinite linear;
+            animation: flameBlowOutAndRecandle 3.5s infinite linear;
         }
 
-        /* Flame 2 (Tall Candle Flame that gets lit) */
-        .flame-2 {
-            position: absolute;
-            top: -24px;
-            width: 14px;
-            height: 20px;
-            background: #fbbf24;
-            border: 2px solid #3d2b4e;
-            border-radius: 50% 50% 35% 35%;
-            box-shadow: 0 0 12px rgba(251, 191, 36, 0.8);
-            animation: flame2Sequence 3.5s infinite linear;
-        }
-
-        /* Expression Animations */
+        /* Expression Keyframes */
         @keyframes eyeNormal1 {
-            0%, 45%, 88%, 100% { opacity: 1; }
-            50%, 82% { opacity: 0; }
+            0%, 38%, 88%, 100% { opacity: 1; }
+            45%, 82% { opacity: 0; }
         }
 
         @keyframes eyeSquint1 {
-            0%, 45%, 88%, 100% { opacity: 0; }
-            50%, 82% { opacity: 1; }
+            0%, 38%, 88%, 100% { opacity: 0; }
+            45%, 82% { opacity: 1; }
         }
 
-        @keyframes mouth2 {
-            0%, 45%, 88%, 100% { opacity: 0; transform: scale(0.2); }
-            50%, 82% { opacity: 1; transform: scale(1); }
+        @keyframes mouthBlowing {
+            0%, 15%, 88%, 100% { opacity: 0; transform: scale(0.2); }
+            22%, 80% { opacity: 1; transform: scale(1); } /* Mouth forms "O" when blowing */
         }
 
-        /* Flame 1: Lit -> Blown Out -> Recandling Back Up */
-        @keyframes flame1Sequence {
+        /* Flame Sequence: Lit -> Blown Out by Big Candle -> Re-candles Back Up */
+        @keyframes flameBlowOutAndRecandle {
             0%, 25% { opacity: 1; transform: scale(1) rotate(-2deg); }
-            35% { opacity: 1; transform: scale(1.1) rotate(5deg); } /* Sparks when tall candle leans in */
-            48%, 75% { opacity: 0; transform: scale(0); } /* Blown out */
-            85% { opacity: 0.6; transform: scale(0.5); } /* Recandling starts */
-            92%, 100% { opacity: 1; transform: scale(1); } /* Fully lit again */
-        }
-
-        /* Flame 2: Unlit -> Lit by lean -> Stays lit while screen dark -> Blows back off */
-        @keyframes flame2Sequence {
-            0%, 25% { opacity: 0; transform: scale(0); }
-            32% { opacity: 1; transform: scale(0.8) rotate(-4deg); } /* Lit by touch */
-            48%, 80% { opacity: 1; transform: scale(1) rotate(2deg); }
-            88%, 100% { opacity: 0; transform: scale(0); } /* Transferred back / out */
+            35% { opacity: 0.8; transform: scale(1.1) rotate(-15deg); } /* Flame pushes away as big candle blows */
+            42%, 75% { opacity: 0; transform: scale(0); } /* Blown out / extinguished */
+            82% { opacity: 0.5; transform: scale(0.4); } /* Re-candling starts */
+            88%, 100% { opacity: 1; transform: scale(1); } /* Fully relit! */
         }
 
         /* ---------------------------------- */
@@ -619,9 +589,8 @@
                 </div>
                 <div class="squint-eyes">&gt; &lt;</div>
             </div>
-            <!-- Tall Candle -->
+            <!-- Tall Candle (No flame, only leans & blows) -->
             <div class="candle candle-2">
-                <div class="flame-2"></div>
                 <div class="eyes">
                     <div class="eye"></div>
                     <div class="eye"></div>
@@ -768,7 +737,7 @@ As you begin this new year of your life, I hope you are always blessed with good
     <!-- Confetti Script -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
-        // Smoothly dismiss loader after 7 seconds (lets the full interaction cycle finish)
+        // Smoothly dismiss loader after 7 seconds
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loader');
