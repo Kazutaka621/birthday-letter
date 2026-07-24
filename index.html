@@ -85,7 +85,7 @@
         }
 
         /* ============================================== */
-        /* FIXED SYNCHRONIZED CANDLE ANIMATION            */
+        /* EXACT CANDLE LEANING & RECANDLING LOADER       */
         /* ============================================== */
         #loader {
             position: fixed;
@@ -99,13 +99,13 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            animation: bgBlink 3.2s infinite ease-in-out;
+            animation: bgFlashSequence 3.5s infinite linear;
             transition: opacity 0.8s ease, visibility 0.8s;
         }
 
-        @keyframes bgBlink {
-            0%, 42%, 100% { background-color: #a2c9f5; }
-            50%, 92% { background-color: #1e2846; }
+        @keyframes bgFlashSequence {
+            0%, 45%, 90%, 100% { background-color: #a2c9f5; }
+            50%, 85% { background-color: #1e2846; }
         }
 
         .loading-text {
@@ -114,18 +114,18 @@
             font-size: 1.1rem;
             font-weight: 600;
             color: #ffffff;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             display: flex;
             align-items: center;
         }
 
         .dot-1, .dot-2, .dot-3 {
-            animation: dotColor 3.2s infinite ease-in-out;
+            animation: dotColor 3.5s infinite linear;
         }
 
         @keyframes dotColor {
-            0%, 42%, 100% { color: #ffffff; }
-            50%, 92% { color: #f43f5e; }
+            0%, 45%, 90%, 100% { color: #ffffff; }
+            50%, 85% { color: #f43f5e; }
         }
 
         .candles-container {
@@ -136,7 +136,7 @@
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            gap: 20px;
+            gap: 24px;
             padding-bottom: 2px;
         }
 
@@ -149,25 +149,52 @@
             justify-content: center;
         }
 
+        /* Wick lines on top of candles */
+        .candle::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            width: 2.5px;
+            height: 6px;
+            background: #3d2b4e;
+        }
+
         /* Short Candle */
         .candle-1 {
             width: 42px;
             height: 55px;
+            transform-origin: bottom center;
+            animation: shortCandleLean 3.5s infinite linear;
         }
 
         /* Tall Candle */
         .candle-2 {
             width: 36px;
             height: 88px;
+            transform-origin: bottom center;
+            animation: tallCandleLean 3.5s infinite linear;
         }
 
-        /* Candle 1 Expressions */
+        /* Leaning Motions */
+        @keyframes tallCandleLean {
+            0%, 100% { transform: rotate(0deg); }
+            20%, 35% { transform: rotate(-14deg); } /* Leans over toward short candle */
+            45%, 90% { transform: rotate(0deg); }
+        }
+
+        @keyframes shortCandleLean {
+            0%, 100% { transform: rotate(0deg); }
+            22%, 35% { transform: rotate(6deg); } /* Slight reaction lean */
+            45%, 90% { transform: rotate(0deg); }
+        }
+
+        /* Candle 1 (Short) Expressions */
         .candle-1 .normal-eyes {
             position: absolute;
             top: 14px;
             display: flex;
             gap: 10px;
-            animation: eyeNormal1 3.2s infinite;
+            animation: eyeNormal1 3.5s infinite linear;
         }
 
         .candle-1 .normal-eyes .eye {
@@ -184,10 +211,10 @@
             font-weight: 800;
             color: #3d2b4e;
             letter-spacing: 2px;
-            animation: eyeSquint1 3.2s infinite;
+            animation: eyeSquint1 3.5s infinite linear;
         }
 
-        /* Candle 2 Expressions */
+        /* Candle 2 (Tall) Expressions */
         .candle-2 .eyes {
             position: absolute;
             top: 12px;
@@ -209,58 +236,66 @@
             height: 6px;
             background: #3d2b4e;
             border-radius: 50%;
-            animation: mouth2 3.2s infinite;
+            animation: mouth2 3.5s infinite linear;
         }
 
-        /* Flames */
+        /* Flame 1 (Short Candle Flame with Recandling animation) */
         .flame-1 {
             position: absolute;
-            top: -22px;
+            top: -24px;
             width: 14px;
             height: 20px;
             background: #fbbf24;
             border: 2px solid #3d2b4e;
             border-radius: 50% 50% 35% 35%;
             box-shadow: 0 0 12px rgba(251, 191, 36, 0.8);
-            animation: flame1Anim 3.2s infinite;
+            animation: flame1Sequence 3.5s infinite linear;
         }
 
+        /* Flame 2 (Tall Candle Flame that gets lit) */
         .flame-2 {
             position: absolute;
-            top: -22px;
+            top: -24px;
             width: 14px;
             height: 20px;
             background: #fbbf24;
             border: 2px solid #3d2b4e;
             border-radius: 50% 50% 35% 35%;
             box-shadow: 0 0 12px rgba(251, 191, 36, 0.8);
-            animation: flame2Anim 3.2s infinite;
+            animation: flame2Sequence 3.5s infinite linear;
         }
 
-        /* Keyframes for Synchronized Opacity Shifts */
+        /* Expression Animations */
         @keyframes eyeNormal1 {
-            0%, 42%, 100% { opacity: 1; }
-            50%, 92% { opacity: 0; }
+            0%, 45%, 88%, 100% { opacity: 1; }
+            50%, 82% { opacity: 0; }
         }
 
         @keyframes eyeSquint1 {
-            0%, 42%, 100% { opacity: 0; }
-            50%, 92% { opacity: 1; }
+            0%, 45%, 88%, 100% { opacity: 0; }
+            50%, 82% { opacity: 1; }
         }
 
         @keyframes mouth2 {
-            0%, 42%, 100% { opacity: 0; transform: scale(0.5); }
-            50%, 92% { opacity: 1; transform: scale(1); }
+            0%, 45%, 88%, 100% { opacity: 0; transform: scale(0.2); }
+            50%, 82% { opacity: 1; transform: scale(1); }
         }
 
-        @keyframes flame1Anim {
-            0%, 40%, 100% { opacity: 1; transform: scale(1) rotate(-2deg); }
-            45%, 95% { opacity: 0; transform: scale(0.2); }
+        /* Flame 1: Lit -> Blown Out -> Recandling Back Up */
+        @keyframes flame1Sequence {
+            0%, 25% { opacity: 1; transform: scale(1) rotate(-2deg); }
+            35% { opacity: 1; transform: scale(1.1) rotate(5deg); } /* Sparks when tall candle leans in */
+            48%, 75% { opacity: 0; transform: scale(0); } /* Blown out */
+            85% { opacity: 0.6; transform: scale(0.5); } /* Recandling starts */
+            92%, 100% { opacity: 1; transform: scale(1); } /* Fully lit again */
         }
 
-        @keyframes flame2Anim {
-            0%, 45%, 95%, 100% { opacity: 0; transform: scale(0.2); }
-            50%, 90% { opacity: 1; transform: scale(1) rotate(2deg); }
+        /* Flame 2: Unlit -> Lit by lean -> Stays lit while screen dark -> Blows back off */
+        @keyframes flame2Sequence {
+            0%, 25% { opacity: 0; transform: scale(0); }
+            32% { opacity: 1; transform: scale(0.8) rotate(-4deg); } /* Lit by touch */
+            48%, 80% { opacity: 1; transform: scale(1) rotate(2deg); }
+            88%, 100% { opacity: 0; transform: scale(0); } /* Transferred back / out */
         }
 
         /* ---------------------------------- */
@@ -569,7 +604,7 @@
 </head>
 <body>
 
-    <!-- CANDLE LOADING OVERLAY (SMOOTH & FIXED) -->
+    <!-- CANDLE LOADING OVERLAY -->
     <div id="loader">
         <div class="loading-text">
             L O A D I N G&nbsp;<span class="dot-1">.</span><span class="dot-2">.</span><span class="dot-3">.</span>
@@ -733,7 +768,7 @@ As you begin this new year of your life, I hope you are always blessed with good
     <!-- Confetti Script -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
-        // Auto-hide candle loader smoothly after 6.4 seconds
+        // Smoothly dismiss loader after 7 seconds (lets the full interaction cycle finish)
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loader');
@@ -741,7 +776,7 @@ As you begin this new year of your life, I hope you are always blessed with good
                     loader.style.opacity = '0';
                     loader.style.visibility = 'hidden';
                 }
-            }, 6400);
+            }, 7000);
         });
 
         // Open site when Envelope is clicked
