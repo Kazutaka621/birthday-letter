@@ -46,13 +46,13 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            animation: bgFlash 2s infinite ease-in-out;
+            animation: bgFlash 3s infinite ease-in-out;
             transition: opacity 0.6s ease, visibility 0.6s;
         }
 
         @keyframes bgFlash {
-            0%, 45%, 100% { background-color: #a2c9f5; }
-            50%, 95% { background-color: #1e293b; }
+            0%, 48% { background-color: #a2c9f5; }
+            50%, 98% { background-color: #1e293b; }
         }
 
         .loading-text {
@@ -60,19 +60,19 @@
             letter-spacing: 4px;
             font-size: 1.2rem;
             color: #ffffff;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         /* Candles CSS */
         .candles-container {
             position: relative;
-            width: 140px;
-            height: 100px;
+            width: 180px;
+            height: 120px;
             border-bottom: 4px solid #334155;
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            gap: 15px;
+            gap: 25px;
             padding-bottom: 2px;
         }
 
@@ -85,14 +85,30 @@
             justify-content: center;
         }
 
-        .candle-1 { width: 35px; height: 50px; }
-        .candle-2 { width: 30px; height: 70px; }
+        /* Small Candle (Left) */
+        .candle-small { 
+            width: 32px; 
+            height: 48px; 
+        }
+
+        /* Tall Candle (Right) */
+        .candle-tall { 
+            width: 30px; 
+            height: 72px; 
+            transform-origin: bottom left;
+            animation: blowAction 3s infinite ease-in-out;
+        }
+
+        @keyframes blowAction {
+            0%, 20%, 100% { transform: rotate(0deg); }
+            35%, 45% { transform: rotate(-15deg); }
+        }
 
         .eyes {
             position: absolute;
-            top: 12px;
+            top: 10px;
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
 
         .eye {
@@ -102,20 +118,62 @@
             border-radius: 50%;
         }
 
-        .flame {
+        /* Flame on Tall Candle */
+        .flame-tall {
             position: absolute;
-            top: -18px;
+            top: -16px;
             width: 12px;
-            height: 18px;
+            height: 16px;
             background: #fbf061;
             border: 2px solid #334155;
             border-radius: 50% 50% 35% 35%;
-            animation: flicker 0.6s infinite alternate;
+            animation: tallFlameAnim 3s infinite ease-in-out;
         }
 
-        @keyframes flicker {
-            0% { transform: scale(1) rotate(-2deg); }
-            100% { transform: scale(1.1) rotate(2deg); }
+        @keyframes tallFlameAnim {
+            0%, 25% { opacity: 1; transform: scale(1); }
+            35% { opacity: 0; transform: scale(0.2); } /* Extinguishes when bowing */
+            55% { opacity: 0; }
+            65%, 100% { opacity: 1; transform: scale(1); } /* Reignites later */
+        }
+
+        /* Flame on Small Candle */
+        .flame-small {
+            position: absolute;
+            top: -16px;
+            width: 12px;
+            height: 16px;
+            background: #fbf061;
+            border: 2px solid #334155;
+            border-radius: 50% 50% 35% 35%;
+            animation: smallFlameAnim 3s infinite ease-in-out;
+        }
+
+        @keyframes smallFlameAnim {
+            0%, 48% { opacity: 0; transform: scale(0); } /* Unlit initially */
+            52%, 95% { opacity: 1; transform: scale(1); } /* Lit by floating spark */
+            100% { opacity: 0; transform: scale(0); }
+        }
+
+        /* Floating Spark moving from Tall to Small */
+        .spark {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #fbf061;
+            border: 1.5px solid #334155;
+            border-radius: 50%;
+            top: 40px;
+            right: 55px;
+            opacity: 0;
+            animation: sparkTransfer 3s infinite ease-in-out;
+        }
+
+        @keyframes sparkTransfer {
+            0%, 32% { opacity: 0; transform: translate(0, 0); }
+            36% { opacity: 1; }
+            48% { opacity: 1; transform: translate(-55px, -15px); } /* Spark travels left */
+            52%, 100% { opacity: 0; transform: translate(-55px, -15px); }
         }
 
         /* ---------------------------------- */
@@ -250,9 +308,7 @@
             font-weight: 700;
         }
 
-        /* ---------------------------------- */
-        /* MODAL POPUP                       */
-        /* ---------------------------------- */
+        /* Modal Overlay */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -327,11 +383,18 @@
     <div id="loader">
         <div class="loading-text">L O A D I N G . .</div>
         <div class="candles-container">
-            <div class="candle candle-1">
-                <div class="flame"></div>
+            <!-- Small Candle -->
+            <div class="candle candle-small">
+                <div class="flame-small"></div>
                 <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
             </div>
-            <div class="candle candle-2">
+
+            <!-- Spark Particle -->
+            <div class="spark"></div>
+
+            <!-- Tall Candle -->
+            <div class="candle candle-tall">
+                <div class="flame-tall"></div>
                 <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
             </div>
         </div>
@@ -352,7 +415,6 @@
         <button class="play-btn" id="playBtn" onclick="toggleAudio()">▶</button>
     </div>
 
-    <!-- Audio Element (Add your audio link or keep YouTube background link) -->
     <audio id="bgMusic" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3"></audio>
 
     <!-- Cards Section -->
@@ -381,16 +443,16 @@
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
-        // Hide loader screen after 3 seconds
+        // Loader timeout (displays for 3.5 seconds to show the complete candle sequence)
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loader');
                 loader.style.opacity = '0';
                 loader.style.visibility = 'hidden';
-            }, 3000);
+            }, 3500);
         });
 
-        // Letter Contents (You can edit text here!)
+        // Letter Contents
         const letters = {
             1: {
                 title: "Dear Maelo... 📬",
