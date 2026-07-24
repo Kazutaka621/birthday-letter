@@ -40,140 +40,189 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #a2c9f5;
             z-index: 9999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            animation: bgFlash 3s infinite ease-in-out;
-            transition: opacity 0.6s ease, visibility 0.6s;
+            animation: roomLightSwitch 3s infinite ease-in-out;
+            transition: opacity 0.8s ease, visibility 0.8s;
         }
 
-        @keyframes bgFlash {
-            0%, 48% { background-color: #a2c9f5; }
-            50%, 98% { background-color: #1e293b; }
+        /* Room darkens when the flame goes out */
+        @keyframes roomLightSwitch {
+            0%, 38%, 68%, 100% { background-color: #a2c9f5; }
+            40%, 66% { background-color: #172a45; }
         }
 
         .loading-text {
             font-family: 'Fredoka', sans-serif;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             font-size: 1.2rem;
             color: #ffffff;
             margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        /* Candles CSS */
-        .candles-container {
+        .dots {
+            display: inline-block;
+            width: 20px;
+            text-align: left;
+            animation: dotAnim 1.5s infinite;
+        }
+
+        @keyframes dotAnim {
+            0% { content: "."; }
+            33% { content: ".."; }
+            66% { content: "..."; }
+        }
+
+        /* Candles Base Frame */
+        .candles-stage {
             position: relative;
-            width: 180px;
-            height: 120px;
-            border-bottom: 4px solid #334155;
+            width: 220px;
+            height: 100px;
+            border-bottom: 4px solid #332d56;
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            gap: 25px;
+            gap: 20px;
             padding-bottom: 2px;
         }
 
         .candle {
             background: #ffffff;
-            border: 3px solid #334155;
+            border: 3px solid #332d56;
             border-radius: 4px 4px 0 0;
             position: relative;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* Small Candle (Left) */
-        .candle-small { 
-            width: 32px; 
-            height: 48px; 
+        /* Short Candle (Left) */
+        .candle-short { 
+            width: 42px; 
+            height: 52px; 
         }
 
         /* Tall Candle (Right) */
         .candle-tall { 
-            width: 30px; 
-            height: 72px; 
-            transform-origin: bottom left;
-            animation: blowAction 3s infinite ease-in-out;
+            width: 32px; 
+            height: 78px; 
         }
 
-        @keyframes blowAction {
-            0%, 20%, 100% { transform: rotate(0deg); }
-            35%, 45% { transform: rotate(-15deg); }
-        }
-
-        .eyes {
+        /* Faces & Expressions */
+        .face {
             position: absolute;
-            top: 10px;
+            top: 12px;
             display: flex;
-            gap: 6px;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
         }
 
-        .eye {
-            width: 4px;
-            height: 4px;
-            background: #334155;
+        .eyes-normal {
+            display: flex;
+            gap: 8px;
+        }
+
+        .eye-dot {
+            width: 3px;
+            height: 3px;
+            background: #332d56;
             border-radius: 50%;
         }
 
-        /* Flame on Tall Candle */
-        .flame-tall {
-            position: absolute;
-            top: -16px;
-            width: 12px;
-            height: 16px;
-            background: #fbf061;
-            border: 2px solid #334155;
-            border-radius: 50% 50% 35% 35%;
-            animation: tallFlameAnim 3s infinite ease-in-out;
+        /* Squinting eyes (> <) when blowing */
+        .eyes-squint {
+            display: none;
+            font-size: 10px;
+            font-weight: 900;
+            color: #d9534f;
+            letter-spacing: 4px;
+            line-height: 1;
         }
 
-        @keyframes tallFlameAnim {
-            0%, 25% { opacity: 1; transform: scale(1); }
-            35% { opacity: 0; transform: scale(0.2); } /* Extinguishes when bowing */
-            55% { opacity: 0; }
-            65%, 100% { opacity: 1; transform: scale(1); } /* Reignites later */
-        }
-
-        /* Flame on Small Candle */
-        .flame-small {
-            position: absolute;
-            top: -16px;
-            width: 12px;
-            height: 16px;
-            background: #fbf061;
-            border: 2px solid #334155;
-            border-radius: 50% 50% 35% 35%;
-            animation: smallFlameAnim 3s infinite ease-in-out;
-        }
-
-        @keyframes smallFlameAnim {
-            0%, 48% { opacity: 0; transform: scale(0); } /* Unlit initially */
-            52%, 95% { opacity: 1; transform: scale(1); } /* Lit by floating spark */
-            100% { opacity: 0; transform: scale(0); }
-        }
-
-        /* Floating Spark moving from Tall to Small */
-        .spark {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #fbf061;
-            border: 1.5px solid #334155;
+        /* Small surprise mouth (o) on tall candle */
+        .mouth-open {
+            width: 5px;
+            height: 6px;
+            border: 2px solid #332d56;
             border-radius: 50%;
-            top: 40px;
-            right: 55px;
-            opacity: 0;
-            animation: sparkTransfer 3s infinite ease-in-out;
+            margin-top: 2px;
+            display: none;
         }
 
-        @keyframes sparkTransfer {
-            0%, 32% { opacity: 0; transform: translate(0, 0); }
-            36% { opacity: 1; }
-            48% { opacity: 1; transform: translate(-55px, -15px); } /* Spark travels left */
-            52%, 100% { opacity: 0; transform: translate(-55px, -15px); }
+        /* Animation for Short Candle Eyes (> < vs normal) */
+        .candle-short .eyes-normal {
+            animation: hideNormalEyes 3s infinite;
+        }
+        .candle-short .eyes-squint {
+            display: block;
+            animation: showSquintEyes 3s infinite;
+        }
+
+        @keyframes hideNormalEyes {
+            0%, 38%, 68%, 100% { opacity: 1; }
+            40%, 66% { opacity: 0; }
+        }
+
+        @keyframes showSquintEyes {
+            0%, 38%, 68%, 100% { opacity: 0; }
+            40%, 66% { opacity: 1; }
+        }
+
+        /* Tall Candle Mouth Reacting */
+        .candle-tall .mouth-open {
+            display: block;
+            animation: mouthReact 3s infinite;
+        }
+
+        @keyframes mouthReact {
+            0%, 35%, 70%, 100% { opacity: 0; transform: scale(0.5); }
+            38%, 66% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Flame on Short Candle */
+        .flame-container {
+            position: absolute;
+            top: -24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: flameToggle 3s infinite ease-in-out;
+        }
+
+        .flame {
+            width: 14px;
+            height: 20px;
+            background: #ffca28;
+            border: 2px solid #332d56;
+            border-radius: 50% 50% 35% 35%;
+            animation: flameFlicker 0.4s infinite alternate;
+        }
+
+        /* Glowing Ring around flame */
+        .flame-halo {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            border: 1px dashed rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        @keyframes flameFlicker {
+            0% { transform: scale(1) rotate(-2deg); }
+            100% { transform: scale(1.1) rotate(2deg); }
+        }
+
+        @keyframes flameToggle {
+            0%, 38%, 68%, 100% { opacity: 1; transform: scale(1); }
+            40%, 66% { opacity: 0; transform: scale(0.2); } /* Flame goes out */
         }
 
         /* ---------------------------------- */
@@ -381,21 +430,34 @@
 
     <!-- Candle Loading Overlay -->
     <div id="loader">
-        <div class="loading-text">L O A D I N G . .</div>
-        <div class="candles-container">
-            <!-- Small Candle -->
-            <div class="candle candle-small">
-                <div class="flame-small"></div>
-                <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
+        <div class="loading-text">
+            LOADING <span id="loadingDots">...</span>
+        </div>
+        <div class="candles-stage">
+            <!-- Short Candle (Left) -->
+            <div class="candle candle-short">
+                <div class="flame-container">
+                    <div class="flame-halo"></div>
+                    <div class="flame"></div>
+                </div>
+                <div class="face">
+                    <div class="eyes-normal">
+                        <div class="eye-dot"></div>
+                        <div class="eye-dot"></div>
+                    </div>
+                    <div class="eyes-squint">&gt;&lt;</div>
+                </div>
             </div>
 
-            <!-- Spark Particle -->
-            <div class="spark"></div>
-
-            <!-- Tall Candle -->
+            <!-- Tall Candle (Right) -->
             <div class="candle candle-tall">
-                <div class="flame-tall"></div>
-                <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
+                <div class="face">
+                    <div class="eyes-normal">
+                        <div class="eye-dot"></div>
+                        <div class="eye-dot"></div>
+                    </div>
+                    <div class="mouth-open"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -443,13 +505,21 @@
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
-        // Loader timeout (displays for 3.5 seconds to show the complete candle sequence)
+        // Animate loading dots
+        let dotCount = 0;
+        const dotsElem = document.getElementById('loadingDots');
+        setInterval(() => {
+            dotCount = (dotCount + 1) % 4;
+            dotsElem.innerText = '.'.repeat(dotCount);
+        }, 400);
+
+        // Hide loader after 3.2 seconds
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loader');
                 loader.style.opacity = '0';
                 loader.style.visibility = 'hidden';
-            }, 3500);
+            }, 3200);
         });
 
         // Letter Contents
