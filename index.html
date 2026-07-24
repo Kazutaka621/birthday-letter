@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Digital Letter Vault 💌</title>
+    <title>It's Your Day! 💙</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
         * {
             box-sizing: border-box;
@@ -17,136 +17,253 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            font-family: 'Nunito', sans-serif;
+            background-color: #b1d4f8;
+            background-image: radial-gradient(#ffffff 15%, transparent 15%);
+            background-size: 20px 20px;
             min-height: 100vh;
-            padding: 40px 20px;
-            color: #2c3e50;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #4a5568;
+            overflow-x: hidden;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #1a2a3a;
-        }
-
-        .header h1 {
-            font-family: 'Caveat', cursive;
-            font-size: 3.8rem;
-            line-height: 1.1;
-        }
-
-        .header p {
-            font-size: 1rem;
-            opacity: 0.8;
-            margin-top: 5px;
-        }
-
-        /* Filter Pills */
-        .filter-container {
+        /* ---------------------------------- */
+        /* CANDLE LOADING SCREEN ANIMATION    */
+        /* ---------------------------------- */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #a2c9f5;
+            z-index: 9999;
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: bgFlash 2s infinite ease-in-out;
+            transition: opacity 0.6s ease, visibility 0.6s;
+        }
+
+        @keyframes bgFlash {
+            0%, 45%, 100% { background-color: #a2c9f5; }
+            50%, 95% { background-color: #1e293b; }
+        }
+
+        .loading-text {
+            font-family: 'Fredoka', sans-serif;
+            letter-spacing: 4px;
+            font-size: 1.2rem;
+            color: #ffffff;
             margin-bottom: 30px;
-            flex-wrap: wrap;
+        }
+
+        /* Candles CSS */
+        .candles-container {
+            position: relative;
+            width: 140px;
+            height: 100px;
+            border-bottom: 4px solid #334155;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 15px;
+            padding-bottom: 2px;
+        }
+
+        .candle {
+            background: #ffffff;
+            border: 3px solid #334155;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            display: flex;
             justify-content: center;
         }
 
-        .filter-btn {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(5px);
-            border: 2px solid transparent;
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
+        .candle-1 { width: 35px; height: 50px; }
+        .candle-2 { width: 30px; height: 70px; }
+
+        .eyes {
+            position: absolute;
+            top: 12px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .eye {
+            width: 4px;
+            height: 4px;
+            background: #334155;
+            border-radius: 50%;
+        }
+
+        .flame {
+            position: absolute;
+            top: -18px;
+            width: 12px;
+            height: 18px;
+            background: #fbf061;
+            border: 2px solid #334155;
+            border-radius: 50% 50% 35% 35%;
+            animation: flicker 0.6s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-2deg); }
+            100% { transform: scale(1.1) rotate(2deg); }
+        }
+
+        /* ---------------------------------- */
+        /* MAIN PAGE CONTENT                 */
+        /* ---------------------------------- */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 3.2rem;
+            color: #ffffff;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        .header p {
             font-size: 0.9rem;
-            cursor: pointer;
-            color: #4a5568;
-            transition: all 0.2s ease;
+            color: #ffffff;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            opacity: 0.9;
         }
 
-        .filter-btn:hover, .filter-btn.active {
+        /* Music Player Widget */
+        .music-player {
             background: #ffffff;
-            color: #3182ce;
-            border-color: #3182ce;
-            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.2);
-            transform: translateY(-2deg);
-        }
-
-        /* Letter Grid */
-        .vault-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 20px;
-            max-width: 950px;
             width: 100%;
-            margin-bottom: 40px;
+            max-width: 380px;
+            border-radius: 30px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            margin-bottom: 30px;
         }
 
-        .letter-card {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 25px 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+        .song-info {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .song-title {
+            font-weight: 700;
+            color: #3b82f6;
+            font-size: 1rem;
+        }
+
+        .song-artist {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .play-btn {
+            background: #edf5ff;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3b82f6;
+            font-size: 1.2rem;
+            transition: background 0.2s;
+        }
+
+        .play-btn:hover {
+            background: #dbeafe;
+        }
+
+        /* Action Cards Grid */
+        .cards-grid {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            max-width: 450px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: #ffffff;
+            flex: 1;
+            min-width: 180px;
+            border-radius: 24px;
+            padding: 25px 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
+            gap: 12px;
         }
 
-        .letter-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
 
         .card-icon {
-            font-size: 3rem;
-            margin-bottom: 12px;
+            font-size: 2.2rem;
+            background: #f0f7ff;
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .card-title {
-            font-family: 'Caveat', cursive;
-            font-size: 1.7rem;
-            color: #2b6cb0;
-            line-height: 1.2;
-            margin-bottom: 6px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.05rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .card-subtitle {
-            font-size: 0.85rem;
-            color: #718096;
+        .footer-note {
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #ffffff;
+            letter-spacing: 2px;
+            font-weight: 700;
         }
 
-        .badge-lock {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: #e53e3e;
-            color: white;
-            font-size: 0.7rem;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-weight: 600;
-        }
-
-        /* Modal / Window */
+        /* ---------------------------------- */
+        /* MODAL POPUP                       */
+        /* ---------------------------------- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(6px);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
@@ -159,255 +276,159 @@
             pointer-events: auto;
         }
 
-        .modal-content {
-            background: #fffdf9;
-            border-radius: 24px;
-            max-width: 580px;
+        .modal-card {
+            background: #ffffff;
+            border-radius: 28px;
+            max-width: 480px;
             width: 100%;
-            padding: 35px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            padding: 35px 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             position: relative;
-            max-height: 85vh;
+            max-height: 80vh;
             overflow-y: auto;
-            border: 2px dashed #90cdf4;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
         }
 
-        .modal-title {
-            font-family: 'Caveat', cursive;
-            font-size: 2.6rem;
-            color: #2b6cb0;
-            text-align: center;
-            margin-bottom: 15px;
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
         }
 
-        .modal-img {
-            width: 100%;
-            max-height: 250px;
-            object-fit: cover;
-            border-radius: 12px;
+        .close-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            cursor: pointer;
+        }
+
+        .modal-header-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.2rem;
+            color: #3b82f6;
             margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .modal-text {
-            font-family: 'Caveat', cursive;
-            font-size: 1.6rem;
-            line-height: 1.5;
-            color: #2d3748;
+        .modal-letter-text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #475569;
             white-space: pre-line;
-            margin-bottom: 25px;
-        }
-
-        .close-btn {
-            display: block;
-            margin: 0 auto;
-            background: #edf2f7;
-            color: #4a5568;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        /* Password Form Style */
-        .password-box {
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        .password-input {
-            padding: 10px 15px;
-            font-size: 1rem;
-            border: 2px solid #cbd5e0;
-            border-radius: 10px;
-            margin-top: 15px;
-            outline: none;
-            text-align: center;
-            width: 200px;
-        }
-
-        .password-btn {
-            background: #3182ce;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 0.95rem;
-            border-radius: 10px;
-            margin-top: 10px;
-            cursor: pointer;
-            font-weight: 600;
         }
     </style>
 </head>
 <body>
 
+    <!-- Candle Loading Overlay -->
+    <div id="loader">
+        <div class="loading-text">L O A D I N G . .</div>
+        <div class="candles-container">
+            <div class="candle candle-1">
+                <div class="flame"></div>
+                <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
+            </div>
+            <div class="candle candle-2">
+                <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Section -->
     <div class="header">
-        <h1>Letter Vault 💌</h1>
-        <p>A collection of special notes, memories, and secrets.</p>
+        <h1>It's Your Day!</h1>
+        <p>A Special Gift For Maelo 💙</p>
     </div>
 
-    <!-- Category Filters -->
-    <div class="filter-container">
-        <button class="filter-btn active" onclick="filterCategory('all', this)">All Letters</button>
-        <button class="filter-btn" onclick="filterCategory('open-when', this)">Open When...</button>
-        <button class="filter-btn" onclick="filterCategory('memories', this)">Memories</button>
-        <button class="filter-btn" onclick="filterCategory('secrets', this)">Secrets 🔒</button>
+    <!-- Music Player -->
+    <div class="music-player">
+        <div class="song-info">
+            <span class="song-title">Blue</span>
+            <span class="song-artist">Yung Kai</span>
+        </div>
+        <button class="play-btn" id="playBtn" onclick="toggleAudio()">▶</button>
     </div>
 
-    <!-- Grid of Letters -->
-    <div class="vault-grid" id="vaultGrid"></div>
+    <!-- Audio Element (Add your audio link or keep YouTube background link) -->
+    <audio id="bgMusic" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3"></audio>
 
-    <!-- Reader Modal Window -->
-    <div class="modal-overlay" id="letterModal">
-        <div class="modal-content" id="modalContent"></div>
+    <!-- Cards Section -->
+    <div class="cards-grid">
+        <div class="card" onclick="openLetter(1)">
+            <div class="card-icon">📬</div>
+            <div class="card-title">Birthday Letter</div>
+        </div>
+
+        <div class="card" onclick="openLetter(2)">
+            <div class="card-icon">⭐</div>
+            <div class="card-title">Special Wishes</div>
+        </div>
+    </div>
+
+    <div class="footer-note">TAP THE CARDS TO OPEN</div>
+
+    <!-- Modal Popup Window -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-card">
+            <span class="close-icon" onclick="closeLetter()">✕</span>
+            <div class="modal-header-title" id="modalTitle">Title</div>
+            <div class="modal-letter-text" id="modalBody">Text goes here...</div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
-        /* 
-           =========================================================
-           EDIT & ADD YOUR LETTERS HERE IN THIS LIST!
-           =========================================================
-           Categories: 'open-when', 'memories', 'secrets'
-        */
-        const vaultData = [
-            {
-                id: 1,
-                category: "open-when",
-                icon: "🎂",
-                title: "Open On Your Birthday",
-                subtitle: "Start here on your special day!",
-                text: "Dear [Name],\n\nHappy Birthday! I hope your day is filled with so much joy, cake, and laughter. Welcome to your personal digital letter vault!",
-                image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=500",
-                password: "" // Empty means no password needed
-            },
-            {
-                id: 2,
-                category: "open-when",
-                icon: "🌧️",
-                title: "Open When You're Sad",
-                subtitle: "A little hug in text form",
-                text: "Whenever things feel tough, just remember how strong you are.\n\nYou have survived 100% of your hardest days so far. Take a breath, make a cup of warm tea, and treat yourself gently today. ❤️",
-                image: "",
-                password: ""
-            },
-            {
-                id: 3,
-                category: "memories",
-                icon: "📸",
-                title: "That One Unforgettable Day",
-                subtitle: "Remember when...",
-                text: "I was looking back at old photos and found this!\n\nRemember when we [insert fun story or trip here]? That will always be one of my absolute favorite memories with you.",
-                image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500",
-                password: ""
-            },
-            {
-                id: 4,
-                category: "secrets",
-                icon: "🔒",
-                title: "Top Secret Letter",
-                subtitle: "Requires secret PIN to open!",
-                text: "🎉 You unlocked it!\n\nThe secret code was [your birthday/year/pin]. You mean the absolute world to me, and I hope this secret note brought a smile to your face!",
-                image: "",
-                password: "1234" // CHANGE THIS TO YOUR SECRET PIN CODE
-            }
-        ];
-
-        // Render Letters dynamically to Grid
-        function renderVault(category = 'all') {
-            const grid = document.getElementById('vaultGrid');
-            grid.innerHTML = '';
-
-            const filtered = category === 'all' 
-                ? vaultData 
-                : vaultData.filter(item => item.category === category);
-
-            filtered.forEach(letter => {
-                const card = document.createElement('div');
-                card.className = 'letter-card';
-                card.onclick = () => openLetter(letter.id);
-
-                const lockBadge = letter.password ? `<span class="badge-lock">Locked 🔒</span>` : '';
-
-                card.innerHTML = `
-                    ${lockBadge}
-                    <div class="card-icon">${letter.icon}</div>
-                    <div class="card-title">${letter.title}</div>
-                    <div class="card-subtitle">${letter.subtitle}</div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        function filterCategory(cat, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            renderVault(cat);
-        }
-
-        function openLetter(id) {
-            const letter = vaultData.find(l => l.id === id);
-            const modalContent = document.getElementById('modalContent');
-
-            if (letter.password) {
-                // Password prompt view
-                modalContent.innerHTML = `
-                    <div class="password-box">
-                        <div class="card-icon">🔒</div>
-                        <h2 class="modal-title">Locked Secret</h2>
-                        <p style="color: #718096; font-size: 0.9rem;">Enter the passcode to open this letter:</p>
-                        <input type="password" id="passInput" class="password-input" placeholder="Passcode">
-                        <br>
-                        <button class="password-btn" onclick="checkPassword(${letter.id})">Unlock</button>
-                        <br><br>
-                        <button class="close-btn" onclick="closeModal()">Cancel</button>
-                    </div>
-                `;
-            } else {
-                // Standard letter view
-                showLetterContent(letter);
-            }
-
-            document.getElementById('letterModal').classList.add('active');
-        }
-
-        function checkPassword(id) {
-            const letter = vaultData.find(l => l.id === id);
-            const input = document.getElementById('passInput').value;
-
-            if (input === letter.password) {
-                confetti({ particleCount: 70, spread: 60 });
-                showLetterContent(letter);
-            } else {
-                alert("Incorrect PIN! Try again.");
-            }
-        }
-
-        function showLetterContent(letter) {
-            const modalContent = document.getElementById('modalContent');
-            const imgHtml = letter.image ? `<img src="${letter.image}" class="modal-img" alt="Memory">` : '';
-
-            modalContent.innerHTML = `
-                <h2 class="modal-title">${letter.title}</h2>
-                ${imgHtml}
-                <div class="modal-text">${letter.text}</div>
-                <button class="close-btn" onclick="closeModal()">Close Note</button>
-            `;
-            confetti({ particleCount: 50, spread: 50, origin: { y: 0.7 } });
-        }
-
-        function closeModal() {
-            document.getElementById('letterModal').classList.remove('active');
-        }
-
-        // Close on backdrop click
-        document.getElementById('letterModal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
+        // Hide loader screen after 3 seconds
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+            }, 3000);
         });
 
-        // Initialize vault on page load
-        renderVault();
+        // Letter Contents (You can edit text here!)
+        const letters = {
+            1: {
+                title: "Dear Maelo... 📬",
+                text: "Happy birthday to my best friend, Maelo! 💙 I hope this new age brings you endless happiness, more success, and all the love you deserve. May your day be filled with your favorite things, lots of laughter, and maybe a little bit of chaos, the good kind, of course!\n\nYou've always been such a bright light to everyone around you, so I truly hope this year treats you extra kind and all your big dreams start to fall into place. Cheers to another year of you being awesome!\n\nOn a side note, I also wanted to say a huge thank you. Thank you for being such a genuine friend and for always being someone I can count on, no matter what."
+            },
+            2: {
+                title: "My Wishes ✨",
+                text: "Once again, Happy Birthday! My wish for you is simple: I hope you always find a reason to smile every single day.\n\nMay your heart be light, your path be clear, and your year be filled with beautiful surprises that you never saw coming.\n\nI hope you stay healthy, reach all the goals you've set, and never lose that kind heart of yours. May this chapter be the best one yet. You deserve all the stars in the sky! 💙"
+            }
+        };
+
+        function openLetter(id) {
+            const letter = letters[id];
+            if (letter) {
+                document.getElementById('modalTitle').innerText = letter.title;
+                document.getElementById('modalBody').innerText = letter.text;
+                document.getElementById('modalOverlay').classList.add('active');
+                confetti({ particleCount: 60, spread: 60, origin: { y: 0.7 } });
+            }
+        }
+
+        function closeLetter() {
+            document.getElementById('modalOverlay').classList.remove('active');
+        }
+
+        // Music Toggle
+        const audio = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('playBtn');
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerText = '⏸';
+            } else {
+                audio.pause();
+                playBtn.innerText = '▶';
+            }
+        }
     </script>
 </body>
 </html>
