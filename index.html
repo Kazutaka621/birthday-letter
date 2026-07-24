@@ -84,7 +84,9 @@
             color: #60a5fa;
         }
 
-        /* CANDLE LOADING SCREEN ANIMATION */
+        /* ============================================== */
+        /* EXACT CANDLE LOADER ANIMATION FROM VIDEO       */
+        /* ============================================== */
         #loader {
             position: fixed;
             top: 0;
@@ -97,75 +99,177 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            animation: bgFlash 2s infinite ease-in-out;
-            transition: opacity 0.6s ease, visibility 0.6s;
+            animation: bgBlink 3s infinite ease-in-out;
+            transition: opacity 0.8s ease, visibility 0.8s;
         }
 
-        @keyframes bgFlash {
-            0%, 45%, 100% { background-color: #a2c9f5; }
-            50%, 95% { background-color: #1e293b; }
+        @keyframes bgBlink {
+            0%, 40%, 100% { background-color: #a2c9f5; }
+            50%, 90% { background-color: #1a233d; }
         }
 
         .loading-text {
-            font-family: 'Playfair Display', serif;
-            letter-spacing: 4px;
-            font-size: 1.2rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
             color: #ffffff;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .loading-dots span {
+            animation: dotColor 3s infinite ease-in-out;
+        }
+
+        @keyframes dotColor {
+            0%, 40%, 100% { color: #ffffff; }
+            50%, 90% { color: #f43f5e; }
         }
 
         .candles-container {
             position: relative;
-            width: 140px;
-            height: 100px;
-            border-bottom: 4px solid #334155;
+            width: 220px;
+            height: 120px;
+            border-bottom: 4px solid #3d2b4e;
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            gap: 15px;
+            gap: 18px;
             padding-bottom: 2px;
         }
 
         .candle {
             background: #ffffff;
-            border: 3px solid #334155;
+            border: 3px solid #3d2b4e;
             border-radius: 4px 4px 0 0;
             position: relative;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .candle-1 { width: 35px; height: 50px; }
-        .candle-2 { width: 30px; height: 70px; }
+        /* Candle 1 (Short) */
+        .candle-1 {
+            width: 42px;
+            height: 55px;
+        }
 
-        .eyes {
+        /* Candle 2 (Tall) */
+        .candle-2 {
+            width: 36px;
+            height: 85px;
+        }
+
+        /* Eyes & Expression for Short Candle */
+        .candle-1 .normal-eyes {
+            position: absolute;
+            top: 14px;
+            display: flex;
+            gap: 10px;
+            animation: hideOnDark 3s infinite;
+        }
+
+        .candle-1 .normal-eyes .eye {
+            width: 4px;
+            height: 4px;
+            background: #3d2b4e;
+            border-radius: 50%;
+        }
+
+        .candle-1 .squint-eyes {
+            position: absolute;
+            top: 12px;
+            font-size: 10px;
+            font-weight: bold;
+            color: #3d2b4e;
+            display: none;
+            animation: showOnDark 3s infinite;
+        }
+
+        /* Eyes & Mouth for Tall Candle */
+        .candle-2 .eyes {
             position: absolute;
             top: 12px;
             display: flex;
             gap: 8px;
         }
 
-        .eye {
+        .candle-2 .eye {
             width: 4px;
             height: 4px;
-            background: #334155;
+            background: #3d2b4e;
             border-radius: 50%;
         }
 
-        .flame {
+        .candle-2 .mouth {
             position: absolute;
-            top: -18px;
-            width: 12px;
-            height: 18px;
-            background: #fbf061;
-            border: 2px solid #334155;
-            border-radius: 50% 50% 35% 35%;
-            animation: flicker 0.6s infinite alternate;
+            top: 20px;
+            width: 6px;
+            height: 6px;
+            background: #3d2b4e;
+            border-radius: 50%;
+            display: none;
+            animation: showMouthOnDark 3s infinite;
         }
 
-        @keyframes flicker {
-            0% { transform: scale(1) rotate(-2deg); }
-            100% { transform: scale(1.1) rotate(2deg); }
+        /* Flames */
+        .flame-1 {
+            position: absolute;
+            top: -20px;
+            width: 14px;
+            height: 20px;
+            background: #fbbf24;
+            border: 2px solid #3d2b4e;
+            border-radius: 50% 50% 35% 35%;
+            animation: flameFlicker 0.4s infinite alternate, hideFlameOnDark 3s infinite;
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+        }
+
+        .flame-2 {
+            position: absolute;
+            top: -20px;
+            width: 14px;
+            height: 20px;
+            background: #fbbf24;
+            border: 2px solid #3d2b4e;
+            border-radius: 50% 50% 35% 35%;
+            display: none;
+            animation: showFlame2OnDark 3s infinite;
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+        }
+
+        @keyframes flameFlicker {
+            0% { transform: scale(1) rotate(-3deg); }
+            100% { transform: scale(1.1) rotate(3deg); }
+        }
+
+        /* Animation States for Dark BG */
+        @keyframes hideOnDark {
+            0%, 45%, 95%, 100% { opacity: 1; }
+            50%, 90% { opacity: 0; }
+        }
+
+        @keyframes showOnDark {
+            0%, 45%, 95%, 100% { display: none; }
+            50%, 90% { display: block; }
+        }
+
+        @keyframes showMouthOnDark {
+            0%, 45%, 95%, 100% { display: none; }
+            50%, 90% { display: block; }
+        }
+
+        @keyframes hideFlameOnDark {
+            0%, 45%, 95%, 100% { opacity: 1; }
+            50%, 90% { opacity: 0; }
+        }
+
+        @keyframes showFlame2OnDark {
+            0%, 45%, 95%, 100% { opacity: 0; display: none; }
+            50%, 90% { opacity: 1; display: block; }
         }
 
         /* ---------------------------------- */
@@ -474,21 +578,34 @@
 </head>
 <body>
 
-    <!-- CANDLE LOADING OVERLAY (FIRST SCREEN) -->
+    <!-- CANDLE LOADING OVERLAY (MATCHED TO VIDEO) -->
     <div id="loader">
-        <div class="loading-text">L O A D I N G . .</div>
+        <div class="loading-text">
+            L O A D I N G <span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>
+        </div>
         <div class="candles-container">
+            <!-- Short Candle -->
             <div class="candle candle-1">
-                <div class="flame"></div>
-                <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
+                <div class="flame-1"></div>
+                <div class="normal-eyes">
+                    <div class="eye"></div>
+                    <div class="eye"></div>
+                </div>
+                <div class="squint-eyes">&gt; &lt;</div>
             </div>
+            <!-- Tall Candle -->
             <div class="candle candle-2">
-                <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
+                <div class="flame-2"></div>
+                <div class="eyes">
+                    <div class="eye"></div>
+                    <div class="eye"></div>
+                </div>
+                <div class="mouth"></div>
             </div>
         </div>
     </div>
 
-    <!-- 1. ENVELOPE OPENING OVERLAY (SECOND SCREEN) -->
+    <!-- 1. ENVELOPE OPENING OVERLAY -->
     <div id="envelopeOverlay">
         <div class="envelope-subtitle">a little surprise</div>
         <div class="envelope-title">You Got A Mail</div>
@@ -625,7 +742,7 @@ As you begin this new year of your life, I hope you are always blessed with good
     <!-- Confetti Script -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
-        // 1. Auto-dismiss Candle Loader after 3 seconds
+        // Auto-hide candle loader after 6 seconds (letting it loop twice)
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loader');
@@ -633,10 +750,10 @@ As you begin this new year of your life, I hope you are always blessed with good
                     loader.style.opacity = '0';
                     loader.style.visibility = 'hidden';
                 }
-            }, 3000);
+            }, 6000);
         });
 
-        // 2. Open site when Envelope is clicked
+        // Open site when Envelope is clicked
         function openSite() {
             const overlay = document.getElementById('envelopeOverlay');
             overlay.style.opacity = '0';
