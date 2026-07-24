@@ -666,18 +666,9 @@
         <p class="hero-desc">Every moment with you becomes a beautiful memory. Today marks your birthday—the day a remarkable person came into this world.</p>
         <div style="color: #60a5fa; font-size: 1.5rem; margin-top: 10px;">💙</div>
 
-        <!-- Official Spotify Embed Player -->
+        <!-- Official Spotify Embed Container -->
         <div class="spotify-container">
-            <iframe 
-                style="border-radius:12px" 
-                src="https://open.spotify.com/embed/track/35o9a4iAfLl5jRmqMX9c1D?utm_source=generator&theme=0" 
-                width="100%" 
-                height="152" 
-                frameBorder="0" 
-                allowfullscreen="" 
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                loading="lazy">
-            </iframe>
+            <div id="embed-iframe"></div>
         </div>
     </section>
 
@@ -779,7 +770,35 @@ As you begin this new year of your life, I hope you are always blessed with good
 
     <!-- Confetti Script -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <!-- Spotify iFrame API Script -->
+    <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+
     <script>
+        let spotifyEmbedController = null;
+        const trackUri = 'spotify:track:35o9a4iAfLl5jRmqMX9c1D'; // Shape of My Heart - Backstreet Boys
+
+        // Initialize Spotify iFrame API
+        window.onSpotifyIframeApiReady = (IFrameAPI) => {
+            const element = document.getElementById('embed-iframe');
+            const options = {
+                width: '100%',
+                height: '152',
+                uri: trackUri
+            };
+            const callback = (EmbedController) => {
+                spotifyEmbedController = EmbedController;
+
+                // Loop the track when it ends
+                EmbedController.addListener('playback_update', e => {
+                    if (e.data.position >= e.data.duration && e.data.duration > 0) {
+                        EmbedController.play();
+                    }
+                });
+            };
+            IFrameAPI.createController(element, options, callback);
+        };
+
         // Smoothly dismiss loader after 7 seconds
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -796,6 +815,11 @@ As you begin this new year of your life, I hope you are always blessed with good
             const overlay = document.getElementById('envelopeOverlay');
             overlay.style.opacity = '0';
             overlay.style.visibility = 'hidden';
+
+            // Autoplay Spotify Song upon user click interaction
+            if (spotifyEmbedController) {
+                spotifyEmbedController.play();
+            }
 
             // Trigger blue confetti burst
             confetti({
