@@ -85,7 +85,7 @@
         }
 
         /* ============================================== */
-        /* CANDLE ANIMATION - BLOW OUT, RED & INFLATE     */
+        /* CANDLE ANIMATION & WAVY LOADING TEXT          */
         /* ============================================== */
         #loader {
             position: fixed;
@@ -108,24 +108,43 @@
             48%, 80% { background-color: #1a233d; }
         }
 
+        /* WAVY LOADING TEXT STYLES */
         .loading-text {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            letter-spacing: 6px;
             font-size: 1.1rem;
             font-weight: 600;
             color: #ffffff;
             margin-bottom: 50px;
             display: flex;
             align-items: center;
+            gap: 4px;
         }
 
-        .dot-1, .dot-2, .dot-3 {
-            animation: dotColor 3.5s infinite linear;
+        .loading-text span {
+            display: inline-block;
+            animation: waveMotion 1.5s infinite ease-in-out;
         }
 
-        @keyframes dotColor {
-            0%, 40%, 88%, 100% { color: #ffffff; }
-            48%, 80% { color: #f43f5e; }
+        /* Wave offset delays for each character */
+        .loading-text span:nth-child(1) { animation-delay: 0.0s; }
+        .loading-text span:nth-child(2) { animation-delay: 0.1s; }
+        .loading-text span:nth-child(3) { animation-delay: 0.2s; }
+        .loading-text span:nth-child(4) { animation-delay: 0.3s; }
+        .loading-text span:nth-child(5) { animation-delay: 0.4s; }
+        .loading-text span:nth-child(6) { animation-delay: 0.5s; }
+        .loading-text span:nth-child(7) { animation-delay: 0.6s; }
+        .loading-text span:nth-child(8) { animation-delay: 0.7s; } /* Space */
+        .loading-text span:nth-child(9) { animation-delay: 0.8s; }
+        .loading-text span:nth-child(10) { animation-delay: 0.9s; }
+        .loading-text span:nth-child(11) { animation-delay: 1.0s; }
+
+        @keyframes waveMotion {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         .candles-container {
@@ -172,17 +191,14 @@
                 background: #ffffff; 
                 transform: scale(1); 
             }
-            /* Turning red & inflating like a balloon before "poof" */
             80% { 
                 background: #ff7b7b; 
                 transform: scaleX(1.3) scaleY(1.1); 
             }
-            /* The "POOF!" expansion moment */
             86% { 
                 background: #ff5252; 
                 transform: scaleX(1.4) scaleY(1.2); 
             }
-            /* Bouncing back to normal size as flame catches */
             92% { 
                 background: #ffffff; 
                 transform: scale(0.95); 
@@ -291,10 +307,10 @@
         @keyframes flameBlowOutAndPoof {
             0%, 25% { opacity: 1; transform: scale(1) rotate(-2deg); }
             35% { opacity: 0.8; transform: scale(1.1) rotate(-15deg); }
-            42%, 78% { opacity: 0; transform: scale(0); } /* Out */
-            80% { opacity: 0.4; transform: scale(0.3); } /* Tiny spark */
-            86% { opacity: 1; transform: scale(1.6); } /* POOF pop! */
-            92%, 100% { opacity: 1; transform: scale(1); } /* Normal flame */
+            42%, 78% { opacity: 0; transform: scale(0); }
+            80% { opacity: 0.4; transform: scale(0.3); }
+            86% { opacity: 1; transform: scale(1.6); }
+            92%, 100% { opacity: 1; transform: scale(1); }
         }
 
         /* ---------------------------------- */
@@ -603,10 +619,20 @@
 </head>
 <body>
 
-    <!-- CANDLE LOADING OVERLAY -->
+    <!-- CANDLE LOADING OVERLAY WITH WAVY TEXT -->
     <div id="loader">
         <div class="loading-text">
-            L O A D I N G&nbsp;<span class="dot-1">.</span><span class="dot-2">.</span><span class="dot-3">.</span>
+            <span>L</span>
+            <span>O</span>
+            <span>A</span>
+            <span>D</span>
+            <span>I</span>
+            <span>N</span>
+            <span>G</span>
+            <span>&nbsp;</span>
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
         </div>
         <div class="candles-container">
             <!-- Short Candle (Inflates, turns red, and recandles) -->
