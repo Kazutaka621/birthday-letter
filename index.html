@@ -955,6 +955,9 @@ You can add as many letters as you want by copying both a button tile above and 
             overlay.style.opacity = '0';
             overlay.style.visibility = 'hidden';
 
+            // Ensure page scrolls back to the top (Home section) when opened
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
             // Autoplay Standalone Audio without pausing external Spotify playback
             const audio = document.getElementById('bgMusic');
             if (audio) {
