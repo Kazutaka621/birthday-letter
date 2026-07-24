@@ -388,7 +388,7 @@
         }
 
         /* ---------------------------------- */
-        /* HERO SECTION & INTERACTIVE PLAYER  */
+        /* HERO SECTION & SPOTIFY PLAYER      */
         /* ---------------------------------- */
         .section {
             min-height: 100vh;
@@ -426,119 +426,21 @@
             margin-bottom: 30px;
         }
 
-        /* Interactive Music Player Glass Card */
-        .music-card {
-            position: absolute;
-            left: 50px;
-            bottom: 80px;
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(14px);
-            border: 1px solid rgba(96, 165, 250, 0.25);
-            padding: 12px 20px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            user-select: none;
+        /* Spotify Player Widget Container */
+        .spotify-container {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 360px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(96, 165, 250, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .music-card:hover {
-            transform: scale(1.03);
-            border-color: rgba(96, 165, 250, 0.5);
-            box-shadow: 0 10px 35px rgba(96, 165, 250, 0.25);
-        }
-
-        .album-art {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.5s ease;
-        }
-
-        /* Album spin when playing */
-        .music-card.playing .album-art {
-            animation: spinRecord 4s linear infinite;
-        }
-
-        @keyframes spinRecord {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .music-info {
-            text-align: left;
-        }
-
-        .music-title {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #f8fafc;
-        }
-
-        .music-artist {
-            font-size: 0.75rem;
-            color: #64748b;
-        }
-
-        /* Interactive Play Button inside Player */
-        .play-btn {
-            width: 32px;
-            height: 32px;
-            background: #60a5fa;
-            color: #030a16;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.75rem;
-            font-weight: bold;
-            margin-left: 5px;
-            transition: background 0.3s;
-        }
-
-        .music-card:hover .play-btn {
-            background: #93c5fd;
-        }
-
-        /* Sound Wave Animation Bars */
-        .sound-wave {
-            display: flex;
-            gap: 2px;
-            align-items: flex-end;
-            height: 12px;
-            margin-top: 4px;
-        }
-
-        .sound-bar {
-            width: 3px;
-            height: 100%;
-            background: #60a5fa;
-            border-radius: 2px;
-            opacity: 0.3;
-        }
-
-        .music-card.playing .sound-bar {
-            opacity: 1;
-            animation: bounceBar 0.8s infinite ease-in-out alternate;
-        }
-
-        .music-card.playing .sound-bar:nth-child(1) { animation-delay: 0.1s; }
-        .music-card.playing .sound-bar:nth-child(2) { animation-delay: 0.3s; }
-        .music-card.playing .sound-bar:nth-child(3) { animation-delay: 0.2s; }
-        .music-card.playing .sound-bar:nth-child(4) { animation-delay: 0.4s; }
-
-        @keyframes bounceBar {
-            0% { height: 3px; }
-            100% { height: 14px; }
+        .spotify-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(96, 165, 250, 0.35);
         }
 
         /* ---------------------------------- */
@@ -694,7 +596,6 @@
             .reasons-grid { grid-template-columns: 1fr; }
             .gallery-grid { grid-template-columns: repeat(2, 1fr); }
             .side-photo { display: none; }
-            .music-card { position: static; margin-top: 30px; }
         }
     </style>
 </head>
@@ -765,25 +666,18 @@
         <p class="hero-desc">Every moment with you becomes a beautiful memory. Today marks your birthday—the day a remarkable person came into this world.</p>
         <div style="color: #60a5fa; font-size: 1.5rem; margin-top: 10px;">💙</div>
 
-        <!-- Audio Element -->
-        <audio id="bgAudio" loop preload="auto">
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        </audio>
-
-        <!-- Interactive Music Player Widget -->
-        <div class="music-card" id="musicCard" onclick="toggleMusic()">
-            <div class="album-art">🎵</div>
-            <div class="music-info">
-                <div class="music-title">Shape of My Heart</div>
-                <div class="music-artist">Backstreet Boys</div>
-                <div class="sound-wave">
-                    <div class="sound-bar"></div>
-                    <div class="sound-bar"></div>
-                    <div class="sound-bar"></div>
-                    <div class="sound-bar"></div>
-                </div>
-            </div>
-            <div class="play-btn" id="playBtn">▶</div>
+        <!-- Official Spotify Embed Player -->
+        <div class="spotify-container">
+            <iframe 
+                style="border-radius:12px" 
+                src="https://open.spotify.com/embed/track/35o9a4iAfLl5jRmqMX9c1D?utm_source=generator&theme=0" 
+                width="100%" 
+                height="152" 
+                frameBorder="0" 
+                allowfullscreen="" 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy">
+            </iframe>
         </div>
     </section>
 
@@ -902,9 +796,6 @@ As you begin this new year of your life, I hope you are always blessed with good
             const overlay = document.getElementById('envelopeOverlay');
             overlay.style.opacity = '0';
             overlay.style.visibility = 'hidden';
-            
-            // Auto play music on envelope click
-            toggleMusic(true);
 
             // Trigger blue confetti burst
             confetti({
@@ -913,26 +804,6 @@ As you begin this new year of your life, I hope you are always blessed with good
                 origin: { y: 0.6 },
                 colors: ['#60a5fa', '#3b82f6', '#93c5fd', '#ffffff']
             });
-        }
-
-        // Toggle Audio Play / Pause
-        function toggleMusic(forcePlay = false) {
-            const audio = document.getElementById('bgAudio');
-            const musicCard = document.getElementById('musicCard');
-            const playBtn = document.getElementById('playBtn');
-
-            if (audio.paused || forcePlay) {
-                audio.play().then(() => {
-                    musicCard.classList.add('playing');
-                    playBtn.innerHTML = '❚❚';
-                }).catch(err => {
-                    console.log('Autoplay blocked or audio load error:', err);
-                });
-            } else {
-                audio.pause();
-                musicCard.classList.remove('playing');
-                playBtn.innerHTML = '▶';
-            }
         }
     </script>
 </body>
