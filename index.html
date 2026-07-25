@@ -25,7 +25,7 @@
             position: relative;
         }
 
-        /* Starry Background */
+        /* Optimized Starry Background */
         body::before {
             content: '';
             position: fixed;
@@ -33,14 +33,9 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: radial-gradient(circle at 50% 50%, rgba(15, 32, 67, 0.8) 0%, rgba(3, 10, 22, 1) 100%),
-                        radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
-                        radial-gradient(2px 2px at 150px 120px, #60a5fa, rgba(0,0,0,0)),
-                        radial-gradient(1.5px 1.5px at 280px 70px, #ffffff, rgba(0,0,0,0)),
-                        radial-gradient(2px 2px at 400px 250px, #93c5fd, rgba(0,0,0,0));
-            background-repeat: repeat;
-            background-size: 100% 100%, 500px 500px, 400px 400px, 300px 300px, 450px 450px;
+            background: radial-gradient(circle at 50% 50%, rgba(15, 32, 67, 0.8) 0%, rgba(3, 10, 22, 1) 100%);
             z-index: -1;
+            will-change: transform;
         }
 
         /* Navigation Bar */
@@ -55,6 +50,7 @@
             z-index: 100;
             background: rgba(3, 10, 22, 0.85);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -103,6 +99,7 @@
             align-items: center;
             animation: bgFlashSequence 3.5s infinite linear;
             transition: opacity 0.8s ease, visibility 0.8s;
+            will-change: background-color;
         }
 
         @keyframes bgFlashSequence {
@@ -124,6 +121,7 @@
         .loading-text span {
             display: inline-block;
             animation: waveMotion 1.5s infinite ease-in-out;
+            will-change: transform;
         }
 
         .loading-text span:nth-child(1) { animation-delay: 0.0s; }
@@ -139,8 +137,8 @@
         .loading-text span:nth-child(11) { animation-delay: 1.0s; }
 
         @keyframes waveMotion {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0) translateZ(0); }
+            50% { transform: translateY(-10px) translateZ(0); }
         }
 
         .candles-container {
@@ -178,14 +176,15 @@
             height: 55px;
             transform-origin: bottom center;
             animation: shortCandleInflate 3.5s infinite ease-in-out;
+            will-change: transform, background-color;
         }
 
         @keyframes shortCandleInflate {
-            0%, 75% { background: #ffffff; transform: scale(1); }
-            80% { background: #ff7b7b; transform: scaleX(1.3) scaleY(1.1); }
-            86% { background: #ff5252; transform: scaleX(1.4) scaleY(1.2); }
-            92% { background: #ffffff; transform: scale(0.95); }
-            96%, 100% { background: #ffffff; transform: scale(1); }
+            0%, 75% { background: #ffffff; transform: scale(1) translateZ(0); }
+            80% { background: #ff7b7b; transform: scaleX(1.3) scaleY(1.1) translateZ(0); }
+            86% { background: #ff5252; transform: scaleX(1.4) scaleY(1.2) translateZ(0); }
+            92% { background: #ffffff; transform: scale(0.95) translateZ(0); }
+            96%, 100% { background: #ffffff; transform: scale(1) translateZ(0); }
         }
 
         .candle-2 {
@@ -193,12 +192,13 @@
             height: 88px;
             transform-origin: bottom center;
             animation: tallCandleBlow 3.5s infinite linear;
+            will-change: transform;
         }
 
         @keyframes tallCandleBlow {
-            0%, 100% { transform: rotate(0deg); }
-            18%, 42% { transform: rotate(-16deg); }
-            52%, 90% { transform: rotate(0deg); }
+            0%, 100% { transform: rotate(0deg) translateZ(0); }
+            18%, 42% { transform: rotate(-16deg) translateZ(0); }
+            52%, 90% { transform: rotate(0deg) translateZ(0); }
         }
 
         .candle-1 .normal-eyes {
@@ -207,6 +207,7 @@
             display: flex;
             gap: 10px;
             animation: eyeNormal1 3.5s infinite linear;
+            will-change: opacity;
         }
 
         .candle-1 .normal-eyes .eye {
@@ -224,6 +225,7 @@
             color: #3d2b4e;
             letter-spacing: 2px;
             animation: eyeSquint1 3.5s infinite linear;
+            will-change: opacity;
         }
 
         .candle-2 .eyes {
@@ -248,13 +250,14 @@
             background: #3d2b4e;
             border-radius: 50%;
             animation: mouthBlowingTiming 3.5s infinite ease-in-out;
+            will-change: transform, opacity;
         }
 
         @keyframes mouthBlowingTiming {
-            0%, 14% { opacity: 0; transform: scale(0.1); }
-            18%, 38% { opacity: 1; transform: scale(1.1); }
-            45% { opacity: 0.8; transform: scale(0.4); }
-            50%, 100% { opacity: 0; transform: scale(0); }
+            0%, 14% { opacity: 0; transform: scale(0.1) translateZ(0); }
+            18%, 38% { opacity: 1; transform: scale(1.1) translateZ(0); }
+            45% { opacity: 0.8; transform: scale(0.4) translateZ(0); }
+            50%, 100% { opacity: 0; transform: scale(0) translateZ(0); }
         }
 
         .flame-1 {
@@ -265,9 +268,10 @@
             background: radial-gradient(circle at 50% 80%, #fff 20%, #f59e0b 60%, #ef4444 100%);
             border: 2px solid #3d2b4e;
             border-radius: 50% 50% 35% 35%;
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.9), 0 0 5px rgba(239, 68, 68, 0.5);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.9);
             animation: flameBlowOutAndPoof 3.5s infinite ease-in-out;
             transform-origin: bottom center;
+            will-change: transform, opacity;
         }
 
         .flame-1::after {
@@ -291,12 +295,13 @@
             border-radius: 50%;
             animation: smokeRise 3.5s infinite ease-out;
             pointer-events: none;
+            will-change: transform, opacity;
         }
 
         @keyframes smokeRise {
-            0%, 36% { opacity: 0; transform: scale(0) translateY(0); }
-            40% { opacity: 0.7; transform: scale(1) translateY(-10px); }
-            55% { opacity: 0; transform: scale(2) translateY(-30px); }
+            0%, 36% { opacity: 0; transform: scale(0) translateY(0) translateZ(0); }
+            40% { opacity: 0.7; transform: scale(1) translateY(-10px) translateZ(0); }
+            55% { opacity: 0; transform: scale(2) translateY(-30px) translateZ(0); }
             100% { opacity: 0; }
         }
 
@@ -311,15 +316,15 @@
         }
 
         @keyframes flameBlowOutAndPoof {
-            0% { opacity: 1; transform: scale(1) rotate(-1deg); }
-            10% { opacity: 1; transform: scale(1.05) rotate(2deg); }
-            20% { opacity: 1; transform: scale(0.95) rotate(-2deg); }
-            30% { opacity: 0.9; transform: scale(1.1, 0.7) rotate(-25deg) translateX(-6px); }
-            38%, 78% { opacity: 0; transform: scale(0); }
-            80% { opacity: 0.5; transform: scale(0.4); }
-            86% { opacity: 1; transform: scale(1.5, 1.7); }
-            92% { opacity: 1; transform: scale(0.9, 1.1); }
-            100% { opacity: 1; transform: scale(1) rotate(0deg); }
+            0% { opacity: 1; transform: scale(1) rotate(-1deg) translateZ(0); }
+            10% { opacity: 1; transform: scale(1.05) rotate(2deg) translateZ(0); }
+            20% { opacity: 1; transform: scale(0.95) rotate(-2deg) translateZ(0); }
+            30% { opacity: 0.9; transform: scale(1.1, 0.7) rotate(-25deg) translateX(-6px) translateZ(0); }
+            38%, 78% { opacity: 0; transform: scale(0) translateZ(0); }
+            80% { opacity: 0.5; transform: scale(0.4) translateZ(0); }
+            86% { opacity: 1; transform: scale(1.5, 1.7) translateZ(0); }
+            92% { opacity: 1; transform: scale(0.9, 1.1) translateZ(0); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg) translateZ(0); }
         }
 
         /* ---------------------------------- */
@@ -438,6 +443,7 @@
             max-width: 380px;
             background: rgba(15, 23, 42, 0.7);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 16px;
             padding: 16px 20px;
             border: 1px solid rgba(96, 165, 250, 0.3);
@@ -513,6 +519,7 @@
         .center-glass-card {
             background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(96, 165, 250, 0.2);
             border-radius: 24px;
             padding: 40px 30px;
@@ -547,6 +554,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -581,6 +589,7 @@
             display: none;
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(96, 165, 250, 0.3);
             border-radius: 24px;
             padding: 40px 35px;
@@ -634,8 +643,8 @@
         }
 
         @keyframes fadeInLetter {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(8px) translateZ(0); }
+            to { opacity: 1; transform: translateY(0) translateZ(0); }
         }
 
         /* ---------------------------------- */
@@ -661,6 +670,7 @@
             font-size: 0.9rem;
             outline: none;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             transition: border-color 0.3s;
         }
 
@@ -677,6 +687,7 @@
             gap: 10px;
             padding-right: 8px;
             text-align: left;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* Custom scrollbar for sleek aesthetic */
@@ -698,6 +709,7 @@
         .reason-list-item {
             background: rgba(15, 23, 42, 0.5);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 14px;
             padding: 15px 20px;
@@ -735,6 +747,7 @@
             width: 100%;
             background: rgba(15, 23, 42, 0.5);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(96, 165, 250, 0.2);
             border-radius: 20px;
             padding: 40px 30px;
@@ -931,7 +944,7 @@
 
     <!-- 5. 100 REASONS SECTION -->
     <section class="section" id="reasons">
-        <h2 style="font-family: 'Cinzel', serif; font-size: 2.8rem; color: #ffffff; margin-bottom: 10px;">100 Reasons Why I Love You</h2>
+        <h2 style="font-family: 'Cinzel', serif; font-size: 2.8rem; color: #ffffff; margin-bottom: 10px;">100 Reasons Why I Like You</h2>
         <div style="width: 40px; height: 2px; background: #60a5fa; margin-bottom: 20px;"></div>
         <p style="font-size: 0.85rem; color: #94a3b8; font-style: italic; font-family: 'Playfair Display', serif; margin-bottom: 15px;">Scroll through or search to read them all</p>
 
@@ -977,103 +990,88 @@ As you begin this new year of your life, I hope you are always blessed with good
             2: {
                 title: "Special Note",
                 subtitle: "Letter II • Memories",
-                content: `Type your second letter content here!
-
-You can add multiple paragraphs, memories, or sweet notes here smoothly. Because of the new grid hub interface, you can add as many letters as your heart desires without cluttering the screen.`
+                content: `Type your second letter content here!`
             },
             3: {
                 title: "Under the Stars",
                 subtitle: "Letter III • Late Night Thoughts",
-                content: `Type your third letter content here!
-
-Every single letter you add will automatically generate its own clean page view when clicked from the compilation hub.`
+                content: `Type your third letter content here!`
             },
             4: {
                 title: "Coffee Dates & Smiles",
                 subtitle: "Letter IV • Little Things",
-                content: `Type your fourth letter content here! 
-
-To add more letters in the future, just duplicate one of the blocks in the HTML grid and add a corresponding entry into this letterDatabase with a new number!`
+                content: `Type your fourth letter content here!`
             }
         };
 
         // 100 Unique Reasons Array
         const reasonsList = [
-            "Your smile brightened even my darkest days.",
-            "Your soul is beautiful—kind, genuine, and rare.",
-            "Your kindness touches everyone around you.",
+            "Your smile brightened even my worst days.",
+            "The kind of person you are is something that this world needs more of.",
+            "Your kindness has a way of making people feel seen and appreciated.",
             "Your voice brings me comfort in ways words cannot explain.",
-            "No matter what challenges come your way, your strength is incredible.",
+            "No matter what life throws at you, you always find a way to keep going.",
             "Simply because you are you, and there is no one else like you.",
-            "The way your eyes light up when you talk about things you love.",
-            "How safe and at home I feel whenever I am with you.",
+            "The way you stay true to yourself, no matter the situation.",
+            "The way you quietly care for the people around you.",
             "Your patience when things don't go according to plan.",
-            "The little notes and messages you send out of nowhere.",
-            "How you always know how to make me laugh when I'm feeling down.",
-            "The warmth of your hands holding mine.",
+            "The way our conversations never feel like a waste of time.",
+            "The comfort and peace I find whenever you're around.",
             "Your adorable laugh that echoes in my mind long after.",
-            "How passionate you get when discussing your goals.",
+            "The quiet confidence you have.",
             "The thoughtful way you listen when I talk about my day.",
-            "How cute you look when you're sleepy or first wake up.",
+            "The little details about you that stay in my mind.",
             "Your unwavering support for everything I do.",
-            "The way we can sit together in comfortable silence and it's never awkward.",
+            "The excitement of getting to know you more each day.",
             "Your incredible resilience during hard times.",
             "How effortlessly you make friends wherever you go.",
-            "The sweet nicknames you give me.",
-            "How deeply you care about the people in your life.",
-            "Your fantastic sense of humor.",
-            "The way you look at me like I'm the only person in the room.",
-            "How you remember the tiny details I mention in passing.",
+            "The way you make my day a little brighter without even trying.",
             "Your determination to grow and better yourself every day.",
-            "The comfort of your hugs that melt all my stress away.",
-            "How you make ordinary, mundane errands feel like a fun adventure.",
-            "Your gorgeous hair and the way it moves.",
+            "The thought of making simple memories with you someday.",
+            "The way your eyes reflect your kindness.",
             "How honest and genuine you are in everything you do.",
-            "The silly faces you make just to get a smile out of me.",
-            "How proud I am to call you mine.",
-            "The way you share your favorite music and shows with me.",
-            "Your gentle heart and how you treat animals and nature.",
-            "How beautifully you handle unexpected surprises.",
-            "The little habits and quirks you have that make you uniquely you.",
-            "How you always save the best bite of food for me.",
+            "Your natural beauty that doesn't need anything extra.",
+            "The expressions on your face that say more than words ever could.",
+            "The way you share your favorite things and the joy they bring you.",
+            "The way you remind me that genuine people still exist.",
+            "The little habits you have that make you uniquely you.",
+            "The cheerful energy you carry every day.",
             "Your reassuring words right when I need to hear them.",
-            "The way your nose scrunches up when you laugh really hard.",
-            "How inspiring your work ethic and dedication are.",
-            "The way you wrap yourself in blankets and look like a cozy burrito.",
-            "How you celebrate my small victories as if they were massive wins.",
-            "Your willingness to try new things and step out of your comfort zone.",
+            "How you believe in me when I struggle to believe in myself.",
+            "How inspiring your dedication is.",
+            "The way you make me realize what I'm capable of.",
+            "How you celebrate small victories as if they were massive wins.",
+            "You feel like an angel in disguise.",
             "The safe space you provide for me to be completely vulnerable.",
             "Your optimism that shines through even on cloudy days.",
-            "The way you hum softly when you're concentrating.",
             "How graceful you are, inside and out.",
-            "The way you always check up on me to see if I've eaten or rested.",
+            "The way you bring out a version of me I never knew existed.",
             "Your brilliant mind and how fascinating your thoughts are.",
-            "How you make every place we visit feel magical.",
             "The way your presence alone can instantly lift my mood.",
             "Your incredible style and how amazing you look in everything.",
-            "How patient you are when teaching me something new.",
+            "The way you never make me feel unimportant.",
             "The memories we've already created, and all the ones we have yet to make.",
             "Your fierce loyalty to the people you love.",
-            "The sound of your footsteps approaching when I'm waiting for you.",
+            "The way you help me see things in a positive light.",
             "How comforting it is to fall asleep knowing you're in my life.",
             "The way you handle stress with such grace and poise.",
             "How you always find the silver lining in tough situations.",
-            "Your soft kisses on my forehead.",
-            "How enthusiastic you get about your favorite foods.",
-            "The way you encourage me to chase my biggest dreams.",
+            "The way you've become a source of my strength and inspiration.",
+            "How enthusiastic you get about your favorite things.",
+            "The way you inspire me to make better decisions.",
             "How easy it is to talk to you about absolutely anything.",
             "Your independent spirit balanced with our closeness.",
-            "The way you catch me staring and just smile back.",
-            "How comforting your text messages are in the middle of a busy workday.",
+            "The way you always have something that catches me off guard—in the best way.",
+            "How comforting your text messages are in the middle of a busy day.",
             "Your deep empathy for what others are going through.",
-            "The way you organize things or take care of your space.",
+            "The way you always remind me of the importance of self-love.",
             "How you make me feel like the luckiest person in the entire universe.",
             "Your gorgeous eyes that I could get lost in forever.",
             "The way you stand up for what you believe in.",
-            "How you make even a rainy day feel cozy and warm.",
-            "Your spontaneous ideas that turn into unforgettable memories.",
+            "The way you remind me that it's okay to ask for help when I need it.",
+            "The way you remind me to prioritize my well-being.",
             "The way you smell—always fresh and comforting.",
-            "How you accept my flaws and love me through my messy moments.",
+            "The way you're always thoughtful and considerate of everyone's feelings.",
             "The joy you bring to my family and friends.",
             "Your incredible intuition about how I'm feeling without me saying a word.",
             "The way you playfully tease me just to see me react.",
@@ -1140,7 +1138,6 @@ To add more letters in the future, just duplicate one of the blocks in the HTML 
         // Initialize reasons on load
         window.addEventListener('DOMContentLoaded', () => {
             renderReasons();
-            // Forces the page to start at the absolute top on refresh
             window.scrollTo(0, 0);
         });
 
@@ -1180,7 +1177,6 @@ To add more letters in the future, just duplicate one of the blocks in the HTML 
             overlay.style.opacity = '0';
             overlay.style.visibility = 'hidden';
 
-            // Ensure page scrolls back to the top home section when opened
             document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
 
             const audio = document.getElementById('bgMusic');
