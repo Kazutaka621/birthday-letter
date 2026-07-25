@@ -997,7 +997,7 @@ To add more letters in the future, just duplicate one of the blocks in the HTML 
             }
         };
 
-        // 100 Unique Reasons Array (Fully populated)
+        // 100 Unique Reasons Array
         const reasonsList = [
             "Your smile brightened even my darkest days.",
             "Your soul is beautiful—kind, genuine, and rare.",
@@ -1140,6 +1140,8 @@ To add more letters in the future, just duplicate one of the blocks in the HTML 
         // Initialize reasons on load
         window.addEventListener('DOMContentLoaded', () => {
             renderReasons();
+            // Forces the page to start at the absolute top on refresh
+            window.scrollTo(0, 0);
         });
 
         // Function to open a specific letter
@@ -1177,6 +1179,9 @@ To add more letters in the future, just duplicate one of the blocks in the HTML 
             const overlay = document.getElementById('envelopeOverlay');
             overlay.style.opacity = '0';
             overlay.style.visibility = 'hidden';
+
+            // Ensure page scrolls back to the top home section when opened
+            document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
 
             const audio = document.getElementById('bgMusic');
             if (audio) {
