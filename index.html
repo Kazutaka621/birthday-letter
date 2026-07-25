@@ -110,7 +110,6 @@
             48%, 80% { background-color: #1a233d; }
         }
 
-        /* WAVY LOADING TEXT STYLES */
         .loading-text {
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 1.1rem;
@@ -640,49 +639,92 @@
         }
 
         /* ---------------------------------- */
-        /* REASONS GRID                       */
+        /* CLEAN 100 REASONS CONTAINER STYLES */
         /* ---------------------------------- */
-        .reasons-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            max-width: 1000px;
+        .reasons-wrapper {
+            max-width: 750px;
             width: 100%;
             margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        .reason-card {
+        .reasons-search {
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            border-radius: 12px;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.3s;
+        }
+
+        .reasons-search:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 15px rgba(96, 165, 250, 0.2);
+        }
+
+        .reasons-scroll-box {
+            max-height: 450px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-right: 8px;
+            text-align: left;
+        }
+
+        /* Custom scrollbar for sleek aesthetic */
+        .reasons-scroll-box::-webkit-scrollbar {
+            width: 6px;
+        }
+        .reasons-scroll-box::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 10px;
+        }
+        .reasons-scroll-box::-webkit-scrollbar-thumb {
+            background: rgba(96, 165, 250, 0.4);
+            border-radius: 10px;
+        }
+        .reasons-scroll-box::-webkit-scrollbar-thumb:hover {
+            background: rgba(96, 165, 250, 0.7);
+        }
+
+        .reason-list-item {
             background: rgba(15, 23, 42, 0.5);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 35px 25px;
-            text-align: center;
-            transition: transform 0.3s, border-color 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: background 0.3s, border-color 0.3s, transform 0.2s;
         }
 
-        .reason-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(96, 165, 250, 0.4);
+        .reason-list-item:hover {
+            background: rgba(30, 58, 138, 0.3);
+            border-color: rgba(96, 165, 250, 0.3);
+            transform: translateX(4px);
         }
 
-        .reason-icon {
-            font-size: 2rem;
-            color: #60a5fa;
-            margin-bottom: 15px;
-        }
-
-        .reason-title {
+        .reason-number {
             font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
-            color: #f8fafc;
-            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #60a5fa;
+            font-weight: 700;
+            min-width: 35px;
         }
 
-        .reason-desc {
-            font-size: 0.82rem;
-            color: #94a3b8;
-            line-height: 1.6;
+        .reason-text {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.5;
         }
 
         /* ---------------------------------- */
@@ -730,7 +772,6 @@
                 letter-spacing: 1px;
             }
             .showcase-container { flex-direction: column; }
-            .reasons-grid { grid-template-columns: 1fr; }
             .side-photo { display: none; }
             .letters-hub-grid { grid-template-columns: repeat(2, 1fr); }
         }
@@ -866,7 +907,7 @@
                     <div class="hub-date">Under the Stars</div>
                 </div>
 
-                <!-- Letter 4 Card (Example for adding more) -->
+                <!-- Letter 4 Card -->
                 <div class="letter-hub-card" onclick="openLetter(4)">
                     <div class="hub-icon">☕</div>
                     <div class="hub-title">Letter IV</div>
@@ -875,7 +916,7 @@
 
             </div>
 
-            <!-- INDIVIDUAL READER VIEW (Shows when a letter is clicked) -->
+            <!-- INDIVIDUAL READER VIEW -->
             <div id="letterReader" class="letter-reader-view">
                 <button class="back-to-hub-btn" onclick="closeLetterReader()">
                     ← Back to All Letters
@@ -888,51 +929,24 @@
         </div>
     </section>
 
-    <!-- 5. REASONS SECTION -->
+    <!-- 5. 100 REASONS SECTION -->
     <section class="section" id="reasons">
-        <h2 style="font-family: 'Cinzel', serif; font-size: 2.8rem; color: #ffffff; margin-bottom: 10px;">The Reason I Love You</h2>
-        <div style="width: 40px; height: 2px; background: #60a5fa; margin-bottom: 40px;"></div>
+        <h2 style="font-family: 'Cinzel', serif; font-size: 2.8rem; color: #ffffff; margin-bottom: 10px;">100 Reasons Why I Love You</h2>
+        <div style="width: 40px; height: 2px; background: #60a5fa; margin-bottom: 20px;"></div>
+        <p style="font-size: 0.85rem; color: #94a3b8; font-style: italic; font-family: 'Playfair Display', serif; margin-bottom: 15px;">Scroll through or search to read them all</p>
 
-        <div class="reasons-grid">
-            <div class="reason-card">
-                <div class="reason-icon">☕</div>
-                <div class="reason-title">Your Smile</div>
-                <div class="reason-desc">Your smile brightens even my darkest days. It has a way of bringing warmth, comfort, and happiness into my heart.</div>
-            </div>
-
-            <div class="reason-card">
-                <div class="reason-icon">❄️</div>
-                <div class="reason-title">Your Soul</div>
-                <div class="reason-desc">Your soul is beautiful—kind, genuine, and rare. The way you see the world inspires me more than you know.</div>
-            </div>
-
-            <div class="reason-card">
-                <div class="reason-icon">🧿</div>
-                <div class="reason-title">Your Kindness</div>
-                <div class="reason-desc">Your kindness touches everyone around you. The way you care for others makes me admire you more every day.</div>
-            </div>
-
-            <div class="reason-card">
-                <div class="reason-icon">🌊</div>
-                <div class="reason-title">Your Voice</div>
-                <div class="reason-desc">Your voice brings me comfort in ways words cannot explain, no matter how my day goes.</div>
-            </div>
-
-            <div class="reason-card">
-                <div class="reason-icon">🌀</div>
-                <div class="reason-title">Your Strength</div>
-                <div class="reason-desc">No matter what challenges come your way, you keep moving forward. Your strength is truly incredible.</div>
-            </div>
-
-            <div class="reason-card">
-                <div class="reason-icon">💙</div>
-                <div class="reason-title">Simply You</div>
-                <div class="reason-desc">More than anything else, I love you simply because you are you. There is no one else like you in the world.</div>
+        <div class="reasons-wrapper">
+            <!-- Search bar to easily find reasons -->
+            <input type="text" id="reasonSearch" class="reasons-search" placeholder="Search reasons (e.g., smile, voice, soul)..." onkeyup="filterReasons()">
+            
+            <!-- Scrollable list container -->
+            <div class="reasons-scroll-box" id="reasonsContainer">
+                <!-- Reasons will be dynamically generated by Javascript below -->
             </div>
         </div>
     </section>
 
-    <!-- 6. MUSEUM OF MEMORIES (Photos Removed) -->
+    <!-- 6. MUSEUM OF MEMORIES -->
     <section class="section" id="memories">
         <div class="envelope-subtitle">every picture tells a story</div>
         <h2 style="font-family: 'Cinzel', serif; font-size: 3rem; color: #ffffff; margin-bottom: 10px;">Museum of Memories</h2>
@@ -940,7 +954,7 @@
         <div class="memories-placeholder">
             <div class="memories-placeholder-icon">📸</div>
             <div class="memories-placeholder-text">
-                "Stay tuned for the memories yet to come."
+                "Our photo gallery is currently being curated. Check back soon for snapshots of our favorite moments together."
             </div>
         </div>
     </section>
@@ -949,7 +963,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <script>
-        // Database of Letters (You can add as many as you want here easily!)
+        // Database of Letters
         const letterDatabase = {
             1: {
                 title: "Dear Maelo,",
@@ -983,6 +997,63 @@ To add more letters in the future, just duplicate one of the blocks in the HTML 
             }
         };
 
+        // 100 Reasons Array (You can customize any text you want inside here!)
+        const reasonsList = [
+            "Your smile brightens even my darkest days.",
+            "Your soul is beautiful—kind, genuine, and rare.",
+            "Your kindness touches everyone around you.",
+            "Your voice brings me comfort in ways words cannot explain.",
+            "No matter what challenges come your way, your strength is incredible.",
+            "Simply because you are you, and there is no one else like you.",
+            "The way your eyes light up when you talk about things you love.",
+            "How safe and at home I feel whenever I am with you.",
+            "Your patience when things don't go according to plan.",
+            "The little notes and messages you send out of nowhere.",
+            // Fill up to 100 easily below or edit any of them:
+            ...Array.from({ length: 90 }, (_, i) => `Reason #${i + 11}: Your endless charm and the way you make every ordinary day feel magical.`)
+        ];
+
+        // Function to render the 100 reasons dynamically into the scrollable box
+        function renderReasons() {
+            const container = document.getElementById('reasonsContainer');
+            container.innerHTML = '';
+
+            reasonsList.forEach((reason, index) => {
+                const item = document.createElement('div');
+                item.className = 'reason-list-item';
+                item.innerHTML = `
+                    <div class="reason-number">#${index + 1}</div>
+                    <div class="reason-text">${reason}</div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // Search/Filter function for the 100 reasons
+        function filterReasons() {
+            const query = document.getElementById('reasonSearch').value.toLowerCase();
+            const container = document.getElementById('reasonsContainer');
+            container.innerHTML = '';
+
+            reasonsList.forEach((reason, index) => {
+                const reasonNum = `#${index + 1}`;
+                if (reason.toLowerCase().includes(query) || reasonNum.includes(query)) {
+                    const item = document.createElement('div');
+                    item.className = 'reason-list-item';
+                    item.innerHTML = `
+                        <div class="reason-number">${reasonNum}</div>
+                        <div class="reason-text">${reason}</div>
+                    `;
+                    container.appendChild(item);
+                }
+            });
+        }
+
+        // Initialize reasons on load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderReasons();
+        });
+
         // Function to open a specific letter
         function openLetter(id) {
             const letterData = letterDatabase[id];
@@ -995,11 +1066,9 @@ To add more letters in the future, just duplicate one of the blocks in the HTML 
             document.getElementById('lettersHub').style.display = 'none';
             document.getElementById('letterReader').style.display = 'block';
 
-            // Scroll slightly up to letter section nicely
             document.getElementById('letter').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Function to go back to the hub grid
         function closeLetterReader() {
             document.getElementById('letterReader').style.display = 'none';
             document.getElementById('lettersHub').style.display = 'grid';
@@ -1016,19 +1085,16 @@ To add more letters in the future, just duplicate one of the blocks in the HTML 
             }, 7000);
         });
 
-        // Open site when Envelope is clicked (removed automatic window.scrollTo to prevent forcing scroll up)
         function openSite() {
             const overlay = document.getElementById('envelopeOverlay');
             overlay.style.opacity = '0';
             overlay.style.visibility = 'hidden';
 
-            // Autoplay Standalone Audio without pausing external Spotify playback
             const audio = document.getElementById('bgMusic');
             if (audio) {
                 audio.play().catch(err => console.log('Audio playback prevented:', err));
             }
 
-            // Trigger blue confetti burst
             confetti({
                 particleCount: 100,
                 spread: 70,
