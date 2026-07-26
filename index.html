@@ -706,10 +706,8 @@
             background: rgba(96, 165, 250, 0.7);
         }
 
-        /* MASSIVE PERFORMANCE FIX HERE */
         .reason-list-item {
             background: rgba(15, 23, 42, 0.5);
-            /* Removed backdrop-filter to prevent severe lag */
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 14px;
             padding: 15px 20px;
@@ -717,7 +715,7 @@
             align-items: center;
             gap: 15px;
             transition: background 0.3s, border-color 0.3s, transform 0.2s;
-            will-change: transform; /* Forces GPU hardware acceleration */
+            will-change: transform;
         }
 
         .reason-list-item:hover {
@@ -869,9 +867,9 @@
         <div class="letters-container">
             <div id="lettersHub" class="letters-hub-grid">
                 <div class="letter-hub-card" onclick="openLetter(1)">
-                    <div class="hub-icon">💌</div>
+                    <div class="hub-icon">🕊️</div>
                     <div class="hub-title">Letter I</div>
-                    <div class="hub-date">Dear Maelo</div>
+                    <div class="hub-date">A Hope I Thought I Lost</div>
                 </div>
                 <div class="letter-hub-card" onclick="openLetter(2)">
                     <div class="hub-icon">✨</div>
@@ -939,7 +937,35 @@
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 
         const letterDatabase = {
-            1: { title: "Dear Maelo,", subtitle: "Letter I • Birthday Note", content: "Today is a special day, because a beautiful and remarkable person was born. I am grateful to know you and to be a part of your journey through life.\n\nThank you for every moment we have shared. To me, every moment spent with you becomes a beautiful memory. Your presence brings so much happiness into my life.\n\nAs you begin this new year of your life, I hope you are always blessed with good health, happiness, and the strength to achieve all the dreams you wish for. I hope we can continue to stay together for a long time." },
+            1: { 
+                title: "A Hope I Thought I Lost", 
+                subtitle: "Letter I • To Stephanie", 
+                content: `When I met you, something in me quietly changed.
+
+Before you came into my life, I had already convinced myself that maybe love just wasn't meant for me anymore. I wasn't looking for it, and I definitely wasn't chasing it. After everything I'd been through, opening my heart again felt more exhausting than exciting. It was easier to believe I'd be better off protecting myself than risking getting hurt all over again.
+
+Then I met you.
+
+I still remember how naturally you caught my attention. It wasn't because you were trying to stand out—you weren't. There was just something about you. The way you carried yourself, the way you smiled, the kindness you showed... somehow, everything about you made the world feel a little lighter.
+
+For the first time in a long time, I found myself questioning the walls I'd spent so much time building.
+
+I've been hurt before. I've had reasons to stop believing, reasons to think that loving someone again would only lead to more disappointment. I kept telling myself that it wasn't worth it—that some people simply aren't meant to find the kind of love they hope for.
+
+But then you came along, and without even realizing it, you challenged every belief I'd made peace with.
+
+You made me wonder if maybe I had given up too soon.
+
+It's strange how one person can change your perspective without even trying. One day I was certain I was done believing in love, and then suddenly, there you were. Now I catch myself wondering, "What if it's different this time?" Not because you've made me any promises, but because knowing you has given me something I thought I'd lost a long time ago—hope.
+
+I'm still scared. I won't pretend I'm not. Loving someone always comes with the possibility of getting hurt, and I know that better than most. But somehow, when it comes to you, that fear doesn't feel as overwhelming anymore.
+
+I'm not trying to rush anything. I'm not trying to force a future that hasn't happened yet. Right now, I'm simply grateful that I met you. Grateful that you reminded me that it's okay to open my heart again, even if it's only one small step at a time.
+
+You didn't just make me like someone again.
+You made me believe that love is still worth believing in.
+You reminded me that maybe I shouldn't give up on it after all.` 
+            },
             2: { title: "Special Note", subtitle: "Letter II • Memories", content: "Type your second letter content here!" },
             3: { title: "Under the Stars", subtitle: "Letter III • Late Night Thoughts", content: "Type your third letter content here!" },
             4: { title: "Coffee Dates & Smiles", subtitle: "Letter IV • Little Things", content: "Type your fourth letter content here!" }
