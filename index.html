@@ -10,11 +10,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
+        /* ADDED: Scroll behavior moved here so it doesn't trigger on initial load */
+        html {
+            scroll-behavior: smooth;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            scroll-behavior: smooth;
+            /* Removed scroll-behavior: smooth from here to prevent the weird load jump */
         }
 
         body {
@@ -976,6 +981,32 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <script>
+        // ==========================================
+        // ADDED FIXES FOR LOAD AND REFRESH BEHAVIOR
+        // ==========================================
+        
+        // 1. Force overlays to be visible just in case Chrome restored a cached closed state
+        const loaderEl = document.getElementById('loader');
+        const envelopeEl = document.getElementById('envelopeOverlay');
+        if (loaderEl) { loaderEl.style.opacity = '1'; loaderEl.style.visibility = 'visible'; }
+        if (envelopeEl) { envelopeEl.style.opacity = '1'; envelopeEl.style.visibility = 'visible'; }
+
+        // 2. Prevent browser from remembering scroll position on refresh
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        // 3. Clear any URL hash (#letter, etc.) so it doesn't jump down
+        if (window.location.hash) {
+            history.replaceState(null, null, window.location.pathname);
+        }
+
+        // 4. Instantly jump to top before anything else renders (no smooth scroll up)
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        
+        // ==========================================
+
+
         // Database of Letters
         const letterDatabase = {
             1: {
@@ -1147,7 +1178,7 @@ As you begin this new year of your life, I hope you are always blessed with good
         // Initialize reasons on load
         window.addEventListener('DOMContentLoaded', () => {
             renderReasons();
-            window.scrollTo(0, 0);
+            // REMOVED window.scrollTo(0, 0); from here to stop the page from sliding up.
         });
 
         // Function to open a specific letter
