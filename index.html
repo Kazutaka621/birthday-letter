@@ -562,7 +562,7 @@
 
         .letters-hub-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             gap: 16px;
             width: 100%;
             margin-top: 10px;
@@ -923,6 +923,11 @@
                     <div class="hub-title">Letter IV</div>
                     <div class="hub-date">My Heart, Laid Bare</div>
                 </div>
+                <div class="letter-hub-card" onclick="openLetter(5)">
+                    <div class="hub-icon">🌸</div>
+                    <div class="hub-title">Letter V</div>
+                    <div class="hub-date">Our Favorite Anime</div>
+                </div>
             </div>
 
             <div id="letterReader" class="letter-reader-view">
@@ -1048,6 +1053,17 @@ So here it is.
 No pretending. No hiding. No carefully chosen version of myself.
 
 Just me, and my heart, exactly as it is.` 
+            },
+            5: { 
+                title: "May Our Story Be Longer Than Every Anime I've Ever Fallen in Love With", 
+                subtitle: "Letter V • To Every Chapter Ahead", 
+                content: `I've always loved anime. Not just because of the beautiful animation or the unforgettable soundtracks, but because every story made me believe that somewhere in this world, two people can find each other when they least expect it. Some stories begin beneath cherry blossoms. Some begin on a crowded train. Others begin with a simple conversation that quietly changes everything. Maybe that's what I love most about anime. Not the action. Not the fantasy. Not even the endings. But the way two ordinary people slowly become each other's home.
+
+Every main character carries something they're trying to overcome. Some are afraid of being alone. Some spend years hiding who they truly are. Some believe they're too broken or too difficult to love. Yet somewhere along the way, someone chooses them anyway. Someone sees every flaw, every fear, every scar, and decides to stay. I think that's the kind of love I've always wished for. I can't rewrite time, travel between worlds, or change fate like the characters I admire. But I do know what it means to love someone deeply. And if it were you, I would choose you every single time.
+
+I'd gladly stay through every season life has prepared for us. The exciting ones, the quiet ones, and even the difficult ones. I want to be there for every ordinary moment—the random conversations, the late-night messages, the comfortable silence, and the little memories that don't seem important until they become our favorites. I don't want our story to end anytime soon. There are still so many chapters left to write, so many memories waiting to be made, and I want to discover all of them with you.
+
+Every anime eventually reaches its final episode. The ending song plays, the credits roll, and another story comes to an end. But the ones we truly love stay with us long after they're over—not because they had the perfect ending, but because every episode meant something. I hope our story becomes like that. And when we finally reach our last chapter, I hope it won't be remembered because of how it ended, but because through every season, every chapter, and every ordinary day, we never stopped choosing each other.` 
             }
         };
 
@@ -1109,7 +1125,7 @@ Just me, and my heart, exactly as it is.`
             document.getElementById('lettersHub').style.display = 'grid';
         }
 
-        const correctPin = "071926"; // Updated PIN
+        const correctPin = "071926";
 
         window.addEventListener('pageshow', (event) => {
             const loader = document.getElementById('loader');
