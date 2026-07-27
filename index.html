@@ -330,6 +330,26 @@
         }
 
         /* ---------------------------------- */
+        /* PIN CODE OVERLAY                   */
+        /* ---------------------------------- */
+        #pinOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #030a16;
+            z-index: 9998;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        /* ---------------------------------- */
         /* ENVELOPE OPENING OVERLAY           */
         /* ---------------------------------- */
         #envelopeOverlay {
@@ -345,6 +365,8 @@
             justify-content: center;
             align-items: center;
             transition: opacity 0.8s ease, visibility 0.8s;
+            visibility: hidden;
+            opacity: 0;
         }
 
         .envelope-subtitle {
@@ -516,7 +538,6 @@
         .side-photo:hover {
             filter: grayscale(0%);
         }
-
 
         .center-glass-card {
             background: rgba(15, 23, 42, 0.6);
@@ -801,6 +822,19 @@
         </div>
     </div>
 
+    <!-- 6-DIGIT PIN CODE OVERLAY -->
+    <div id="pinOverlay">
+        <div class="envelope-subtitle">security check</div>
+        <div class="envelope-title" style="font-size: 2rem;">Enter 6-Digit PIN</div>
+        <div style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 20px;">Please enter your passcode to view your mail</div>
+        
+        <input type="password" id="pinInput" maxlength="6" pattern="\d*" inputmode="numeric" placeholder="••••••" style="width: 200px; padding: 12px; text-align: center; font-size: 1.5rem; letter-spacing: 8px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(96, 165, 250, 0.4); border-radius: 12px; color: #ffffff; outline: none; margin-bottom: 15px;" />
+        
+        <div id="pinError" style="color: #ef4444; font-size: 0.8rem; height: 20px; margin-bottom: 10px;"></div>
+        
+        <button onclick="verifyPin()" style="background: rgba(96, 165, 250, 0.2); border: 1px solid rgba(96, 165, 250, 0.4); color: #93c5fd; padding: 10px 24px; border-radius: 20px; font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: background 0.3s;">Submit</button>
+    </div>
+
     <!-- ENVELOPE OPENING OVERLAY -->
     <div id="envelopeOverlay">
         <div class="envelope-subtitle">a little surprise</div>
@@ -1047,7 +1081,17 @@ Just me, and my heart, exactly as it is.`
             });
         }
 
-        window.addEventListener('DOMContentLoaded', () => { renderReasons(); });
+        window.addEventListener('DOMContentLoaded', () => { 
+            renderReasons(); 
+            const pinInputField = document.getElementById('pinInput');
+            if(pinInputField) {
+                pinInputField.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        verifyPin();
+                    }
+                });
+            }
+        });
 
         function openLetter(id) {
             const letterData = letterDatabase[id];
@@ -1065,10 +1109,17 @@ Just me, and my heart, exactly as it is.`
             document.getElementById('lettersHub').style.display = 'grid';
         }
 
-        // Updated event listener to handle browser closing/re-opening & back/forward cache states properly
+        const correctPin = "123456"; // Change this to your preferred 6 digits
+
         window.addEventListener('pageshow', (event) => {
             const loader = document.getElementById('loader');
+            const pinOverlay = document.getElementById('pinOverlay');
             const envelope = document.getElementById('envelopeOverlay');
+            
+            if (envelope) {
+                envelope.style.opacity = '0';
+                envelope.style.visibility = 'hidden';
+            }
             
             if (loader) {
                 loader.style.opacity = '1';
@@ -1077,14 +1128,35 @@ Just me, and my heart, exactly as it is.`
                 setTimeout(() => {
                     loader.style.opacity = '0';
                     loader.style.visibility = 'hidden';
+                    
+                    if (pinOverlay) {
+                        pinOverlay.style.opacity = '1';
+                        pinOverlay.style.visibility = 'visible';
+                        document.getElementById('pinInput').focus();
+                    }
                 }, 7000);
             }
-            
-            if (envelope) {
-                envelope.style.opacity = '1';
-                envelope.style.visibility = 'visible';
-            }
         });
+
+        function verifyPin() {
+            const userPin = document.getElementById('pinInput').value;
+            const errorDiv = document.getElementById('pinError');
+            const pinOverlay = document.getElementById('pinOverlay');
+            const envelope = document.getElementById('envelopeOverlay');
+
+            if (userPin === correctPin) {
+                pinOverlay.style.opacity = '0';
+                pinOverlay.style.visibility = 'hidden';
+
+                if (envelope) {
+                    envelope.style.opacity = '1';
+                    envelope.style.visibility = 'visible';
+                }
+            } else {
+                errorDiv.innerText = "Incorrect PIN. Please try again.";
+                document.getElementById('pinInput').value = "";
+            }
+        }
 
         function openSite() {
             const overlay = document.getElementById('envelopeOverlay');
