@@ -926,11 +926,6 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <script>
-        const loaderEl = document.getElementById('loader');
-        const envelopeEl = document.getElementById('envelopeOverlay');
-        if (loaderEl) { loaderEl.style.opacity = '1'; loaderEl.style.visibility = 'visible'; }
-        if (envelopeEl) { envelopeEl.style.opacity = '1'; envelopeEl.style.visibility = 'visible'; }
-
         if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
         if (window.location.hash) { history.replaceState(null, null, window.location.pathname); }
 
@@ -1067,11 +1062,25 @@ Just me, and my heart, exactly as it is.`
             document.getElementById('lettersHub').style.display = 'grid';
         }
 
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                if (loader) { loader.style.opacity = '0'; loader.style.visibility = 'hidden'; }
-            }, 7000);
+        // Updated event listener to handle browser closing/re-opening & back/forward cache states properly
+        window.addEventListener('pageshow', (event) => {
+            const loader = document.getElementById('loader');
+            const envelope = document.getElementById('envelopeOverlay');
+            
+            if (loader) {
+                loader.style.opacity = '1';
+                loader.style.visibility = 'visible';
+                
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    loader.style.visibility = 'hidden';
+                }, 7000);
+            }
+            
+            if (envelope) {
+                envelope.style.opacity = '1';
+                envelope.style.visibility = 'visible';
+            }
         });
 
         function openSite() {
