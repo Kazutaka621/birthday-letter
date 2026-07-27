@@ -494,25 +494,25 @@
         /* ---------------------------------- */
         .showcase-container {
             display: flex;
-            align-items: center;
+            align-items: stretch; /* Makes children stretch to match the tallest item */
             justify-content: center;
             gap: 30px;
             max-width: 1100px;
             width: 100%;
-            margin-top: 0;
         }
-
+        
         .side-photo {
             width: 260px;
-            height: 360px;
+            height: auto; /* Let the height adapt dynamically */
+            flex: 1; /* Allows them to match the height of the glass card */
             border-radius: 16px;
-            object-fit: cover;
+            object-fit: cover; /* Ensures the image covers the space nicely without distorting */
             border: 1px solid rgba(255, 255, 255, 0.1);
             filter: grayscale(80%) contrast(110%);
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             transition: filter 0.3s;
         }
-
+        
         .side-photo:hover {
             filter: grayscale(0%);
         }
