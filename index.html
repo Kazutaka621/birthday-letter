@@ -591,7 +591,7 @@
             box-shadow: 0 10px 25px rgba(96, 165, 250, 0.25);
         }
 
-        /* Custom placement for Letter 5 (centered under 1 & 2) and Letter 6 slot (under 3 & 4) */
+        /* Placement for Letter 5 and Letter 6 */
         .card-letter-5 {
             grid-column: 1 / span 2;
             width: 80%;
@@ -602,16 +602,6 @@
             grid-column: 3 / span 2;
             width: 80%;
             justify-self: center;
-            border: 1px dashed rgba(96, 165, 250, 0.3);
-            background: rgba(15, 23, 42, 0.3);
-            cursor: default;
-        }
-
-        .card-letter-6:hover {
-            transform: none;
-            border-color: rgba(96, 165, 250, 0.3);
-            background: rgba(15, 23, 42, 0.3);
-            box-shadow: none;
         }
 
         .hub-icon {
@@ -944,21 +934,21 @@
                     <div class="hub-date">The Person I Truly Am</div>
                 </div>
                 <div class="letter-hub-card" onclick="openLetter(4)">
-                    <div class="hub-icon">💌</div>
+                    <div class="hub-icon">🛡️</div>
                     <div class="hub-title">Letter IV</div>
-                    <div class="hub-date">My Heart, Laid Bare</div>
+                    <div class="hub-date">Your Safe Place</div>
                 </div>
 
-                <!-- ROW 2: LETTER 5 (CENTERED BELOW 1 & 2) AND SPACE FOR LETTER 6 (BELOW 3 & 4) -->
+                <!-- ROW 2: LETTERS 5 & 6 -->
                 <div class="letter-hub-card card-letter-5" onclick="openLetter(5)">
                     <div class="hub-icon">🌸</div>
                     <div class="hub-title">Letter V</div>
                     <div class="hub-date">The Story I Hope Never Ends</div>
                 </div>
-                <div class="letter-hub-card card-letter-6">
-                    <div class="hub-icon" style="opacity: 0.4;">✨</div>
-                    <div class="hub-title" style="opacity: 0.4; font-weight: 400;">Letter VI</div>
-                    <div class="hub-date" style="opacity: 0.4;">Reserved Slot</div>
+                <div class="letter-hub-card card-letter-6" onclick="openLetter(6)">
+                    <div class="hub-icon">💌</div>
+                    <div class="hub-title">Letter VI</div>
+                    <div class="hub-date">My Heart, Laid Bare</div>
                 </div>
             </div>
 
@@ -1066,8 +1056,28 @@ I guess that's the risk that comes with letting someone in. The closer someone g
 That's the kind of love I hope exists. Not the kind that loves a perfect version of me, because that person doesn't exist. I hope someone chooses the real me—the one who's still growing, still healing, and still trying to figure things out. Because at the end of the day, I don't want to be loved for the person I pretend to be. I want to be loved for the person I truly am—the good parts, the broken parts, and everything in between.` 
             },
             4: { 
+                title: "Your Safe Place", 
+                subtitle: "Letter IV • Always Here", 
+                content: `In case you ever feel like you have no one to run to, no place to go, or no one to lean on, I hope you remember that you have me. I'm here. You can always run to me whenever everything feels too heavy. You can lean on me, hold my hand, or simply stay beside me. When it feels like the whole world is against you, I'll be on your side. I won't leave when things become difficult. I'll stay beside you through the good days and the bad ones because I don't want you to face them alone.
+
+When life becomes overwhelming and everything feels like it's falling apart, let me carry some of that weight with you. You don't always have to be the strong one. No matter how difficult life gets, how heavy your heart feels, or how dark your days become, you'll always be safe with me. You don't have to pretend you're okay or force yourself to smile. If you need to cry, cry. If you need someone to listen, I'll be there. If you need silence, I'll sit beside you until you're ready to speak.
+
+I may not always have the right words or know exactly how to make things better, but I promise you'll never have to face your battles alone as long as I'm here. When you feel lost, I'll help you find your way back. When you begin to doubt yourself, I'll remind you of the strength you've forgotten you have. So whenever life gets too heavy, come to me. Lean on me. Let me be your safe place, just as you've become mine.` 
+            },
+            5: { 
+                title: "May Our Story Be Longer Than Every Anime I've Ever Fallen in Love With", 
+                subtitle: "Letter V • To Every Chapter Ahead", 
+                content: `I've always loved anime. Not just because of the beautiful animation or the unforgettable soundtracks, but because every story made me believe that somewhere in this world, two people can find each other when they least expect it. Some stories begin beneath cherry blossoms. Some begin on a crowded train. Others begin with a simple conversation that quietly changes everything. Maybe that's what I love most about anime. Not the action. Not the fantasy. Not even the endings. But the way two ordinary people slowly become each other's home.
+
+Every main character carries something they're trying to overcome. Some are afraid of being alone. Some spend years hiding who they truly are. Some believe they're too broken or too difficult to love. Yet somewhere along the way, someone chooses them anyway. Someone sees every flaw, every fear, every scar, and decides to stay. I think that's the kind of love I've always wished for. I can't rewrite time, travel between worlds, or change fate like the characters I admire. But I do know what it means to love someone deeply. And if it were you, I would choose you every single time.
+
+I'd gladly stay through every season life has prepared for us. The exciting ones, the quiet ones, and even the difficult ones. I want to be there for every ordinary moment—the random conversations, the late-night messages, the comfortable silence, and the little memories that don't seem important until they become our favorites. I don't want our story to end anytime soon. There are still so many chapters left to write, so many memories waiting to be made, and I want to discover all of them with you.
+
+Every anime eventually reaches its final episode. The ending song plays, the credits roll, and another story comes to an end. But the ones we truly love stay with us long after they're over—not because they had the perfect ending, but because every episode meant something. I hope our story becomes like that. And when we finally reach our last chapter, I hope it won't be remembered because of how it ended, but because through every season, every chapter, and every ordinary day, we never stopped choosing each other.` 
+            },
+            6: { 
                 title: "My Heart, Laid Bare", 
-                subtitle: "Letter IV • No Hiding", 
+                subtitle: "Letter VI • No Hiding", 
                 content: `So Here It Is: My Heart, Laid Bare
 
 I've never been good at telling people how I feel. Even when my heart is full, I somehow convince myself to keep quiet. I overthink every word, wondering if I'm saying too much or not enough. Most of the time, I choose silence because it feels safer than being misunderstood. So I learned to keep things to myself. I buried my feelings where no one could see them. I told myself that some emotions were better left unsaid, that maybe people didn't need to know how much they meant to me. It was easier that way—easier than risking rejection, easier than wondering if my feelings would ever be returned.
@@ -1085,17 +1095,6 @@ So here it is.
 No pretending. No hiding. No carefully chosen version of myself.
 
 Just me, and my heart, exactly as it is.` 
-            },
-            5: { 
-                title: "May Our Story Be Longer Than Every Anime I've Ever Fallen in Love With", 
-                subtitle: "Letter V • To Every Chapter Ahead", 
-                content: `I've always loved anime. Not just because of the beautiful animation or the unforgettable soundtracks, but because every story made me believe that somewhere in this world, two people can find each other when they least expect it. Some stories begin beneath cherry blossoms. Some begin on a crowded train. Others begin with a simple conversation that quietly changes everything. Maybe that's what I love most about anime. Not the action. Not the fantasy. Not even the endings. But the way two ordinary people slowly become each other's home.
-
-Every main character carries something they're trying to overcome. Some are afraid of being alone. Some spend years hiding who they truly are. Some believe they're too broken or too difficult to love. Yet somewhere along the way, someone chooses them anyway. Someone sees every flaw, every fear, every scar, and decides to stay. I think that's the kind of love I've always wished for. I can't rewrite time, travel between worlds, or change fate like the characters I admire. But I do know what it means to love someone deeply. And if it were you, I would choose you every single time.
-
-I'd gladly stay through every season life has prepared for us. The exciting ones, the quiet ones, and even the difficult ones. I want to be there for every ordinary moment—the random conversations, the late-night messages, the comfortable silence, and the little memories that don't seem important until they become our favorites. I don't want our story to end anytime soon. There are still so many chapters left to write, so many memories waiting to be made, and I want to discover all of them with you.
-
-Every anime eventually reaches its final episode. The ending song plays, the credits roll, and another story comes to an end. But the ones we truly love stay with us long after they're over—not because they had the perfect ending, but because every episode meant something. I hope our story becomes like that. And when we finally reach our last chapter, I hope it won't be remembered because of how it ended, but because through every season, every chapter, and every ordinary day, we never stopped choosing each other.` 
             }
         };
 
