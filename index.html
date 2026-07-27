@@ -555,14 +555,14 @@
         /* LETTER COMPILATION HUB & VIEWER    */
         /* ---------------------------------- */
         .letters-container {
-            max-width: 750px;
+            max-width: 800px;
             width: 100%;
             margin: 0 auto;
         }
 
         .letters-hub-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 16px;
             width: 100%;
             margin-top: 10px;
@@ -589,6 +589,29 @@
             border-color: #60a5fa;
             background: rgba(30, 58, 138, 0.4);
             box-shadow: 0 10px 25px rgba(96, 165, 250, 0.25);
+        }
+
+        /* Custom placement for Letter 5 (centered under 1 & 2) and Letter 6 slot (under 3 & 4) */
+        .card-letter-5 {
+            grid-column: 1 / span 2;
+            width: 80%;
+            justify-self: center;
+        }
+
+        .card-letter-6 {
+            grid-column: 3 / span 2;
+            width: 80%;
+            justify-self: center;
+            border: 1px dashed rgba(96, 165, 250, 0.3);
+            background: rgba(15, 23, 42, 0.3);
+            cursor: default;
+        }
+
+        .card-letter-6:hover {
+            transform: none;
+            border-color: rgba(96, 165, 250, 0.3);
+            background: rgba(15, 23, 42, 0.3);
+            box-shadow: none;
         }
 
         .hub-icon {
@@ -798,6 +821,7 @@
             .showcase-container { flex-direction: column; }
             .side-photo { display: none; }
             .letters-hub-grid { grid-template-columns: repeat(2, 1fr); }
+            .card-letter-5, .card-letter-6 { grid-column: span 1; width: 100%; }
         }
     </style>
 </head>
@@ -903,6 +927,7 @@
 
         <div class="letters-container">
             <div id="lettersHub" class="letters-hub-grid">
+                <!-- ROW 1: LETTERS 1, 2, 3, 4 -->
                 <div class="letter-hub-card" onclick="openLetter(1)">
                     <div class="hub-icon">🕊️</div>
                     <div class="hub-title">Letter I</div>
@@ -923,10 +948,17 @@
                     <div class="hub-title">Letter IV</div>
                     <div class="hub-date">My Heart, Laid Bare</div>
                 </div>
-                <div class="letter-hub-card" onclick="openLetter(5)">
+
+                <!-- ROW 2: LETTER 5 (CENTERED BELOW 1 & 2) AND SPACE FOR LETTER 6 (BELOW 3 & 4) -->
+                <div class="letter-hub-card card-letter-5" onclick="openLetter(5)">
                     <div class="hub-icon">🌸</div>
                     <div class="hub-title">Letter V</div>
                     <div class="hub-date">Our Favorite Anime</div>
+                </div>
+                <div class="letter-hub-card card-letter-6">
+                    <div class="hub-icon" style="opacity: 0.4;">✨</div>
+                    <div class="hub-title" style="opacity: 0.4; font-weight: 400;">Letter VI</div>
+                    <div class="hub-date" style="opacity: 0.4;">Reserved Slot</div>
                 </div>
             </div>
 
