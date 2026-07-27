@@ -37,7 +37,7 @@
             width: 100vw;
             height: 100vh;
             background: radial-gradient(circle at 50% 50%, rgba(15, 32, 67, 0.8) 0%, rgba(3, 10, 22, 1) 100%);
-            z-index: -1;
+            z-index: -2;
         }
 
         /* Navigation Bar */
@@ -396,7 +396,7 @@
         }
 
         /* ---------------------------------- */
-        /* HERO SECTION & AUDIO PLAYER        */
+        /* HERO SECTION & CALENDAR STYLE GRID */
         /* ---------------------------------- */
         .section {
             padding: 40px 20px 30px 20px;
@@ -409,8 +409,93 @@
         }
 
         #home {
-            padding-top: 120px;
-            min-height: auto;
+            padding-top: 140px;
+            min-height: 95vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Full Calendar Grid Overlay Backdrop */
+        .hero-calendar-grid-bg {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 750px;
+            height: 480px;
+            background: rgba(238, 235, 248, 0.12);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 2px solid rgba(147, 197, 253, 0.25);
+            border-radius: 16px;
+            z-index: -1;
+            display: grid;
+            grid-template-columns: 1fr 1.6fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            pointer-events: none;
+            opacity: 0.75;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .calendar-cell {
+            border: 1px solid rgba(147, 197, 253, 0.2);
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cell-top-left { font-family: 'Cinzel', serif; font-size: 1.2rem; color: rgba(147, 197, 253, 0.4); align-self: flex-start; }
+        .cell-top-right { font-family: 'Cinzel', serif; font-size: 1.2rem; color: rgba(147, 197, 253, 0.4); align-self: flex-end; }
+
+        .sketch-heart {
+            position: absolute;
+            font-size: 3.5rem;
+            color: rgba(192, 132, 252, 0.35);
+            transform: rotate(-15deg);
+        }
+
+        /* Center main calendar content block */
+        .calendar-center-main {
+            grid-column: 2 / 3;
+            grid-row: 1 / span 2;
+            border: 2px solid rgba(147, 197, 253, 0.35);
+            padding: 25px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            background: rgba(220, 210, 245, 0.05);
+        }
+
+        .cal-month-header {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            color: rgba(192, 132, 252, 0.6);
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .cal-title-main {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        .cal-desc-text {
+            font-size: 0.72rem;
+            color: rgba(203, 213, 225, 0.45);
+            text-align: center;
+            line-height: 1.5;
+            max-width: 250px;
         }
 
         .hero-subtitle {
@@ -419,6 +504,8 @@
             color: #93c5fd;
             font-size: 1.1rem;
             margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-title {
@@ -428,6 +515,8 @@
             line-height: 1.1;
             margin-bottom: 15px;
             text-shadow: 0 0 20px rgba(147, 197, 253, 0.3);
+            position: relative;
+            z-index: 2;
         }
 
         .hero-desc {
@@ -436,6 +525,8 @@
             color: #94a3b8;
             line-height: 1.6;
             margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
         }
 
         .audio-player-card {
@@ -452,6 +543,8 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            position: relative;
+            z-index: 2;
         }
 
         .player-info {
@@ -487,60 +580,6 @@
             height: 36px;
             border-radius: 8px;
             filter: invert(88%) hue-rotate(180deg);
-        }
-
-        /* ---------------------------------- */
-        /* CALENDAR TILE SECTION              */
-        /* ---------------------------------- */
-        .calendar-section-wrapper {
-            max-width: 600px;
-            width: 100%;
-            margin: 10px auto;
-        }
-
-        .calendar-card {
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(96, 165, 250, 0.3);
-            border-radius: 24px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 20px rgba(96, 165, 250, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .calendar-date-header {
-            font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
-            letter-spacing: 2px;
-            color: #93c5fd;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .calendar-main-title {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 2.2rem;
-            color: #ffffff;
-            margin-bottom: 20px;
-            line-height: 1.2;
-            text-shadow: 0 0 15px rgba(147, 197, 253, 0.3);
-        }
-
-        .calendar-description {
-            font-size: 0.95rem;
-            color: #cbd5e1;
-            line-height: 1.7;
-            max-width: 450px;
-            margin: 0 auto;
-        }
-
-        .calendar-heart-icon {
-            font-size: 2rem;
-            margin-top: 20px;
         }
 
         /* ---------------------------------- */
@@ -831,6 +870,7 @@
             .showcase-container { flex-direction: column; }
             .side-photo { display: none; }
             .letters-hub-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-calendar-grid-bg { display: none; } /* Hide complex grid on small screens for cleaner mobile display */
         }
     </style>
 </head>
@@ -876,8 +916,39 @@
         </ul>
     </nav>
 
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION WITH CALENDAR STYLE GRID BACKDROP -->
     <section class="section" id="home">
+        <!-- Calendar Grid Backdrop (Matching Reference Style) -->
+        <div class="hero-calendar-grid-bg">
+            <!-- Cell 1: Top-Left (31) -->
+            <div class="calendar-cell">
+                <div class="cell-top-left">31</div>
+                <div class="sketch-heart" style="bottom: 15px; right: 15px;">💜</div>
+            </div>
+
+            <!-- Cell 2: Center Main (July 30) -->
+            <div class="calendar-center-main">
+                <div class="cal-month-header">JULY 30</div>
+                <div class="cal-title-main">National Girlfriend's Day</div>
+                <div class="cal-desc-text">This day is dedicated to celebrating someone truly special. Thank you for making every moment brighter.</div>
+            </div>
+
+            <!-- Cell 3: Top-Right (Heart doodle) -->
+            <div class="calendar-cell" style="align-items: flex-end;">
+                <div class="sketch-heart" style="top: 25px; left: 20px;">💜</div>
+            </div>
+
+            <!-- Cell 4: Bottom-Left (7) -->
+            <div class="calendar-cell">
+                <div class="cell-top-left" style="align-self: flex-end; margin-top: auto;">7</div>
+            </div>
+
+            <!-- Cell 5: Bottom-Right (8) -->
+            <div class="calendar-cell">
+                <div class="cell-top-left" style="margin-top: auto;">8</div>
+            </div>
+        </div>
+
         <div class="hero-subtitle">For Steph, on Her Birthday</div>
         <h1 class="hero-title">Happy Birthday,<br>Stephanie</h1>
         <p class="hero-desc">Every moment with you becomes a beautiful memory. Today marks your birthday—the day a remarkable person came into this world.</p>
@@ -895,20 +966,6 @@
                 <source src="shape-of-my-heart.mp3.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
-        </div>
-    </section>
-
-    <!-- JULY 30 CALENDAR TILE SECTION -->
-    <section class="section">
-        <div class="calendar-section-wrapper">
-            <div class="calendar-card">
-                <div class="calendar-date-header">July 30</div>
-                <div class="calendar-main-title">A Special Day</div>
-                <p class="calendar-description">
-                    This day is dedicated to celebrating someone truly special—you. Thank you for making every moment brighter.
-                </p>
-                <div class="calendar-heart-icon">💙</div>
-            </div>
         </div>
     </section>
 
