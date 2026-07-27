@@ -37,7 +37,7 @@
             width: 100vw;
             height: 100vh;
             background: radial-gradient(circle at 50% 50%, rgba(15, 32, 67, 0.8) 0%, rgba(3, 10, 22, 1) 100%);
-            z-index: -2;
+            z-index: -1;
         }
 
         /* Navigation Bar */
@@ -396,7 +396,7 @@
         }
 
         /* ---------------------------------- */
-        /* HERO SECTION & CALENDAR STYLE GRID */
+        /* HERO SECTION & AUDIO PLAYER        */
         /* ---------------------------------- */
         .section {
             padding: 40px 20px 30px 20px;
@@ -409,93 +409,8 @@
         }
 
         #home {
-            padding-top: 140px;
-            min-height: 95vh;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Full Calendar Grid Overlay Backdrop */
-        .hero-calendar-grid-bg {
-            position: absolute;
-            top: 55%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 750px;
-            height: 480px;
-            background: rgba(238, 235, 248, 0.12);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            border: 2px solid rgba(147, 197, 253, 0.25);
-            border-radius: 16px;
-            z-index: -1;
-            display: grid;
-            grid-template-columns: 1fr 1.6fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            pointer-events: none;
-            opacity: 0.75;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-
-        .calendar-cell {
-            border: 1px solid rgba(147, 197, 253, 0.2);
-            padding: 20px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cell-top-left { font-family: 'Cinzel', serif; font-size: 1.2rem; color: rgba(147, 197, 253, 0.4); align-self: flex-start; }
-        .cell-top-right { font-family: 'Cinzel', serif; font-size: 1.2rem; color: rgba(147, 197, 253, 0.4); align-self: flex-end; }
-
-        .sketch-heart {
-            position: absolute;
-            font-size: 3.5rem;
-            color: rgba(192, 132, 252, 0.35);
-            transform: rotate(-15deg);
-        }
-
-        /* Center main calendar content block */
-        .calendar-center-main {
-            grid-column: 2 / 3;
-            grid-row: 1 / span 2;
-            border: 2px solid rgba(147, 197, 253, 0.35);
-            padding: 25px 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            position: relative;
-            background: rgba(220, 210, 245, 0.05);
-        }
-
-        .cal-month-header {
-            font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            color: rgba(192, 132, 252, 0.6);
-            text-transform: uppercase;
-            margin-bottom: 2px;
-        }
-
-        .cal-title-main {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-weight: 700;
-            font-size: 2rem;
-            color: rgba(255, 255, 255, 0.5);
-            text-align: center;
-            line-height: 1.1;
-            margin-bottom: 12px;
-        }
-
-        .cal-desc-text {
-            font-size: 0.72rem;
-            color: rgba(203, 213, 225, 0.45);
-            text-align: center;
-            line-height: 1.5;
-            max-width: 250px;
+            padding-top: 120px;
+            min-height: auto;
         }
 
         .hero-subtitle {
@@ -504,8 +419,6 @@
             color: #93c5fd;
             font-size: 1.1rem;
             margin-bottom: 10px;
-            position: relative;
-            z-index: 2;
         }
 
         .hero-title {
@@ -515,8 +428,6 @@
             line-height: 1.1;
             margin-bottom: 15px;
             text-shadow: 0 0 20px rgba(147, 197, 253, 0.3);
-            position: relative;
-            z-index: 2;
         }
 
         .hero-desc {
@@ -525,8 +436,6 @@
             color: #94a3b8;
             line-height: 1.6;
             margin-bottom: 30px;
-            position: relative;
-            z-index: 2;
         }
 
         .audio-player-card {
@@ -543,8 +452,6 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            position: relative;
-            z-index: 2;
         }
 
         .player-info {
@@ -587,7 +494,7 @@
         /* ---------------------------------- */
         .showcase-container {
             display: flex;
-            align-items: stretch;
+            align-items: center;
             justify-content: center;
             gap: 30px;
             max-width: 1100px;
@@ -597,8 +504,7 @@
 
         .side-photo {
             width: 260px;
-            height: auto;
-            flex: 1;
+            height: 360px;
             border-radius: 16px;
             object-fit: cover;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -610,6 +516,7 @@
         .side-photo:hover {
             filter: grayscale(0%);
         }
+
 
         .center-glass-card {
             background: rgba(15, 23, 42, 0.6);
@@ -870,7 +777,6 @@
             .showcase-container { flex-direction: column; }
             .side-photo { display: none; }
             .letters-hub-grid { grid-template-columns: repeat(2, 1fr); }
-            .hero-calendar-grid-bg { display: none; } /* Hide complex grid on small screens for cleaner mobile display */
         }
     </style>
 </head>
@@ -916,39 +822,8 @@
         </ul>
     </nav>
 
-    <!-- HERO SECTION WITH CALENDAR STYLE GRID BACKDROP -->
+    <!-- HERO SECTION -->
     <section class="section" id="home">
-        <!-- Calendar Grid Backdrop (Matching Reference Style) -->
-        <div class="hero-calendar-grid-bg">
-            <!-- Cell 1: Top-Left (31) -->
-            <div class="calendar-cell">
-                <div class="cell-top-left">31</div>
-                <div class="sketch-heart" style="bottom: 15px; right: 15px;">💜</div>
-            </div>
-
-            <!-- Cell 2: Center Main (July 30) -->
-            <div class="calendar-center-main">
-                <div class="cal-month-header">JULY 30</div>
-                <div class="cal-title-main">National Girlfriend's Day</div>
-                <div class="cal-desc-text">This day is dedicated to celebrating someone truly special. Thank you for making every moment brighter.</div>
-            </div>
-
-            <!-- Cell 3: Top-Right (Heart doodle) -->
-            <div class="calendar-cell" style="align-items: flex-end;">
-                <div class="sketch-heart" style="top: 25px; left: 20px;">💜</div>
-            </div>
-
-            <!-- Cell 4: Bottom-Left (7) -->
-            <div class="calendar-cell">
-                <div class="cell-top-left" style="align-self: flex-end; margin-top: auto;">7</div>
-            </div>
-
-            <!-- Cell 5: Bottom-Right (8) -->
-            <div class="calendar-cell">
-                <div class="cell-top-left" style="margin-top: auto;">8</div>
-            </div>
-        </div>
-
         <div class="hero-subtitle">For Steph, on Her Birthday</div>
         <h1 class="hero-title">Happy Birthday,<br>Stephanie</h1>
         <p class="hero-desc">Every moment with you becomes a beautiful memory. Today marks your birthday—the day a remarkable person came into this world.</p>
@@ -981,12 +856,12 @@
                 <h2 style="font-family: 'Cinzel', serif; font-size: 2.2rem; color: #ffffff; line-height: 1.3; margin-bottom: 20px;">Today is the day the world became more beautiful.</h2>
                 <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.7;">The day you were born is the best thing that ever happened to this world—and to me.<br><br>I hope we will always be together until the very end, and that I can be the home you always return to.</p>
             </div>
-
+    
             <!-- SECOND PHOTO -->
             <img src="SnapInsta.to_749161222_18172008481430852_3166299685577193666_n.jpg" class="side-photo" alt="Photo 2">
         </div>
     </section>
-
+    
     <!-- LETTER COMPILATION SECTION -->
     <section class="section" id="letter">
         <div class="envelope-subtitle">a collection of thoughts</div>
@@ -1063,22 +938,82 @@
             1: { 
                 title: "A Hope I Thought I Lost", 
                 subtitle: "Letter I • To Stephanie", 
-                content: `When I met you, something in me quietly changed.\n\nBefore you came into my life, I had already convinced myself that maybe love just wasn't meant for me anymore. I wasn't looking for it, and I definitely wasn't chasing it. After everything I'd been through, opening my heart again felt more exhausting than exciting. It was easier to believe I'd be better off protecting myself than risking getting hurt all over again.\n\nThen I met you.\n\nI still remember how naturally you caught my attention. It wasn't because you were trying to stand out—you weren't. There was just something about you. The way you carried yourself, the way you smiled, the kindness you showed... somehow, everything about you made the world feel a little lighter.\n\nFor the first time in a long time, I found myself questioning the walls I'd spent so much time building.\n\nI've been hurt before. I've had reasons to stop believing, reasons to think that loving someone again would only lead to more disappointment. I kept telling myself that it wasn't worth it—that some people simply aren't meant to find the kind of love they hope for.\n\nBut then you came along, and without even realizing it, you challenged every belief I'd made peace with.\n\nYou made me wonder if maybe I had given up too soon.\n\nIt's strange how one person can change your perspective without even trying. One day I was certain I was done believing in love, and then suddenly, there you were. Now I catch myself wondering, "What if it's different this time?" Not because you've made me any promises, but because knowing you has given me something I thought I'd lost a long time ago—hope.\n\nI'm still scared. I won't pretend I'm not. Loving someone always comes with the possibility of getting hurt, and I know that better than most. But somehow, when it comes to you, that fear doesn't feel as overwhelming anymore.\n\nI'm not trying to rush anything. I'm not trying to force a future that hasn't happened yet. Right now, I'm simply grateful that I met you. Grateful that you reminded me that it's okay to open my heart again, even if it's only one small step at a time.\n\nYou didn't just make me like someone again.\nYou made me believe that love is still worth believing in.\nYou reminded me that maybe I shouldn't give up on it after all.` 
+                content: `When I met you, something in me quietly changed.
+
+Before you came into my life, I had already convinced myself that maybe love just wasn't meant for me anymore. I wasn't looking for it, and I definitely wasn't chasing it. After everything I'd been through, opening my heart again felt more exhausting than exciting. It was easier to believe I'd be better off protecting myself than risking getting hurt all over again.
+
+Then I met you.
+
+I still remember how naturally you caught my attention. It wasn't because you were trying to stand out—you weren't. There was just something about you. The way you carried yourself, the way you smiled, the kindness you showed... somehow, everything about you made the world feel a little lighter.
+
+For the first time in a long time, I found myself questioning the walls I'd spent so much time building.
+
+I've been hurt before. I've had reasons to stop believing, reasons to think that loving someone again would only lead to more disappointment. I kept telling myself that it wasn't worth it—that some people simply aren't meant to find the kind of love they hope for.
+
+But then you came along, and without even realizing it, you challenged every belief I'd made peace with.
+
+You made me wonder if maybe I had given up too soon.
+
+It's strange how one person can change your perspective without even trying. One day I was certain I was done believing in love, and then suddenly, there you were. Now I catch myself wondering, "What if it's different this time?" Not because you've made me any promises, but because knowing you has given me something I thought I'd lost a long time ago—hope.
+
+I'm still scared. I won't pretend I'm not. Loving someone always comes with the possibility of getting hurt, and I know that better than most. But somehow, when it comes to you, that fear doesn't feel as overwhelming anymore.
+
+I'm not trying to rush anything. I'm not trying to force a future that hasn't happened yet. Right now, I'm simply grateful that I met you. Grateful that you reminded me that it's okay to open my heart again, even if it's only one small step at a time.
+
+You didn't just make me like someone again.
+You made me believe that love is still worth believing in.
+You reminded me that maybe I shouldn't give up on it after all.` 
             },
             2: { 
                 title: "You Are Enough", 
                 subtitle: "Letter II • Choosing Yourself", 
-                content: `There will be days when it feels like no one notices you. Days when you're surrounded by people, yet somehow still feel alone. Days when it seems like no one understands what you're carrying or how tired you've become. I know those moments can be overwhelming, and sometimes they make you question your own worth. But even on those days, I hope you remember one thing—you still have yourself.\n\nI know it's not always easy to believe that. Sometimes all you want is for someone to stay, to listen, or simply remind you that everything will be okay. But even if no one else does, I hope you never forget that you've always been there for yourself. Think about everything you've been through. Every difficult day you thought you couldn't survive. Every time life became too heavy, you still found the strength to wake up the next morning. You may not give yourself enough credit, but that strength has always been yours. I'm proud of you for that.\n\nThe world won't always be kind. People will disappoint you. Some will leave without explanation, while others may never understand what you're feeling. There will be moments when you'll feel unappreciated, overlooked, or like you're giving more than you're receiving. When that happens, I hope you choose yourself. Not because you're being selfish, but because you deserve the same kindness you so freely give to everyone else. You deserve to rest without feeling guilty, to say no when you're exhausted, and to forgive yourself for the days when you're not at your best. Most importantly, you deserve to be loved by yourself.\n\nI know you have such a beautiful heart. You care deeply about the people around you, sometimes so much that you forget to care for yourself. So if there's one thing I hope you always remember, it's this: please don't leave yourself behind while you're busy taking care of everyone else. Be patient with yourself. Celebrate even the smallest victories. Allow yourself to make mistakes. Allow yourself to ask for help when you need it. And when life becomes too overwhelming, don't be afraid to slow down and breathe. You don't have to carry everything on your own.\n\nOne day, you'll look back and realize that the person who never truly gave up on you was you. The same heart that kept choosing to stand up after every setback. The same person who kept believing there was still tomorrow, even when today was difficult. That's someone worth being proud of.\n\nSo whenever you feel like no one sees you, no one understands you, or no one cares, I hope you remember this: you are enough. Not because of what you've accomplished. Not because of what you can give to other people. Not because someone else tells you that you are. You are enough simply because you are you.\n\nAnd I hope that no matter where life takes you, you never stop choosing yourself, believing in yourself, and loving yourself the way you deserve. Because the world is a better place with you in it.` 
+                content: `There will be days when it feels like no one notices you. Days when you're surrounded by people, yet somehow still feel alone. Days when it seems like no one understands what you're carrying or how tired you've become. I know those moments can be overwhelming, and sometimes they make you question your own worth. But even on those days, I hope you remember one thing—you still have yourself.
+
+I know it's not always easy to believe that. Sometimes all you want is for someone to stay, to listen, or simply remind you that everything will be okay. But even if no one else does, I hope you never forget that you've always been there for yourself. Think about everything you've been through. Every difficult day you thought you couldn't survive. Every time life became too heavy, you still found the strength to wake up the next morning. You may not give yourself enough credit, but that strength has always been yours. I'm proud of you for that.
+
+The world won't always be kind. People will disappoint you. Some will leave without explanation, while others may never understand what you're feeling. There will be moments when you'll feel unappreciated, overlooked, or like you're giving more than you're receiving. When that happens, I hope you choose yourself. Not because you're being selfish, but because you deserve the same kindness you so freely give to everyone else. You deserve to rest without feeling guilty, to say no when you're exhausted, and to forgive yourself for the days when you're not at your best. Most importantly, you deserve to be loved by yourself.
+
+I know you have such a beautiful heart. You care deeply about the people around you, sometimes so much that you forget to care for yourself. So if there's one thing I hope you always remember, it's this: please don't leave yourself behind while you're busy taking care of everyone else. Be patient with yourself. Celebrate even the smallest victories. Allow yourself to make mistakes. Allow yourself to ask for help when you need it. And when life becomes too overwhelming, don't be afraid to slow down and breathe. You don't have to carry everything on your own.
+
+One day, you'll look back and realize that the person who never truly gave up on you was you. The same heart that kept choosing to stand up after every setback. The same person who kept believing there was still tomorrow, even when today was difficult. That's someone worth being proud of.
+
+So whenever you feel like no one sees you, no one understands you, or no one cares, I hope you remember this: you are enough. Not because of what you've accomplished. Not because of what you can give to other people. Not because someone else tells you that you are. You are enough simply because you are you.
+
+And I hope that no matter where life takes you, you never stop choosing yourself, believing in yourself, and loving yourself the way you deserve. Because the world is a better place with you in it.` 
             },
             3: { 
                 title: "The Person I Truly Am", 
                 subtitle: "Letter III • The Real Me", 
-                content: `I often find myself trying to live up to people's first impression of me. If they see me as someone who's easygoing, cheerful, or always smiling, I do everything I can to stay that person. I keep the conversations light, I laugh a little louder, and I try my best to make it seem like everything is okay. Maybe it's because I'm afraid that if they see anything different, they'll start seeing me differently too.\n\nBut there are days when pretending becomes exhausting. There are days when all I want is for someone to open the door I've kept locked for so long and finally meet the person behind all the smiles—the one who overthinks, the one who gets scared, the one who questions himself more often than he'd ever admit. Because the truth is, I'm not perfect. I've made mistakes I'm still trying to forgive myself for. I carry fears I rarely talk about. I have insecurities that quietly follow me wherever I go. There are parts of me that aren't easy to understand, and there are days when I'm not easy to love.\n\nI think that's what scares me the most. Not that people will see the real me, but that once they do, they'll decide they liked the version of me they imagined better. I always wonder, if you knew every part of me—not just the good ones, but the ones I'm still trying to heal—would you still choose to stay? Would you still see me the same way after knowing my fears, my flaws, and the things I wish I had done differently?\n\nI guess that's the risk that comes with letting someone in. The closer someone gets, the harder it becomes to hide the parts of yourself you've spent years trying to keep out of sight. Eventually, the masks come off, and all that's left is the truth. Maybe that's what love is really tested by—not when everything is easy, not when you're only showing the best parts of yourself, but when someone sees you at your lowest, your messiest, your most vulnerable, and still chooses to stay.\n\nThat's the kind of love I hope exists. Not the kind that loves a perfect version of me, because that person doesn't exist. I hope someone chooses the real me—the one who's still growing, still healing, and still trying to figure things out. Because at the end of the day, I don't want to be loved for the person I pretend to be. I want to be loved for the person I truly am—the good parts, the broken parts, and everything in between.` 
+                content: `I often find myself trying to live up to people's first impression of me. If they see me as someone who's easygoing, cheerful, or always smiling, I do everything I can to stay that person. I keep the conversations light, I laugh a little louder, and I try my best to make it seem like everything is okay. Maybe it's because I'm afraid that if they see anything different, they'll start seeing me differently too.
+
+But there are days when pretending becomes exhausting. There are days when all I want is for someone to open the door I've kept locked for so long and finally meet the person behind all the smiles—the one who overthinks, the one who gets scared, the one who questions himself more often than he'd ever admit. Because the truth is, I'm not perfect. I've made mistakes I'm still trying to forgive myself for. I carry fears I rarely talk about. I have insecurities that quietly follow me wherever I go. There are parts of me that aren't easy to understand, and there are days when I'm not easy to love.
+
+I think that's what scares me the most. Not that people will see the real me, but that once they do, they'll decide they liked the version of me they imagined better. I always wonder, if you knew every part of me—not just the good ones, but the ones I'm still trying to heal—would you still choose to stay? Would you still see me the same way after knowing my fears, my flaws, and the things I wish I had done differently?
+
+I guess that's the risk that comes with letting someone in. The closer someone gets, the harder it becomes to hide the parts of yourself you've spent years trying to keep out of sight. Eventually, the masks come off, and all that's left is the truth. Maybe that's what love is really tested by—not when everything is easy, not when you're only showing the best parts of yourself, but when someone sees you at your lowest, your messiest, your most vulnerable, and still chooses to stay.
+
+That's the kind of love I hope exists. Not the kind that loves a perfect version of me, because that person doesn't exist. I hope someone chooses the real me—the one who's still growing, still healing, and still trying to figure things out. Because at the end of the day, I don't want to be loved for the person I pretend to be. I want to be loved for the person I truly am—the good parts, the broken parts, and everything in between.` 
             },
             4: { 
                 title: "My Heart, Laid Bare", 
                 subtitle: "Letter IV • No Hiding", 
-                content: `So Here It Is: My Heart, Laid Bare\n\nI've never been good at telling people how I feel. Even when my heart is full, I sometimes convince myself to keep quiet. I overthink every word, wondering if I'm saying too much or not enough. Most of the time, I choose silence because it feels safer than being misunderstood. So I learned to keep things to myself. I buried my feelings where no one could see them. I told myself that some emotions were better left unsaid, that maybe people didn't need to know how much they meant to me. It was easier that way—easier than risking rejection, easier than wondering if my feelings would ever be returned.\n\nThen I met you, and for the first time, I wanted to stop hiding. There was something about you that made me want to speak instead of staying quiet. I can't really explain it. Maybe it was the way you listened without making people feel small. Maybe it was the kindness you showed so naturally. Or maybe it was simply the way being around you made me feel safe. Whatever the reason was, it made me want to try. Not because I suddenly became good at expressing my feelings, but because you became someone worth trying for.\n\nSo if my words ever come out awkwardly, if I struggle to explain what I'm feeling, or if I take a little longer than most people to say what's on my mind, I hope you'll understand. I'm trying because you deserve to know. You deserve to know that you've become one of the brightest parts of my life. That your smile has a way of making difficult days feel a little lighter. That our conversations, no matter how random or ordinary they seem, often become the best part of my day. You deserve to know that your kindness never goes unnoticed, that your presence brings me a kind of peace I didn't know I was looking for, and most of all, that you've made me feel comfortable enough to be honest—not just with you, but with myself.\n\nYou've shown me that being vulnerable isn't something to be ashamed of. That opening your heart isn't always a mistake. That sometimes, the right person won't run away after seeing the parts of you you've spent years trying to hide. I don't know if I'll ever find the perfect words to describe what I feel for you. Maybe I never will. But I don't think love has ever been about finding the perfect words. I think it's about showing up anyway. It's about choosing honesty even when your voice shakes. It's about saying, "This is who I am, and these are the feelings I've been carrying."\n\nSo that's what I'm doing. I'm choosing to let you see the parts of me that I don't usually show anyone else—not because I expect anything in return, but because meeting you made me realize that some people are worth being honest with. And if there's one thing I hope you never doubt, it's this: everything I've written, every word I've struggled to put together, every feeling I've finally found the courage to share—they're all real.\n\nSo here it is.\n\nNo pretending. No hiding. No carefully chosen version of myself.\n\nJust me, and my heart, exactly as it is.` 
+                content: `So Here It Is: My Heart, Laid Bare
+
+I've never been good at telling people how I feel. Even when my heart is full, I somehow convince myself to keep quiet. I overthink every word, wondering if I'm saying too much or not enough. Most of the time, I choose silence because it feels safer than being misunderstood. So I learned to keep things to myself. I buried my feelings where no one could see them. I told myself that some emotions were better left unsaid, that maybe people didn't need to know how much they meant to me. It was easier that way—easier than risking rejection, easier than wondering if my feelings would ever be returned.
+
+Then I met you, and for the first time, I wanted to stop hiding. There was something about you that made me want to speak instead of staying quiet. I can't really explain it. Maybe it was the way you listened without making people feel small. Maybe it was the kindness you showed so naturally. Or maybe it was simply the way being around you made me feel safe. Whatever the reason was, it made me want to try. Not because I suddenly became good at expressing my feelings, but because you became someone worth trying for.
+
+So if my words ever come out awkwardly, if I struggle to explain what I'm feeling, or if I take a little longer than most people to say what's on my mind, I hope you'll understand. I'm trying because you deserve to know. You deserve to know that you've become one of the brightest parts of my life. That your smile has a way of making difficult days feel a little lighter. That our conversations, no matter how random or ordinary they seem, often become the best part of my day. You deserve to know that your kindness never goes unnoticed, that your presence brings me a kind of peace I didn't know I was looking for, and most of all, that you've made me feel comfortable enough to be honest—not just with you, but with myself.
+
+You've shown me that being vulnerable isn't something to be ashamed of. That opening your heart isn't always a mistake. That sometimes, the right person won't run away after seeing the parts of you you've spent years trying to hide. I don't know if I'll ever find the perfect words to describe what I feel for you. Maybe I never will. But I don't think love has ever been about finding the perfect words. I think it's about showing up anyway. It's about choosing honesty even when your voice shakes. It's about saying, "This is who I am, and these are the feelings I've been carrying."
+
+So that's what I'm doing. I'm choosing to let you see the parts of me that I don't usually show anyone else—not because I expect anything in return, but because meeting you made me realize that some people are worth being honest with. And if there's one thing I hope you never doubt, it's this: everything I've written, every word I've struggled to put together, every feeling I've finally found the courage to share—they're all real.
+
+So here it is.
+
+No pretending. No hiding. No carefully chosen version of myself.
+
+Just me, and my heart, exactly as it is.` 
             }
         };
 
@@ -1130,6 +1065,7 @@
             document.getElementById('lettersHub').style.display = 'grid';
         }
 
+        // Updated event listener to handle browser closing/re-opening & back/forward cache states properly
         window.addEventListener('pageshow', (event) => {
             const loader = document.getElementById('loader');
             const envelope = document.getElementById('envelopeOverlay');
