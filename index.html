@@ -3,924 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday! 💙</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+    <title>For Stephanie</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: #030a16;
-            color: #e2e8f0;
+            background-color: #f8fafc;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: #1e293b;
             overflow-x: hidden;
-            position: relative;
         }
-
-        /* Optimized Starry Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(circle at 50% 50%, rgba(15, 32, 67, 0.8) 0%, rgba(3, 10, 22, 1) 100%);
-            z-index: -1;
-        }
-
-        /* Navigation Bar */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 30px;
-            z-index: 100;
-            background: rgba(3, 10, 22, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .nav-logo {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.1rem;
-            color: #93c5fd;
-            white-space: nowrap;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 0.7rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            transition: color 0.3s;
-            white-space: nowrap;
-        }
-
-        .nav-links a:hover {
-            color: #60a5fa;
-        }
-
-        /* ============================================== */
-        /* CANDLE ANIMATION & WAVY LOADING TEXT           */
-        /* ============================================== */
+        
+        /* Loader styles */
         #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: #a2c9f5;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            animation: bgFlashSequence 3.5s infinite linear;
-            transition: opacity 0.8s ease, visibility 0.8s;
-            will-change: background-color;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
 
-        @keyframes bgFlashSequence {
-            0%, 40%, 88%, 100% { background-color: #a2c9f5; }
-            48%, 80% { background-color: #1a233d; }
-        }
-
-        .loading-text {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 50px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .loading-text span {
-            display: inline-block;
-            animation: waveMotion 1.5s infinite ease-in-out;
-            will-change: transform;
-        }
-
-        .loading-text span:nth-child(1) { animation-delay: 0.0s; }
-        .loading-text span:nth-child(2) { animation-delay: 0.1s; }
-        .loading-text span:nth-child(3) { animation-delay: 0.2s; }
-        .loading-text span:nth-child(4) { animation-delay: 0.3s; }
-        .loading-text span:nth-child(5) { animation-delay: 0.4s; }
-        .loading-text span:nth-child(6) { animation-delay: 0.5s; }
-        .loading-text span:nth-child(7) { animation-delay: 0.6s; }
-        .loading-text span:nth-child(8) { animation-delay: 0.7s; }
-        .loading-text span:nth-child(9) { animation-delay: 0.8s; }
-        .loading-text span:nth-child(10) { animation-delay: 0.9s; }
-        .loading-text span:nth-child(11) { animation-delay: 1.0s; }
-
-        @keyframes waveMotion {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .candles-container {
-            position: relative;
-            width: 220px;
-            height: 120px;
-            border-bottom: 4px solid #3d2b4e;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: 24px;
-            padding-bottom: 2px;
-        }
-
-        .candle {
-            background: #ffffff;
-            border: 3.5px solid #3d2b4e;
-            border-radius: 5px 5px 0 0;
-            position: relative;
-            display: flex;
-            justify-content: center;
-        }
-
-        .candle::before {
-            content: '';
-            position: absolute;
-            top: -6px;
-            width: 2.5px;
-            height: 6px;
-            background: #3d2b4e;
-        }
-
-        .candle-1 {
-            width: 42px;
-            height: 55px;
-            transform-origin: bottom center;
-            animation: shortCandleInflate 3.5s infinite ease-in-out;
-            will-change: transform, background-color;
-        }
-
-        @keyframes shortCandleInflate {
-            0%, 75% { background: #ffffff; transform: scale(1); }
-            80% { background: #ff7b7b; transform: scale(1.3, 1.1); }
-            86% { background: #ff5252; transform: scale(1.4, 1.2); }
-            92% { background: #ffffff; transform: scale(0.95); }
-            96%, 100% { background: #ffffff; transform: scale(1); }
-        }
-
-        .candle-2 {
-            width: 36px;
-            height: 88px;
-            transform-origin: bottom center;
-            animation: tallCandleBlow 3.5s infinite linear;
-            will-change: transform;
-        }
-
-        @keyframes tallCandleBlow {
-            0%, 100% { transform: rotate(0deg); }
-            18%, 42% { transform: rotate(-16deg); }
-            52%, 90% { transform: rotate(0deg); }
-        }
-
-        .candle-1 .normal-eyes {
-            position: absolute;
-            top: 14px;
-            display: flex;
-            gap: 10px;
-            animation: eyeNormal1 3.5s infinite linear;
-            will-change: opacity;
-        }
-
-        .candle-1 .normal-eyes .eye {
-            width: 4px;
-            height: 4px;
-            background: #3d2b4e;
-            border-radius: 50%;
-        }
-
-        .candle-1 .squint-eyes {
-            position: absolute;
-            top: 10px;
-            font-size: 11px;
-            font-weight: 800;
-            color: #3d2b4e;
-            letter-spacing: 2px;
-            animation: eyeSquint1 3.5s infinite linear;
-            will-change: opacity;
-        }
-
-        .candle-2 .eyes {
-            position: absolute;
-            top: 12px;
-            display: flex;
-            gap: 8px;
-        }
-
-        .candle-2 .eye {
-            width: 4px;
-            height: 4px;
-            background: #3d2b4e;
-            border-radius: 50%;
-        }
-
-        .candle-2 .mouth {
-            position: absolute;
-            top: 20px;
-            width: 7px;
-            height: 7px;
-            background: #3d2b4e;
-            border-radius: 50%;
-            animation: mouthBlowingTiming 3.5s infinite ease-in-out;
-            will-change: transform, opacity;
-        }
-
-        @keyframes mouthBlowingTiming {
-            0%, 14% { opacity: 0; transform: scale(0.1); }
-            18%, 38% { opacity: 1; transform: scale(1.1); }
-            45% { opacity: 0.8; transform: scale(0.4); }
-            50%, 100% { opacity: 0; transform: scale(0); }
-        }
-
-        .flame-1 {
-            position: absolute;
-            top: -26px;
-            width: 16px;
-            height: 24px;
-            background: radial-gradient(circle at 50% 80%, #fff 20%, #f59e0b 60%, #ef4444 100%);
-            border: 2px solid #3d2b4e;
-            border-radius: 50% 50% 35% 35%;
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.9);
-            animation: flameBlowOutAndPoof 3.5s infinite ease-in-out;
-            transform-origin: bottom center;
-            will-change: transform, opacity;
-        }
-
-        .flame-1::after {
-            content: '';
-            position: absolute;
-            bottom: 3px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 6px;
-            height: 10px;
-            background: #ffffff;
-            border-radius: 50%;
-        }
-
-        .smoke {
-            position: absolute;
-            top: -15px;
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            animation: smokeRise 3.5s infinite ease-out;
-            pointer-events: none;
-            will-change: transform, opacity;
-        }
-
-        @keyframes smokeRise {
-            0%, 36% { opacity: 0; transform: scale(0) translateY(0); }
-            40% { opacity: 0.7; transform: scale(1) translateY(-10px); }
-            55% { opacity: 0; transform: scale(2) translateY(-30px); }
-            100% { opacity: 0; }
-        }
-
-        @keyframes eyeNormal1 {
-            0%, 38%, 90%, 100% { opacity: 1; }
-            45%, 86% { opacity: 0; }
-        }
-
-        @keyframes eyeSquint1 {
-            0%, 38%, 90%, 100% { opacity: 0; }
-            45%, 86% { opacity: 1; }
-        }
-
-        @keyframes flameBlowOutAndPoof {
-            0% { opacity: 1; transform: scale(1) rotate(-1deg); }
-            10% { opacity: 1; transform: scale(1.05) rotate(2deg); }
-            20% { opacity: 1; transform: scale(0.95) rotate(-2deg); }
-            30% { opacity: 0.9; transform: scale(1.1, 0.7) rotate(-25deg) translateX(-6px); }
-            38%, 78% { opacity: 0; transform: scale(0); }
-            80% { opacity: 0.5; transform: scale(0.4); }
-            86% { opacity: 1; transform: scale(1.5, 1.7); }
-            92% { opacity: 1; transform: scale(0.9, 1.1); }
-            100% { opacity: 1; transform: scale(1) rotate(0deg); }
-        }
-
-        /* ---------------------------------- */
-        /* ENVELOPE OPENING OVERLAY           */
-        /* ---------------------------------- */
+        /* Envelope Overlay styles */
         #envelopeOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #030a16;
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.8s ease, visibility 0.8s;
-        }
-
-        .envelope-subtitle {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            color: #60a5fa;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-
-        .envelope-title {
-            font-family: 'Cinzel', serif;
-            font-size: 3rem;
-            color: #f8fafc;
-            margin-bottom: 30px;
-        }
-
-        .envelope-box {
-            width: 220px;
-            height: 140px;
-            background: rgba(30, 58, 138, 0.3);
-            border: 1.5px solid #60a5fa;
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 0 30px rgba(96, 165, 250, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-        }
-
-        .envelope-box:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(96, 165, 250, 0.4);
-        }
-
-        .envelope-icon {
-            font-size: 3rem;
-            color: #93c5fd;
-        }
-
-        .click-hint {
-            margin-top: 25px;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            color: #64748b;
-            text-transform: uppercase;
-        }
-
-        /* ---------------------------------- */
-        /* HERO SECTION & AUDIO PLAYER        */
-        /* ---------------------------------- */
-        .section {
-            padding: 40px 20px 30px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-
-        #home {
-            padding-top: 120px;
-            min-height: auto;
-        }
-
-        .hero-subtitle {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            color: #93c5fd;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-        }
-
-        .hero-title {
-            font-family: 'Cinzel', serif;
-            font-size: 4rem;
-            color: #ffffff;
-            line-height: 1.1;
-            margin-bottom: 15px;
-            text-shadow: 0 0 20px rgba(147, 197, 253, 0.3);
-        }
-
-        .hero-desc {
-            max-width: 500px;
-            font-size: 0.9rem;
-            color: #94a3b8;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .audio-player-card {
-            margin-top: 15px;
-            width: 100%;
-            max-width: 380px;
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 16px;
-            padding: 16px 20px;
-            border: 1px solid rgba(96, 165, 250, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(96, 165, 250, 0.15);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .player-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-align: left;
-        }
-
-        .player-icon {
-            font-size: 1.8rem;
-            background: rgba(96, 165, 250, 0.15);
-            padding: 10px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .player-title {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: #f8fafc;
-        }
-
-        .player-artist {
-            font-size: 0.8rem;
-            color: #94a3b8;
-        }
-
-        audio {
-            width: 100%;
-            height: 36px;
-            border-radius: 8px;
-            filter: invert(88%) hue-rotate(180deg);
-        }
-
-        /* ---------------------------------- */
-        /* PHOTO SHOWCASE SECTION             */
-        /* ---------------------------------- */
-        .showcase-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            max-width: 1100px;
-            width: 100%;
-            margin-top: 0;
-        }
-
-        .side-photo {
-            width: 260px;
-            height: 360px;
-            border-radius: 16px;
-            object-fit: cover;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            filter: grayscale(80%) contrast(110%);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            transition: filter 0.3s;
-        }
-
-        .side-photo:hover {
-            filter: grayscale(0%);
-        }
-
-        .center-glass-card {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(96, 165, 250, 0.2);
-            border-radius: 24px;
-            padding: 40px 30px;
-            flex: 1;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-
-        /* ---------------------------------- */
-        /* LETTER COMPILATION HUB & VIEWER    */
-        /* ---------------------------------- */
-        .letters-container {
-            max-width: 750px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .letters-hub-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 16px;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .letter-hub-card {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(96, 165, 250, 0.2);
-            border-radius: 18px;
-            padding: 22px 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .letter-hub-card:hover {
-            transform: translateY(-5px);
-            border-color: #60a5fa;
-            background: rgba(30, 58, 138, 0.4);
-            box-shadow: 0 10px 25px rgba(96, 165, 250, 0.25);
-        }
-
-        .hub-icon {
-            font-size: 2rem;
-            margin-bottom: 2px;
-        }
-
-        .hub-title {
-            font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
-            color: #f8fafc;
-            font-weight: 600;
-        }
-
-        .hub-date {
-            font-size: 0.7rem;
-            color: #94a3b8;
-        }
-
-        .letter-reader-view {
-            display: none;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(96, 165, 250, 0.3);
-            border-radius: 24px;
-            padding: 40px 35px;
-            text-align: left;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            animation: fadeInLetter 0.4s ease-in-out forwards;
-        }
-
-        .back-to-hub-btn {
-            background: rgba(96, 165, 250, 0.15);
-            border: 1px solid rgba(96, 165, 250, 0.3);
-            color: #93c5fd;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            margin-bottom: 25px;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .back-to-hub-btn:hover {
-            background: rgba(96, 165, 250, 0.3);
-            color: #ffffff;
-        }
-
-        .reader-header {
-            font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .reader-date-tag {
-            font-size: 0.8rem;
-            color: #60a5fa;
-            font-style: italic;
-            font-family: 'Playfair Display', serif;
-            margin-bottom: 20px;
-        }
-
-        .reader-content {
-            font-size: 0.95rem;
-            line-height: 1.85;
-            color: #cbd5e1;
-            white-space: pre-line;
-        }
-
-        @keyframes fadeInLetter {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ---------------------------------- */
-        /* CLEAN 100 REASONS CONTAINER STYLES */
-        /* ---------------------------------- */
-        .reasons-wrapper {
-            max-width: 750px;
-            width: 100%;
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .reasons-search {
-            width: 100%;
-            padding: 12px 20px;
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(96, 165, 250, 0.3);
-            border-radius: 12px;
-            color: #ffffff;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.9rem;
-            outline: none;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: border-color 0.3s;
-        }
-
-        .reasons-search:focus {
-            border-color: #60a5fa;
-            box-shadow: 0 0 15px rgba(96, 165, 250, 0.2);
-        }
-
-        .reasons-scroll-box {
-            max-height: 450px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding-right: 8px;
-            text-align: left;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .reasons-scroll-box::-webkit-scrollbar {
-            width: 6px;
-        }
-        .reasons-scroll-box::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.4);
-            border-radius: 10px;
-        }
-        .reasons-scroll-box::-webkit-scrollbar-thumb {
-            background: rgba(96, 165, 250, 0.4);
-            border-radius: 10px;
-        }
-        .reasons-scroll-box::-webkit-scrollbar-thumb:hover {
-            background: rgba(96, 165, 250, 0.7);
-        }
-
-        .reason-list-item {
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 14px;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: background 0.3s, border-color 0.3s, transform 0.2s;
-            will-change: transform;
-        }
-
-        .reason-list-item:hover {
-            background: rgba(30, 58, 138, 0.3);
-            border-color: rgba(96, 165, 250, 0.3);
-            transform: translateX(4px);
-        }
-
-        .reason-number {
-            font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
-            color: #60a5fa;
-            font-weight: 700;
-            min-width: 35px;
-        }
-
-        .reason-text {
-            font-size: 0.9rem;
-            color: #cbd5e1;
-            line-height: 1.5;
-        }
-
-        /* ---------------------------------- */
-        /* MUSEUM OF MEMORIES TEXT PLACEHOLDER*/
-        /* ---------------------------------- */
-        .memories-placeholder {
-            max-width: 650px;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(96, 165, 250, 0.2);
-            border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            margin-top: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .memories-placeholder-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
-        .memories-placeholder-text {
-            font-size: 0.95rem;
-            color: #94a3b8;
-            line-height: 1.7;
-            font-style: italic;
-            font-family: 'Playfair Display', serif;
-        }
-
-        @media (max-width: 768px) {
-            nav { padding: 15px 12px; }
-            .nav-logo { font-size: 0.95rem; }
-            .nav-links { gap: 10px; }
-            .nav-links a { font-size: 0.55rem; letter-spacing: 1px; }
-            .showcase-container { flex-direction: column; }
-            .side-photo { display: none; }
-            .letters-hub-grid { grid-template-columns: repeat(2, 1fr); }
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
     </style>
 </head>
-<body>
+<body class="relative min-h-screen">
 
-    <!-- CANDLE LOADING OVERLAY WITH WAVY TEXT -->
-    <div id="loader">
-        <div class="loading-text">
-            <span>L</span><span>O</span><span>A</span><span>D</span><span>I</span><span>N</span><span>G</span><span>&nbsp;</span><span>.</span><span>.</span><span>.</span>
-        </div>
-        <div class="candles-container">
-            <div class="candle candle-1">
-                <div class="flame-1"></div>
-                <div class="smoke"></div>
-                <div class="normal-eyes"><div class="eye"></div><div class="eye"></div></div>
-                <div class="squint-eyes">&gt; &lt;</div>
-            </div>
-            <div class="candle candle-2">
-                <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
-                <div class="mouth"></div>
-            </div>
+    <!-- Loading Screen -->
+    <div id="loader" class="fixed inset-0 z-50 bg-slate-900 flex flex-col items-center justify-center text-white">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid mb-4"></div>
+        <p class="text-lg font-medium tracking-wide">Loading something special for you...</p>
+    </div>
+
+    <!-- Envelope Overlay -->
+    <div id="envelopeOverlay" class="fixed inset-0 z-40 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center transform transition-all">
+            <div class="text-5xl mb-4">💌</div>
+            <h2 class="text-2xl font-bold mb-2 text-slate-800">A Message For You</h2>
+            <p class="text-slate-600 mb-6">Someone left a little piece of their heart here. Tap below to open it.</p>
+            <button onclick="openSite()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-xl transition shadow-lg shadow-blue-500/30">
+                Open Envelope
+            </button>
         </div>
     </div>
 
-    <!-- ENVELOPE OPENING OVERLAY -->
-    <div id="envelopeOverlay">
-        <div class="envelope-subtitle">a little surprise</div>
-        <div class="envelope-title">You Got A Mail</div>
-        <div class="envelope-box" onclick="openSite()">
-            <div class="envelope-icon">✉️</div>
-        </div>
-        <div class="click-hint">CLICK THE MAIL TO OPEN</div>
-    </div>
+    <!-- Background Audio (Optional placeholder) -->
+    <audio id="bgMusic" loop>
+        <!-- Add your audio source here if needed -->
+    </audio>
 
-    <!-- NAVIGATION BAR -->
-    <nav>
-        <div class="nav-logo">♡Stephanie:&gt;</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#letter">Letter</a></li>
-            <li><a href="#reasons">Reasons</a></li>
-            <li><a href="#memories">Memory</a></li>
-        </ul>
-    </nav>
+    <!-- Main Content Hub -->
+    <main id="home" class="max-w-4xl mx-auto px-4 py-12">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-extrabold text-slate-900 mb-2">For Stephanie</h1>
+            <p class="text-slate-600">A collection of thoughts, letters, and reasons.</p>
+        </header>
 
-    <!-- HERO SECTION -->
-    <section class="section" id="home">
-        <div class="hero-subtitle">For Steph, on Her Birthday</div>
-        <h1 class="hero-title">Happy Birthday,<br>Stephanie</h1>
-        <p class="hero-desc">Every moment with you becomes a beautiful memory. Today marks your birthday—the day a remarkable person came into this world.</p>
-        <div style="color: #60a5fa; font-size: 1.5rem; margin-top: 10px;">💙</div>
-
-        <div class="audio-player-card">
-            <div class="player-info">
-                <div class="player-icon">🎵</div>
-                <div>
-                    <div class="player-title">Shape of My Heart</div>
-                    <div class="player-artist">Backstreet Boys</div>
-                </div>
+        <!-- Letters Hub Section -->
+        <section id="lettersHub" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+            <div onclick="openLetter(1)" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition cursor-pointer border border-slate-100">
+                <span class="text-xs font-semibold text-blue-600 uppercase tracking-wider">Letter I</span>
+                <h3 class="text-xl font-bold text-slate-800 mt-1 mb-2">A Hope I Thought I Lost</h3>
+                <p class="text-slate-500 text-sm">When I met you, something in me quietly changed...</p>
             </div>
-            <audio id="bgMusic" loop controls>
-                <source src="shape-of-my-heart.mp3.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-    </section>
-
-    <!-- PHOTO SHOWCASE SECTION -->
-    <section class="section">
-        <div class="showcase-container">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500" class="side-photo" alt="Photo 1">
-            
-            <div class="center-glass-card">
-                <div style="color: #60a5fa; font-size: 1.2rem; margin-bottom: 10px;">💙 ✨ 💙</div>
-                <div style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">from the bottom of my heart</div>
-                <h2 style="font-family: 'Cinzel', serif; font-size: 2.2rem; color: #ffffff; line-height: 1.3; margin-bottom: 20px;">Today is the day the world became more beautiful.</h2>
-                <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.7;">The day you were born is the best thing that ever happened to this world—and to me.<br><br>I hope we will always be together until the very end, and that I can be the home you always return to.</p>
+            <div onclick="openLetter(2)" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition cursor-pointer border border-slate-100">
+                <span class="text-xs font-semibold text-blue-600 uppercase tracking-wider">Letter II</span>
+                <h3 class="text-xl font-bold text-slate-800 mt-1 mb-2">You Are Enough</h3>
+                <p class="text-slate-500 text-sm">There will be days when it feels like no one notices you...</p>
             </div>
-
-            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500" class="side-photo" alt="Photo 2">
-        </div>
-    </section>
-
-    <!-- LETTER COMPILATION SECTION -->
-    <section class="section" id="letter">
-        <div class="envelope-subtitle">a collection of thoughts</div>
-        <h2 style="font-family: 'Cinzel', serif; font-size: 2.5rem; color: #ffffff; margin-bottom: 25px;">Letter Compilation</h2>
-
-        <div class="letters-container">
-            <div id="lettersHub" class="letters-hub-grid">
-                <div class="letter-hub-card" onclick="openLetter(1)">
-                    <div class="hub-icon">🕊️</div>
-                    <div class="hub-title">Letter I</div>
-                    <div class="hub-date">A Hope I Thought I Lost</div>
-                </div>
-                <div class="letter-hub-card" onclick="openLetter(2)">
-                    <div class="hub-icon">🌻</div>
-                    <div class="hub-title">Letter II</div>
-                    <div class="hub-date">You Are Enough</div>
-                </div>
-                <div class="letter-hub-card" onclick="openLetter(3)">
-                    <div class="hub-icon">🤍</div>
-                    <div class="hub-title">Letter III</div>
-                    <div class="hub-date">The Person I Truly Am</div>
-                </div>
-                <div class="letter-hub-card" onclick="openLetter(4)">
-                    <div class="hub-icon">💌</div>
-                    <div class="hub-title">Letter IV</div>
-                    <div class="hub-date">My Heart, Laid Bare</div>
-                </div>
+            <div onclick="openLetter(3)" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition cursor-pointer border border-slate-100">
+                <span class="text-xs font-semibold text-blue-600 uppercase tracking-wider">Letter III</span>
+                <h3 class="text-xl font-bold text-slate-800 mt-1 mb-2">The Person I Truly Am</h3>
+                <p class="text-slate-500 text-sm">I often find myself trying to live up to people's first impressions...</p>
             </div>
-
-            <div id="letterReader" class="letter-reader-view">
-                <button class="back-to-hub-btn" onclick="closeLetterReader()">← Back to All Letters</button>
-                <div id="readerTitle" class="reader-header"></div>
-                <div id="readerSubtitle" class="reader-date-tag"></div>
-                <div id="readerBody" class="reader-content"></div>
+            <div onclick="openLetter(4)" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition cursor-pointer border border-slate-100">
+                <span class="text-xs font-semibold text-blue-600 uppercase tracking-wider">Letter IV</span>
+                <h3 class="text-xl font-bold text-slate-800 mt-1 mb-2">My Heart, Laid Bare</h3>
+                <p class="text-slate-500 text-sm">I've never been good at telling people how I feel...</p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 100 REASONS SECTION -->
-    <section class="section" id="reasons">
-        <h2 style="font-family: 'Cinzel', serif; font-size: 2.8rem; color: #ffffff; margin-bottom: 10px;">100 Reasons Why I Like You</h2>
-        <div style="width: 40px; height: 2px; background: #60a5fa; margin-bottom: 20px;"></div>
-        <p style="font-size: 0.85rem; color: #94a3b8; font-style: italic; font-family: 'Playfair Display', serif; margin-bottom: 15px;">Scroll through or search to read them all</p>
+        <!-- Letter Reader Section (Hidden by default) -->
+        <section id="letterReader" class="hidden bg-white p-8 rounded-2xl shadow-sm border border-slate-100 mb-16">
+            <button onclick="closeLetterReader()" class="mb-6 text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center gap-1">
+                ← Back to Letters
+            </button>
+            <span id="readerSubtitle" class="text-xs font-semibold text-blue-600 uppercase tracking-wider"></span>
+            <h2 id="readerTitle" class="text-3xl font-extrabold text-slate-900 mt-1 mb-6"></h2>
+            <div id="readerBody" class="text-slate-700 whitespace-pre-line leading-relaxed space-y-4"></div>
+        </section>
 
-        <div class="reasons-wrapper">
-            <input type="text" id="reasonSearch" class="reasons-search" placeholder="Search reasons (e.g., smile, voice, soul)..." onkeyup="filterReasons()">
-            <div class="reasons-scroll-box" id="reasonsContainer"></div>
-        </div>
-    </section>
-
-    <!-- MUSEUM OF MEMORIES -->
-    <section class="section" id="memories">
-        <div class="envelope-subtitle">every picture tells a story</div>
-        <h2 style="font-family: 'Cinzel', serif; font-size: 3rem; color: #ffffff; margin-bottom: 10px;">Museum of Memories</h2>
-
-        <div class="memories-placeholder">
-            <div class="memories-placeholder-icon">📸</div>
-            <div class="memories-placeholder-text">
-                "Our photo gallery is currently being curated. Check back soon for snapshots of our favorite moments together."
+        <!-- Reasons Section -->
+        <section class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4">100 Reasons</h2>
+            <input type="text" id="reasonSearch" oninput="filterReasons()" placeholder="Search reasons..." class="w-full px-4 py-2 border border-slate-200 rounded-xl mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div id="reasonsContainer" class="space-y-4 max-h-96 overflow-y-auto pr-2">
+                <!-- Dynamically populated -->
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Confetti Script -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -935,82 +114,22 @@
             1: { 
                 title: "A Hope I Thought I Lost", 
                 subtitle: "Letter I • To Stephanie", 
-                content: `When I met you, something in me quietly changed.
-
-Before you came into my life, I had already convinced myself that maybe love just wasn't meant for me anymore. I wasn't looking for it, and I definitely wasn't chasing it. After everything I'd been through, opening my heart again felt more exhausting than exciting. It was easier to believe I'd be better off protecting myself than risking getting hurt all over again.
-
-Then I met you.
-
-I still remember how naturally you caught my attention. It wasn't because you were trying to stand out—you weren't. There was just something about you. The way you carried yourself, the way you smiled, the kindness you showed... somehow, everything about you made the world feel a little lighter.
-
-For the first time in a long time, I found myself questioning the walls I'd spent so much time building.
-
-I've been hurt before. I've had reasons to stop believing, reasons to think that loving someone again would only lead to more disappointment. I kept telling myself that it wasn't worth it—that some people simply aren't meant to find the kind of love they hope for.
-
-But then you came along, and without even realizing it, you challenged every belief I'd made peace with.
-
-You made me wonder if maybe I had given up too soon.
-
-It's strange how one person can change your perspective without even trying. One day I was certain I was done believing in love, and then suddenly, there you were. Now I catch myself wondering, "What if it's different this time?" Not because you've made me any promises, but because knowing you has given me something I thought I'd lost a long time ago—hope.
-
-I'm still scared. I won't pretend I'm not. Loving someone always comes with the possibility of getting hurt, and I know that better than most. But somehow, when it comes to you, that fear doesn't feel as overwhelming anymore.
-
-I'm not trying to rush anything. I'm not trying to force a future that hasn't happened yet. Right now, I'm simply grateful that I met you. Grateful that you reminded me that it's okay to open my heart again, even if it's only one small step at a time.
-
-You didn't just make me like someone again.
-You made me believe that love is still worth believing in.
-You reminded me that maybe I shouldn't give up on it after all.` 
+                content: `When I met you, something in me quietly changed.\n\nBefore you came into my life, I had already convinced myself that maybe love just wasn't meant for me anymore. I wasn't looking for it, and I definitely wasn't chasing it. After everything I'd been through, opening my heart again felt more exhausting than exciting. It was easier to believe I'd be better off protecting myself than risking getting hurt all over again.\n\nThen I met you.\n\nI still remember how naturally you caught my attention. It wasn't because you were trying to stand out—you weren't. There was just something about you. The way you carried yourself, the way you smiled, the kindness you showed... somehow, everything about you made the world feel a little lighter.\n\nFor the first time in a long time, I found myself questioning the walls I'd spent so much time building.\n\nI've been hurt before. I've had reasons to stop believing, reasons to think that loving someone again would only lead to more disappointment. I kept telling myself that it wasn't worth it—that some people simply aren't meant to find the kind of love they hope for.\n\nBut then you came along, and without even realizing it, you challenged every belief I'd made peace with.\n\nYou made me wonder if maybe I had given up too soon.\n\nIt's strange how one person can change your perspective without even trying. One day I was certain I was done believing in love, and then suddenly, there you were. Now I catch myself wondering, "What if it's different this time?" Not because you've made me any promises, but because knowing you has given me something I thought I'd lost a long time ago—hope.\n\nI'm still scared. I won't pretend I'm not. Loving someone always comes with the possibility of getting hurt, and I know that better than most. But somehow, when it comes to you, that fear doesn't feel as overwhelming anymore.\n\nI'm not trying to rush anything. I'm not trying to force a future that hasn't happened yet. Right now, I'm simply grateful that I met you. Grateful that you reminded me that it's okay to open my heart again, even if it's only one small step at a time.\n\nYou didn't just make me like someone again.\nYou made me believe that love is still worth believing in.\nYou reminded me that maybe I shouldn't give up on it after all.` 
             },
             2: { 
                 title: "You Are Enough", 
                 subtitle: "Letter II • Choosing Yourself", 
-                content: `There will be days when it feels like no one notices you. Days when you're surrounded by people, yet somehow still feel alone. Days when it seems like no one understands what you're carrying or how tired you've become. I know those moments can be overwhelming, and sometimes they make you question your own worth. But even on those days, I hope you remember one thing—you still have yourself.
-
-I know it's not always easy to believe that. Sometimes all you want is for someone to stay, to listen, or simply remind you that everything will be okay. But even if no one else does, I hope you never forget that you've always been there for yourself. Think about everything you've been through. Every difficult day you thought you couldn't survive. Every time life became too heavy, you still found the strength to wake up the next morning. You may not give yourself enough credit, but that strength has always been yours. I'm proud of you for that.
-
-The world won't always be kind. People will disappoint you. Some will leave without explanation, while others may never understand what you're feeling. There will be moments when you'll feel unappreciated, overlooked, or like you're giving more than you're receiving. When that happens, I hope you choose yourself. Not because you're being selfish, but because you deserve the same kindness you so freely give to everyone else. You deserve to rest without feeling guilty, to say no when you're exhausted, and to forgive yourself for the days when you're not at your best. Most importantly, you deserve to be loved by yourself.
-
-I know you have such a beautiful heart. You care deeply about the people around you, sometimes so much that you forget to care for yourself. So if there's one thing I hope you always remember, it's this: please don't leave yourself behind while you're busy taking care of everyone else. Be patient with yourself. Celebrate even the smallest victories. Allow yourself to make mistakes. Allow yourself to ask for help when you need it. And when life becomes too overwhelming, don't be afraid to slow down and breathe. You don't have to carry everything on your own.
-
-One day, you'll look back and realize that the person who never truly gave up on you was you. The same heart that kept choosing to stand up after every setback. The same person who kept believing there was still tomorrow, even when today was difficult. That's someone worth being proud of.
-
-So whenever you feel like no one sees you, no one understands you, or no one cares, I hope you remember this: you are enough. Not because of what you've accomplished. Not because of what you can give to other people. Not because someone else tells you that you are. You are enough simply because you are you.
-
-And I hope that no matter where life takes you, you never stop choosing yourself, believing in yourself, and loving yourself the way you deserve. Because the world is a better place with you in it.` 
+                content: `There will be days when it feels like no one notices you. Days when you're surrounded by people, yet somehow still feel alone. Days when it seems like no one understands what you're carrying or how tired you've become. I know those moments can be overwhelming, and sometimes they make you question your own worth. But even on those days, I hope you remember one thing—you still have yourself.\n\nI know it's not always easy to believe that. Sometimes all you want is for someone to stay, to listen, or simply remind you that everything will be okay. But even if no one else does, I hope you never forget that you've always been there for yourself. Think about everything you've been through. Every difficult day you thought you couldn't survive. Every time life became too heavy, you still found the strength to wake up the next morning. You may not give yourself enough credit, but that strength has always been yours. I'm proud of you for that.\n\nThe world won't always be kind. People will disappoint you. Some will leave without explanation, while others may never understand what you're feeling. There will be moments when you'll feel unappreciated, overlooked, or like you're giving more than you're receiving. When that happens, I hope you choose yourself. Not because you're being selfish, but because you deserve the same kindness you so freely give to everyone else. You deserve to rest without feeling guilty, to say no when you're exhausted, and to forgive yourself for the days when you're not at your best. Most importantly, you deserve to be loved by yourself.\n\nI know you have such a beautiful heart. You care deeply about the people around you, sometimes so much that you forget to care for yourself. So if there's one thing I hope you always remember, it's this: please don't leave yourself behind while you're busy taking care of everyone else. Be patient with yourself. Celebrate even the smallest victories. Allow yourself to make mistakes. Allow yourself to ask for help when you need it. And when life becomes too overwhelming, don't be afraid to slow down and breathe. You don't have to carry everything on your own.\n\nOne day, you'll look back and realize that the person who never truly gave up on you was you. The same heart that kept choosing to stand up after every setback. The same person who kept believing there was still tomorrow, even when today was difficult. That's someone worth being proud of.\n\nSo whenever you feel like no one sees you, no one understands you, or no one cares, I hope you remember this: you are enough. Not because of what you've accomplished. Not because of what you can give to other people. Not because someone else tells you that you are. You are enough simply because you are you.\n\nAnd I hope that no matter where life takes you, you never stop choosing yourself, believing in yourself, and loving yourself the way you deserve. Because the world is a better place with you in it.` 
             },
             3: { 
                 title: "The Person I Truly Am", 
                 subtitle: "Letter III • The Real Me", 
-                content: `I often find myself trying to live up to people's first impression of me. If they see me as someone who's easygoing, cheerful, or always smiling, I do everything I can to stay that person. I keep the conversations light, I laugh a little louder, and I try my best to make it seem like everything is okay. Maybe it's because I'm afraid that if they see anything different, they'll start seeing me differently too.
-
-But there are days when pretending becomes exhausting. There are days when all I want is for someone to open the door I've kept locked for so long and finally meet the person behind all the smiles—the one who overthinks, the one who gets scared, the one who questions himself more often than he'd ever admit. Because the truth is, I'm not perfect. I've made mistakes I'm still trying to forgive myself for. I carry fears I rarely talk about. I have insecurities that quietly follow me wherever I go. There are parts of me that aren't easy to understand, and there are days when I'm not easy to love.
-
-I think that's what scares me the most. Not that people will see the real me, but that once they do, they'll decide they liked the version of me they imagined better. I always wonder, if you knew every part of me—not just the good ones, but the ones I'm still trying to heal—would you still choose to stay? Would you still see me the same way after knowing my fears, my flaws, and the things I wish I had done differently?
-
-I guess that's the risk that comes with letting someone in. The closer someone gets, the harder it becomes to hide the parts of yourself you've spent years trying to keep out of sight. Eventually, the masks come off, and all that's left is the truth. Maybe that's what love is really tested by—not when everything is easy, not when you're only showing the best parts of yourself, but when someone sees you at your lowest, your messiest, your most vulnerable, and still chooses to stay.
-
-That's the kind of love I hope exists. Not the kind that loves a perfect version of me, because that person doesn't exist. I hope someone chooses the real me—the one who's still growing, still healing, and still trying to figure things out. Because at the end of the day, I don't want to be loved for the person I pretend to be. I want to be loved for the person I truly am—the good parts, the broken parts, and everything in between.` 
+                content: `I often find myself trying to live up to people's first impression of me. If they see me as someone who's easygoing, cheerful, or always smiling, I do everything I can to stay that person. I keep the conversations light, I laugh a little louder, and I try my best to make it seem like everything is okay. Maybe it's because I'm afraid that if they see anything different, they'll start seeing me differently too.\n\nBut there are days when pretending becomes exhausting. There are days when all I want is for someone to open the door I've kept locked for so long and finally meet the person behind all the smiles—the one who overthinks, the one who gets scared, the one who questions himself more often than he'd ever admit. Because the truth is, I'm not perfect. I've made mistakes I'm still trying to forgive myself for. I carry fears I rarely talk about. I have insecurities that quietly follow me wherever I go. There are parts of me that aren't easy to understand, and there are days when I'm not easy to love.\n\nI think that's what scares me the most. Not that people will see the real me, but that once they do, they'll decide they liked the version of me they imagined better. I always wonder, if you knew every part of me—not just the good ones, but the ones I'm still trying to heal—would you still choose to stay? Would you still see me the same way after knowing my fears, my flaws, and the things I wish I had done differently?\n\nI guess that's the risk that comes with letting someone in. The closer someone gets, the harder it becomes to hide the parts of yourself you've spent years trying to keep out of sight. Eventually, the masks come off, and all that's left is the truth. Maybe that's what love is really tested by—not when everything is easy, not when you're only showing the best parts of yourself, but when someone sees you at your lowest, your messiest, your most vulnerable, and still chooses to stay.\n\nThat's the kind of love I hope exists. Not the kind that loves a perfect version of me, because that person doesn't exist. I hope someone chooses the real me—the one who's still growing, still healing, and still trying to figure things out. Because at the end of the day, I don't want to be loved for the person I pretend to be. I want to be loved for the person I truly am—the good parts, the broken parts, and everything in between.` 
             },
             4: { 
                 title: "My Heart, Laid Bare", 
                 subtitle: "Letter IV • No Hiding", 
-                content: `So Here It Is: My Heart, Laid Bare
-
-I've never been good at telling people how I feel. Even when my heart is full, I somehow convince myself to keep quiet. I overthink every word, wondering if I'm saying too much or not enough. Most of the time, I choose silence because it feels safer than being misunderstood. So I learned to keep things to myself. I buried my feelings where no one could see them. I told myself that some emotions were better left unsaid, that maybe people didn't need to know how much they meant to me. It was easier that way—easier than risking rejection, easier than wondering if my feelings would ever be returned.
-
-Then I met you, and for the first time, I wanted to stop hiding. There was something about you that made me want to speak instead of staying quiet. I can't really explain it. Maybe it was the way you listened without making people feel small. Maybe it was the kindness you showed so naturally. Or maybe it was simply the way being around you made me feel safe. Whatever the reason was, it made me want to try. Not because I suddenly became good at expressing my feelings, but because you became someone worth trying for.
-
-So if my words ever come out awkwardly, if I struggle to explain what I'm feeling, or if I take a little longer than most people to say what's on my mind, I hope you'll understand. I'm trying because you deserve to know. You deserve to know that you've become one of the brightest parts of my life. That your smile has a way of making difficult days feel a little lighter. That our conversations, no matter how random or ordinary they seem, often become the best part of my day. You deserve to know that your kindness never goes unnoticed, that your presence brings me a kind of peace I didn't know I was looking for, and most of all, that you've made me feel comfortable enough to be honest—not just with you, but with myself.
-
-You've shown me that being vulnerable isn't something to be ashamed of. That opening your heart isn't always a mistake. That sometimes, the right person won't run away after seeing the parts of you you've spent years trying to hide. I don't know if I'll ever find the perfect words to describe what I feel for you. Maybe I never will. But I don't think love has ever been about finding the perfect words. I think it's about showing up anyway. It's about choosing honesty even when your voice shakes. It's about saying, "This is who I am, and these are the feelings I've been carrying."
-
-So that's what I'm doing. I'm choosing to let you see the parts of me that I don't usually show anyone else—not because I expect anything in return, but because meeting you made me realize that some people are worth being honest with. And if there's one thing I hope you never doubt, it's this: everything I've written, every word I've struggled to put together, every feeling I've finally found the courage to share—they're all real.
-
-So here it is.
-
-No pretending. No hiding. No carefully chosen version of myself.
-
-Just me, and my heart, exactly as it is.` 
+                content: `So Here It Is: My Heart, Laid Bare\n\nI've never been good at telling people how I feel. Even when my heart is full, I sometimes convince myself to keep quiet. I overthink every word, wondering if I'm saying too much or not enough. Most of the time, I choose silence because it feels safer than being misunderstood. So I learned to keep things to myself. I buried my feelings where no one could see them. I told myself that some emotions were better left unsaid, that maybe people didn't need to know how much they meant to me. It was easier that way—easier than risking rejection, easier than wondering if my feelings would ever be returned.\n\nThen I met you, and for the first time, I wanted to stop hiding. There was something about you that made me want to speak instead of staying quiet. I can't really explain it. Maybe it was the way you listened without making people feel small. Maybe it was the kindness you showed so naturally. Or maybe it was simply the way being around you made me feel safe. Whatever the reason was, it made me want to try. Not because I suddenly became good at expressing my feelings, but because you became someone worth trying for.\n\nSo if my words ever come out awkwardly, if I struggle to explain what I'm feeling, or if I take a little longer than most people to say what's on my mind, I hope you'll understand. I'm trying because you deserve to know. You deserve to know that you've become one of the brightest parts of my life. That your smile has a way of making difficult days feel a little lighter. That our conversations, no matter how random or ordinary they seem, often become the best part of my day. You deserve to know that your kindness never goes unnoticed, that your presence brings me a kind of peace I didn't know I was looking for, and most of all, that you've made me feel comfortable enough to be honest—not just with you, but with myself.\n\nYou've shown me that being vulnerable isn't something to be ashamed of. That opening your heart isn't always a mistake. That sometimes, the right person won't run away after seeing the parts of you you've spent years trying to hide. I don't know if I'll ever find the perfect words to describe what I feel for you. Maybe I never will. But I don't think love has ever been about finding the perfect words. I think it's about showing up anyway. It's about choosing honesty even when your voice shakes. It's about saying, "This is who I am, and these are the feelings I've been carrying."\n\nSo that's what I'm doing. I'm choosing to let you see the parts of me that I don't usually show anyone else—not because I expect anything in return, but because meeting you made me realize that some people are worth being honest with. And if there's one thing I hope you never doubt, it's this: everything I've written, every word I've struggled to put together, every feeling I've finally found the courage to share—they're all real.\n\nSo here it is.\n\nNo pretending. No hiding. No carefully chosen version of myself.\n\nJust me, and my heart, exactly as it is.` 
             }
         };
 
@@ -1023,8 +142,8 @@ Just me, and my heart, exactly as it is.`
             container.innerHTML = '';
             reasonsList.forEach((reason, index) => {
                 const item = document.createElement('div');
-                item.className = 'reason-list-item';
-                item.innerHTML = `<div class="reason-number">#${index + 1}</div><div class="reason-text">${reason}</div>`;
+                item.className = 'reason-list-item flex gap-3 p-3 hover:bg-slate-50 rounded-xl transition';
+                item.innerHTML = `<div class="reason-number font-bold text-blue-600">#${index + 1}</div><div class="reason-text text-slate-700">${reason}</div>`;
                 container.appendChild(item);
             });
         }
@@ -1037,8 +156,8 @@ Just me, and my heart, exactly as it is.`
                 const reasonNum = `#${index + 1}`;
                 if (reason.toLowerCase().includes(query) || reasonNum.includes(query)) {
                     const item = document.createElement('div');
-                    item.className = 'reason-list-item';
-                    item.innerHTML = `<div class="reason-number">${reasonNum}</div><div class="reason-text">${reason}</div>`;
+                    item.className = 'reason-list-item flex gap-3 p-3 hover:bg-slate-50 rounded-xl transition';
+                    item.innerHTML = `<div class="reason-number font-bold text-blue-600">${reasonNum}</div><div class="reason-text text-slate-700">${reason}</div>`;
                     container.appendChild(item);
                 }
             });
@@ -1054,7 +173,7 @@ Just me, and my heart, exactly as it is.`
             document.getElementById('readerBody').innerText = letterData.content;
             document.getElementById('lettersHub').style.display = 'none';
             document.getElementById('letterReader').style.display = 'block';
-            document.getElementById('letter').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('letterReader').scrollIntoView({ behavior: 'smooth' });
         }
 
         function closeLetterReader() {
@@ -1062,8 +181,18 @@ Just me, and my heart, exactly as it is.`
             document.getElementById('lettersHub').style.display = 'grid';
         }
 
-        // Updated event listener to handle browser closing/re-opening & back/forward cache states properly
-        window.addEventListener('pageshow', (event) => {
+        // Trigger sequence whenever the tab becomes visible (handles background tab restore from closed Chrome)
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                triggerIntroSequence();
+            }
+        });
+
+        window.addEventListener('pageshow', () => {
+            triggerIntroSequence();
+        });
+
+        function triggerIntroSequence() {
             const loader = document.getElementById('loader');
             const envelope = document.getElementById('envelopeOverlay');
             
@@ -1081,7 +210,7 @@ Just me, and my heart, exactly as it is.`
                 envelope.style.opacity = '1';
                 envelope.style.visibility = 'visible';
             }
-        });
+        }
 
         function openSite() {
             const overlay = document.getElementById('envelopeOverlay');
