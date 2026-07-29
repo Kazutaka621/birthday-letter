@@ -330,7 +330,7 @@
         }
 
         /* ---------------------------------- */
-        /* FULL SCREEN WAVE ROSE OVERLAY      */
+        /* FULL SCREEN CANVAS ROSE OVERLAY    */
         /* ---------------------------------- */
         #roseBloomOverlay {
             position: fixed;
@@ -338,7 +338,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #000000; /* Solid dark background like the video */
+            background: #000000;
             z-index: 9998;
             display: flex;
             flex-direction: column;
@@ -350,27 +350,13 @@
             opacity: 0;
         }
 
-        /* Wave Flower Particle Keyframe */
-        .wave-rose {
+        #roseCanvas {
             position: absolute;
-            user-select: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            will-change: transform, opacity;
-            opacity: 0;
-            animation: waveBloom 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            filter: drop-shadow(0 8px 15px rgba(0,0,0,0.6));
-            z-index: 1;
-        }
-
-        @keyframes waveBloom {
-            0% {
-                opacity: 0;
-                transform: scale(0) rotate(calc(var(--rot) - 60deg)) translateX(100px);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) rotate(var(--rot)) translateX(0);
-            }
         }
 
         /* ---------------------------------- */
@@ -379,7 +365,7 @@
         .mail-popup-card {
             position: relative;
             z-index: 10000;
-            display: none; /* Initially completely hidden */
+            display: none;
             flex-direction: column;
             align-items: center;
             text-align: center;
@@ -887,6 +873,7 @@
 
     <!-- FULL SCREEN ROSE BLOOM & MAIL POPUP OVERLAY -->
     <div id="roseBloomOverlay">
+        <canvas id="roseCanvas"></canvas>
         <div class="mail-popup-card" id="mailCard">
             <div class="envelope-subtitle">a little surprise</div>
             <div class="envelope-title">You Got A Mail</div>
@@ -1286,56 +1273,104 @@ Just me, and my heart, exactly as it is.`
 
         const correctPin = "071926";
 
-        /* Generate dense floral wave sweeping from right to left */
+        /* High Performance Canvas 60FPS Right-to-Left Rose Wave Animation */
         function triggerRightToLeftRoseWave() {
-            const container = document.getElementById('roseBloomOverlay');
-            const roses = ['🌸', '🌺', '💮'];
-            const total = 450; // Dense cluster to cover the entire screen
+            const canvas = document.getElementById('roseCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
 
-            for (let i = 0; i < total; i++) {
-                // Random position covering the whole viewport
-                const destX = Math.random() * window.innerWidth;
-                const destY = Math.random() * window.innerHeight;
+            const emojis = ['🌸', '🌺', '💮'];
+            const totalParticles = 400;
+            const particles = [];
 
-                // Delay based on X position: right edge (window.innerWidth) = 0 delay, left edge = max delay
-                // Add a small random offset to give it an organic, non-linear wave shape
-                const delayFraction = 1 - (destX / window.innerWidth);
+            for (let i = 0; i < totalParticles; i++) {
+                const destX = Math.random() * canvas.width;
+                const destY = Math.random() * canvas.height;
+                const delayFraction = 1 - (destX / canvas.width);
                 const randomOffset = (Math.random() * 200) - 100;
-                let delay = (delayFraction * 2200) + randomOffset;
+                let delay = (delayFraction * 2000) + randomOffset;
                 if (delay < 0) delay = 0;
 
-                setTimeout(() => {
-                    const rose = document.createElement('div');
-                    rose.className = 'wave-rose';
-                    rose.innerText = roses[Math.floor(Math.random() * roses.length)];
-
-                    // Random sizes to create depth layering
-                    const size = Math.floor(Math.random() * 50 + 40); 
-                    rose.style.fontSize = size + 'px';
-                    
-                    // Center anchor based on size
-                    rose.style.left = (destX - size/2) + 'px';
-                    rose.style.top = (destY - size/2) + 'px';
-                    rose.style.setProperty('--rot', (Math.random() * 360) + 'deg');
-
-                    // Insert before mail card to stay in background
-                    container.insertBefore(rose, document.getElementById('mailCard'));
-                }, delay);
+                particles.push({
+                    x: destX,
+                    y: destY,
+                    size: Math.random() * 35 + 35,
+                    emoji: emojis[Math.floor(Math.random() * emojis.length)],
+                    rotation: Math.random() * Math.PI * 2,
+                    delay: delay,
+                    duration: 700
+                });
             }
 
-            /* Wait until the entire wave is absolutely finished, then reveal the mail card */
-            // max delay ~2200ms + animation duration ~900ms = ~3100ms
-            setTimeout(() => {
-                const mailCard = document.getElementById('mailCard');
-                if (mailCard) {
-                    mailCard.style.display = 'flex'; // Put it back into document flow
-                    
-                    // Small timeout needed for the DOM to register 'display: flex' before animating
-                    setTimeout(() => {
-                        mailCard.classList.add('pop-up');
-                    }, 50);
+            const animationStartTime = performance.now();
+            let waveFinished = false;
+
+            function animate(currentTime) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                let allDone = true;
+                const elapsedTotal = currentTime - animationStartTime;
+
+                particles.forEach(p => {
+                    const particleElapsed = elapsedTotal - p.delay;
+                    if (particleElapsed < 0) {
+                        allDone = false;
+                        return;
+                    }
+
+                    let progress = particleElapsed / p.duration;
+                    if (progress > 1) progress = 1;
+                    if (progress < 1) allDone = false;
+
+                    const easeProgress = 1 - Math.pow(1 - progress, 3);
+                    const currentScale = easeProgress;
+                    const currentAlpha = progress;
+
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.rotation + (1 - easeProgress) * 0.4);
+                    ctx.globalAlpha = currentAlpha;
+                    ctx.font = `${p.size * currentScale}px sans-serif`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(p.emoji, 0, 0);
+                    ctx.restore();
+                });
+
+                if (!allDone && elapsedTotal < 3500) {
+                    requestAnimationFrame(animate);
+                } else {
+                    // Final static paint lock
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    particles.forEach(p => {
+                        ctx.save();
+                        ctx.translate(p.x, p.y);
+                        ctx.rotate(p.rotation);
+                        ctx.globalAlpha = 1;
+                        ctx.font = `${p.size}px sans-serif`;
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(p.emoji, 0, 0);
+                        ctx.restore();
+                    });
+
+                    // Reveal Mail Card after wave completes
+                    if (!waveFinished) {
+                        waveFinished = true;
+                        const mailCard = document.getElementById('mailCard');
+                        if (mailCard) {
+                            mailCard.style.display = 'flex';
+                            setTimeout(() => {
+                                mailCard.classList.add('pop-up');
+                            }, 50);
+                        }
+                    }
                 }
-            }, 3200); 
+            }
+
+            requestAnimationFrame(animate);
         }
 
         window.addEventListener('pageshow', (event) => {
@@ -1356,7 +1391,6 @@ Just me, and my heart, exactly as it is.`
                     loader.style.opacity = '0';
                     loader.style.visibility = 'hidden';
                     
-                    /* Reveal Black Overlay and start right-to-left flower sweep */
                     if (roseBloomOverlay) {
                         roseBloomOverlay.style.opacity = '1';
                         roseBloomOverlay.style.visibility = 'visible';
@@ -1366,7 +1400,6 @@ Just me, and my heart, exactly as it is.`
             }
         });
 
-        /* Step 1: Clicking mail opens PIN overlay */
         function openSite() {
             const roseBloomOverlay = document.getElementById('roseBloomOverlay');
             const pinOverlay = document.getElementById('pinOverlay');
@@ -1383,7 +1416,6 @@ Just me, and my heart, exactly as it is.`
             }
         }
 
-        /* Step 2: Verifying PIN unlocks the main page */
         function verifyPin() {
             const userPin = document.getElementById('pinInput').value;
             const errorDiv = document.getElementById('pinError');
