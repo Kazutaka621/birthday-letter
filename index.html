@@ -881,12 +881,12 @@
             <div class="player-info">
                 <div class="player-icon">🎵</div>
                 <div>
-                    <div class="player-title">Shape of My Heart</div>
-                    <div class="player-artist">Backstreet Boys</div>
+                    <div class="player-title" id="playerTitle">Shape of My Heart</div>
+                    <div class="player-artist" id="playerArtist">Backstreet Boys</div>
                 </div>
             </div>
-            <audio id="bgMusic" loop controls>
-                <source src="shape-of-my-heart.mp3.mp3" type="audio/mpeg">
+            <audio id="bgMusic" controls>
+                <source id="audioSource" src="shape-of-my-heart.mp3.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
         </div>
@@ -994,6 +994,38 @@
         if (window.location.hash) { history.replaceState(null, null, window.location.pathname); }
 
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
+        // Playlist configuration
+        const playlist = [
+            {
+                title: "Shape of My Heart",
+                artist: "Backstreet Boys",
+                src: "shape-of-my-heart.mp3.mp3"
+            },
+            {
+                title: "The Euphoria of Ridley",
+                artist: "Soundtrack",
+                src: "the-euphoria-of-ridley.mp3" // Change this filename if your actual file name is different
+            }
+        ];
+        let currentTrackIndex = 0;
+        const audio = document.getElementById('bgMusic');
+        const audioSource = document.getElementById('audioSource');
+        const playerTitle = document.getElementById('playerTitle');
+        const playerArtist = document.getElementById('playerArtist');
+
+        function loadTrack(index) {
+            audioSource.src = playlist[index].src;
+            playerTitle.innerText = playlist[index].title;
+            playerArtist.innerText = playlist[index].artist;
+            audio.load();
+        }
+
+        audio.addEventListener('ended', () => {
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+            loadTrack(currentTrackIndex);
+            audio.play().catch(err => console.log('Playback prevented:', err));
+        });
 
         const letterDatabase = {
             1: { 
@@ -1213,6 +1245,7 @@ Just me, and my heart, exactly as it is.`
 
         window.addEventListener('DOMContentLoaded', () => { 
             renderReasons(); 
+            loadTrack(0);
             const pinInputField = document.getElementById('pinInput');
             if(pinInputField) {
                 pinInputField.addEventListener('keypress', function (e) {
