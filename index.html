@@ -330,110 +330,6 @@
         }
 
         /* ---------------------------------- */
-        /* FULL SCREEN CANVAS ROSE OVERLAY    */
-        /* ---------------------------------- */
-        #roseBloomOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #000000;
-            z-index: 9998;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            transition: opacity 0.8s ease, visibility 0.8s;
-            visibility: hidden;
-            opacity: 0;
-        }
-
-        #roseCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        /* ---------------------------------- */
-        /* MAIL POP-UP CARD OVERLAY           */
-        /* ---------------------------------- */
-        .mail-popup-card {
-            position: relative;
-            z-index: 10000;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            background: rgba(15, 23, 42, 0.88);
-            border: 1px solid rgba(244, 63, 94, 0.5);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 40px 35px;
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(244, 63, 94, 0.3);
-            opacity: 0;
-            transform: scale(0.2) translateY(50px);
-            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .mail-popup-card.pop-up {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
-
-        .envelope-subtitle {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            color: #f43f5e;
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-        }
-
-        .envelope-title {
-            font-family: 'Cinzel', serif;
-            font-size: 2.5rem;
-            color: #f8fafc;
-            margin-bottom: 25px;
-        }
-
-        .envelope-box {
-            width: 220px;
-            height: 140px;
-            background: rgba(225, 29, 72, 0.2);
-            border: 1.5px solid #f43f5e;
-            border-radius: 16px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 0 30px rgba(244, 63, 94, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-        }
-
-        .envelope-box:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 45px rgba(244, 63, 94, 0.5);
-        }
-
-        .envelope-icon {
-            font-size: 3.5rem;
-        }
-
-        .click-hint {
-            margin-top: 25px;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            color: #f43f5e;
-            text-transform: uppercase;
-        }
-
-        /* ---------------------------------- */
         /* PIN CODE OVERLAY                   */
         /* ---------------------------------- */
         #pinOverlay {
@@ -443,7 +339,7 @@
             width: 100vw;
             height: 100vh;
             background: #030a16;
-            z-index: 9999;
+            z-index: 9998;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -451,6 +347,74 @@
             transition: opacity 0.5s ease, visibility 0.5s;
             visibility: hidden;
             opacity: 0;
+        }
+
+        /* ---------------------------------- */
+        /* ENVELOPE OPENING OVERLAY           */
+        /* ---------------------------------- */
+        #envelopeOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #030a16;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .envelope-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #60a5fa;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .envelope-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            color: #f8fafc;
+            margin-bottom: 30px;
+        }
+
+        .envelope-box {
+            width: 220px;
+            height: 140px;
+            background: rgba(30, 58, 138, 0.3);
+            border: 1.5px solid #60a5fa;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(96, 165, 250, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .envelope-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(96, 165, 250, 0.4);
+        }
+
+        .envelope-icon {
+            font-size: 3rem;
+            color: #93c5fd;
+        }
+
+        .click-hint {
+            margin-top: 25px;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: #64748b;
+            text-transform: uppercase;
         }
 
         /* ---------------------------------- */
@@ -627,6 +591,7 @@
             box-shadow: 0 10px 25px rgba(96, 165, 250, 0.25);
         }
 
+        /* Placement for Letter 5 and Letter 6 */
         .card-letter-5 {
             grid-column: 1 / span 2;
             width: 80%;
@@ -871,19 +836,6 @@
         </div>
     </div>
 
-    <!-- FULL SCREEN ROSE BLOOM & MAIL POPUP OVERLAY -->
-    <div id="roseBloomOverlay">
-        <canvas id="roseCanvas"></canvas>
-        <div class="mail-popup-card" id="mailCard">
-            <div class="envelope-subtitle">a little surprise</div>
-            <div class="envelope-title">You Got A Mail</div>
-            <div class="envelope-box" onclick="openSite()">
-                <div class="envelope-icon">✉️</div>
-            </div>
-            <div class="click-hint">CLICK THE MAIL TO OPEN</div>
-        </div>
-    </div>
-
     <!-- 6-DIGIT PIN CODE OVERLAY -->
     <div id="pinOverlay">
         <div class="envelope-subtitle">security check</div>
@@ -895,6 +847,16 @@
         <div id="pinError" style="color: #ef4444; font-size: 0.8rem; height: 20px; margin-bottom: 10px;"></div>
         
         <button onclick="verifyPin()" style="background: rgba(96, 165, 250, 0.2); border: 1px solid rgba(96, 165, 250, 0.4); color: #93c5fd; padding: 10px 24px; border-radius: 20px; font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: background 0.3s;">Submit</button>
+    </div>
+
+    <!-- ENVELOPE OPENING OVERLAY -->
+    <div id="envelopeOverlay">
+        <div class="envelope-subtitle">a little surprise</div>
+        <div class="envelope-title">You Got A Mail</div>
+        <div class="envelope-box" onclick="openSite()">
+            <div class="envelope-icon">✉️</div>
+        </div>
+        <div class="click-hint">CLICK THE MAIL TO OPEN</div>
     </div>
 
     <!-- NAVIGATION BAR -->
@@ -933,6 +895,7 @@
     <!-- PHOTO SHOWCASE SECTION -->
     <section class="section">
         <div class="showcase-container">
+            <!-- FIRST PHOTO -->
             <img src="SnapInsta.to_749542546_18172008445430852_3683813179628220141_n.jpg" class="side-photo" alt="Photo 1">
             
             <div class="center-glass-card">
@@ -942,6 +905,7 @@
                 <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.7;">The day you were born is the best thing that ever happened to this world—and to me.<br><br>I hope we will always be together until the very end, and that I can be the home you always return to.</p>
             </div>
     
+            <!-- SECOND PHOTO -->
             <img src="SnapInsta.to_749161222_18172008481430852_3166299685577193666_n.jpg" class="side-photo" alt="Photo 2">
         </div>
     </section>
@@ -953,6 +917,7 @@
 
         <div class="letters-container">
             <div id="lettersHub" class="letters-hub-grid">
+                <!-- ROW 1: LETTERS 1, 2, 3, 4 -->
                 <div class="letter-hub-card" onclick="openLetter(1)">
                     <div class="hub-icon">🕊️</div>
                     <div class="hub-title">Letter I</div>
@@ -974,6 +939,7 @@
                     <div class="hub-date">Your Safe Place</div>
                 </div>
 
+                <!-- ROW 2: LETTERS 5 & 6 -->
                 <div class="letter-hub-card card-letter-5" onclick="openLetter(5)">
                     <div class="hub-icon">🌸</div>
                     <div class="hub-title">Letter V</div>
@@ -1039,7 +1005,9 @@ I've been hurt before, and I had every reason to stop believing that love would 
 
 Not because you've made me promises or asked me to believe in forever, but because knowing you gave me something I thought I'd lost a long time ago—hope. I'm still scared, and I won't pretend I'm not. Loving someone always comes with the possibility of getting hurt, and I know that better than most. But somehow, when it comes to you, that fear doesn't feel as overwhelming anymore.
 
-I'm not trying to rush anything or force a future that hasn't happened yet. Right now, I'm simply grateful that I met you. Grateful that you reminded me it's okay to open my heart again, even if it's only one small step at a time. You didn't just make me like someone again—you made me believe that love is still worth believing in. And maybe, just maybe, I shouldn't give up on it after all.` 
+I'm not trying to rush anything or force a future that hasn't happened yet. Right now, I'm simply grateful that I met you. Grateful that you reminded me it's okay to open my heart again, even if it's only one small step at a time. You didn't just make me like someone again—you made me believe that love is still worth believing in. And maybe, just maybe, I shouldn't give up on it after all.
+
+I think this reads more like a letter than a series of reflections, which matches the style you've been using throughout your collection.` 
             },
             2: { 
                 title: "You Are Enough", 
@@ -1273,110 +1241,10 @@ Just me, and my heart, exactly as it is.`
 
         const correctPin = "071926";
 
-        /* High Performance Canvas 60FPS Right-to-Left Rose Wave Animation */
-        function triggerRightToLeftRoseWave() {
-            const canvas = document.getElementById('roseCanvas');
-            const ctx = canvas.getContext('2d');
-            
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            const emojis = ['🌸', '🌺', '💮'];
-            const totalParticles = 400;
-            const particles = [];
-
-            for (let i = 0; i < totalParticles; i++) {
-                const destX = Math.random() * canvas.width;
-                const destY = Math.random() * canvas.height;
-                const delayFraction = 1 - (destX / canvas.width);
-                const randomOffset = (Math.random() * 200) - 100;
-                let delay = (delayFraction * 2000) + randomOffset;
-                if (delay < 0) delay = 0;
-
-                particles.push({
-                    x: destX,
-                    y: destY,
-                    size: Math.random() * 35 + 35,
-                    emoji: emojis[Math.floor(Math.random() * emojis.length)],
-                    rotation: Math.random() * Math.PI * 2,
-                    delay: delay,
-                    duration: 700
-                });
-            }
-
-            const animationStartTime = performance.now();
-            let waveFinished = false;
-
-            function animate(currentTime) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                let allDone = true;
-                const elapsedTotal = currentTime - animationStartTime;
-
-                particles.forEach(p => {
-                    const particleElapsed = elapsedTotal - p.delay;
-                    if (particleElapsed < 0) {
-                        allDone = false;
-                        return;
-                    }
-
-                    let progress = particleElapsed / p.duration;
-                    if (progress > 1) progress = 1;
-                    if (progress < 1) allDone = false;
-
-                    const easeProgress = 1 - Math.pow(1 - progress, 3);
-                    const currentScale = easeProgress;
-                    const currentAlpha = progress;
-
-                    ctx.save();
-                    ctx.translate(p.x, p.y);
-                    ctx.rotate(p.rotation + (1 - easeProgress) * 0.4);
-                    ctx.globalAlpha = currentAlpha;
-                    ctx.font = `${p.size * currentScale}px sans-serif`;
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText(p.emoji, 0, 0);
-                    ctx.restore();
-                });
-
-                if (!allDone && elapsedTotal < 3500) {
-                    requestAnimationFrame(animate);
-                } else {
-                    // Final static paint lock
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    particles.forEach(p => {
-                        ctx.save();
-                        ctx.translate(p.x, p.y);
-                        ctx.rotate(p.rotation);
-                        ctx.globalAlpha = 1;
-                        ctx.font = `${p.size}px sans-serif`;
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'middle';
-                        ctx.fillText(p.emoji, 0, 0);
-                        ctx.restore();
-                    });
-
-                    // Reveal Mail Card after wave completes
-                    if (!waveFinished) {
-                        waveFinished = true;
-                        const mailCard = document.getElementById('mailCard');
-                        if (mailCard) {
-                            mailCard.style.display = 'flex';
-                            setTimeout(() => {
-                                mailCard.classList.add('pop-up');
-                            }, 50);
-                        }
-                    }
-                }
-            }
-
-            requestAnimationFrame(animate);
-        }
-
         window.addEventListener('pageshow', (event) => {
             const loader = document.getElementById('loader');
             const pinOverlay = document.getElementById('pinOverlay');
-            const roseBloomOverlay = document.getElementById('roseBloomOverlay');
+            const envelope = document.getElementById('envelopeOverlay');
             
             if (pinOverlay) {
                 pinOverlay.style.opacity = '0';
@@ -1391,22 +1259,23 @@ Just me, and my heart, exactly as it is.`
                     loader.style.opacity = '0';
                     loader.style.visibility = 'hidden';
                     
-                    if (roseBloomOverlay) {
-                        roseBloomOverlay.style.opacity = '1';
-                        roseBloomOverlay.style.visibility = 'visible';
-                        triggerRightToLeftRoseWave();
+                    // Show Envelope First after loading
+                    if (envelope) {
+                        envelope.style.opacity = '1';
+                        envelope.style.visibility = 'visible';
                     }
-                }, 3500);
+                }, 7000);
             }
         });
 
+        // Step 1: Clicking mail hides envelope and shows PIN overlay
         function openSite() {
-            const roseBloomOverlay = document.getElementById('roseBloomOverlay');
+            const envelope = document.getElementById('envelopeOverlay');
             const pinOverlay = document.getElementById('pinOverlay');
 
-            if (roseBloomOverlay) {
-                roseBloomOverlay.style.opacity = '0';
-                roseBloomOverlay.style.visibility = 'hidden';
+            if (envelope) {
+                envelope.style.opacity = '0';
+                envelope.style.visibility = 'hidden';
             }
 
             if (pinOverlay) {
@@ -1416,6 +1285,7 @@ Just me, and my heart, exactly as it is.`
             }
         }
 
+        // Step 2: Verifying PIN grants access to the site
         function verifyPin() {
             const userPin = document.getElementById('pinInput').value;
             const errorDiv = document.getElementById('pinError');
@@ -1428,7 +1298,7 @@ Just me, and my heart, exactly as it is.`
                 document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
                 const audio = document.getElementById('bgMusic');
                 if (audio) { audio.play().catch(err => console.log('Audio playback prevented:', err)); }
-                confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 }, colors: ['#f43f5e', '#60a5fa', '#93c5fd', '#ffffff'] });
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#60a5fa', '#3b82f6', '#93c5fd', '#ffffff'] });
             } else {
                 errorDiv.innerText = "Incorrect PIN. Please try again.";
                 document.getElementById('pinInput').value = "";
