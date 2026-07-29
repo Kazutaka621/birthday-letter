@@ -330,7 +330,7 @@
         }
 
         /* ---------------------------------- */
-        /* FULL SCREEN ROSE BLOOM OVERLAY     */
+        /* FULL SCREEN WAVE ROSE OVERLAY      */
         /* ---------------------------------- */
         #roseBloomOverlay {
             position: fixed;
@@ -338,7 +338,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: radial-gradient(circle at 50% 50%, rgba(136, 19, 55, 0.95) 0%, rgba(3, 10, 22, 0.98) 100%);
+            background: #000000; /* Solid dark background like the video */
             z-index: 9998;
             display: flex;
             flex-direction: column;
@@ -350,21 +350,27 @@
             opacity: 0;
         }
 
-        /* Animated blooming rose particles */
-        .blooming-rose {
+        /* Wave Flower Particle Keyframe */
+        .wave-rose {
             position: absolute;
             user-select: none;
             pointer-events: none;
+            will-change: transform, opacity;
             opacity: 0;
-            transform: scale(0) rotate(-30deg);
-            animation: roseBloomIn 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            filter: drop-shadow(0 0 15px rgba(244, 63, 94, 0.7));
+            animation: waveBloom 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            filter: drop-shadow(0 8px 15px rgba(0,0,0,0.6));
+            z-index: 1;
         }
 
-        @keyframes roseBloomIn {
-            0% { opacity: 0; transform: scale(0) rotate(-45deg); }
-            50% { opacity: 1; transform: scale(1.3) rotate(15deg); }
-            100% { opacity: 0.85; transform: scale(1) rotate(0deg); }
+        @keyframes waveBloom {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(calc(var(--rot) - 60deg)) translateX(100px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(var(--rot)) translateX(0);
+            }
         }
 
         /* ---------------------------------- */
@@ -373,26 +379,24 @@
         .mail-popup-card {
             position: relative;
             z-index: 10000;
-            display: flex;
+            display: none; /* Initially completely hidden */
             flex-direction: column;
             align-items: center;
             text-align: center;
-            background: rgba(15, 23, 42, 0.85);
-            border: 1px solid rgba(244, 63, 94, 0.4);
+            background: rgba(15, 23, 42, 0.88);
+            border: 1px solid rgba(244, 63, 94, 0.5);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             padding: 40px 35px;
             border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(244, 63, 94, 0.25);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(244, 63, 94, 0.3);
             opacity: 0;
-            visibility: hidden;
-            transform: scale(0.3) translateY(40px);
+            transform: scale(0.2) translateY(50px);
             transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .mail-popup-card.pop-up {
             opacity: 1;
-            visibility: visible;
             transform: scale(1) translateY(0);
         }
 
@@ -1282,37 +1286,56 @@ Just me, and my heart, exactly as it is.`
 
         const correctPin = "071926";
 
-        /* Generate full-screen rose particles */
-        function triggerRoseBloomEffect() {
+        /* Generate dense floral wave sweeping from right to left */
+        function triggerRightToLeftRoseWave() {
             const container = document.getElementById('roseBloomOverlay');
-            const roses = ['🌹', '🌸', '🌺', '🥀', '✨', '🌹', '💮'];
-            const particleCount = 45;
+            const roses = ['🌸', '🌺', '💮'];
+            const total = 450; // Dense cluster to cover the entire screen
 
-            for (let i = 0; i < particleCount; i++) {
-                const rose = document.createElement('div');
-                rose.className = 'blooming-rose';
-                rose.innerText = roses[Math.floor(Math.random() * roses.length)];
-                
-                const xPos = Math.random() * 92;
-                const yPos = Math.random() * 92;
-                const fontSize = Math.floor(Math.random() * 25 + 32);
-                const delay = (Math.random() * 1.5).toFixed(2);
+            for (let i = 0; i < total; i++) {
+                // Random position covering the whole viewport
+                const destX = Math.random() * window.innerWidth;
+                const destY = Math.random() * window.innerHeight;
 
-                rose.style.left = xPos + 'vw';
-                rose.style.top = yPos + 'vh';
-                rose.style.fontSize = fontSize + 'px';
-                rose.style.animationDelay = delay + 's';
+                // Delay based on X position: right edge (window.innerWidth) = 0 delay, left edge = max delay
+                // Add a small random offset to give it an organic, non-linear wave shape
+                const delayFraction = 1 - (destX / window.innerWidth);
+                const randomOffset = (Math.random() * 200) - 100;
+                let delay = (delayFraction * 2200) + randomOffset;
+                if (delay < 0) delay = 0;
 
-                container.appendChild(rose);
+                setTimeout(() => {
+                    const rose = document.createElement('div');
+                    rose.className = 'wave-rose';
+                    rose.innerText = roses[Math.floor(Math.random() * roses.length)];
+
+                    // Random sizes to create depth layering
+                    const size = Math.floor(Math.random() * 50 + 40); 
+                    rose.style.fontSize = size + 'px';
+                    
+                    // Center anchor based on size
+                    rose.style.left = (destX - size/2) + 'px';
+                    rose.style.top = (destY - size/2) + 'px';
+                    rose.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+
+                    // Insert before mail card to stay in background
+                    container.insertBefore(rose, document.getElementById('mailCard'));
+                }, delay);
             }
 
-            /* Pop up the Mail card after full screen roses bloom */
+            /* Wait until the entire wave is absolutely finished, then reveal the mail card */
+            // max delay ~2200ms + animation duration ~900ms = ~3100ms
             setTimeout(() => {
                 const mailCard = document.getElementById('mailCard');
                 if (mailCard) {
-                    mailCard.classList.add('pop-up');
+                    mailCard.style.display = 'flex'; // Put it back into document flow
+                    
+                    // Small timeout needed for the DOM to register 'display: flex' before animating
+                    setTimeout(() => {
+                        mailCard.classList.add('pop-up');
+                    }, 50);
                 }
-            }, 1200);
+            }, 3200); 
         }
 
         window.addEventListener('pageshow', (event) => {
@@ -1333,17 +1356,17 @@ Just me, and my heart, exactly as it is.`
                     loader.style.opacity = '0';
                     loader.style.visibility = 'hidden';
                     
-                    /* Show Full Screen Rose Bloom Overlay */
+                    /* Reveal Black Overlay and start right-to-left flower sweep */
                     if (roseBloomOverlay) {
                         roseBloomOverlay.style.opacity = '1';
                         roseBloomOverlay.style.visibility = 'visible';
-                        triggerRoseBloomEffect();
+                        triggerRightToLeftRoseWave();
                     }
                 }, 3500);
             }
         });
 
-        /* Step 1: Clicking mail hides Rose/Mail screen and opens PIN overlay */
+        /* Step 1: Clicking mail opens PIN overlay */
         function openSite() {
             const roseBloomOverlay = document.getElementById('roseBloomOverlay');
             const pinOverlay = document.getElementById('pinOverlay');
