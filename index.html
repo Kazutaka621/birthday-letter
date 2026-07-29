@@ -1246,9 +1246,9 @@ Just me, and my heart, exactly as it is.`
             const pinOverlay = document.getElementById('pinOverlay');
             const envelope = document.getElementById('envelopeOverlay');
             
-            if (envelope) {
-                envelope.style.opacity = '0';
-                envelope.style.visibility = 'hidden';
+            if (pinOverlay) {
+                pinOverlay.style.opacity = '0';
+                pinOverlay.style.visibility = 'hidden';
             }
             
             if (loader) {
@@ -1259,43 +1259,50 @@ Just me, and my heart, exactly as it is.`
                     loader.style.opacity = '0';
                     loader.style.visibility = 'hidden';
                     
-                    if (pinOverlay) {
-                        pinOverlay.style.opacity = '1';
-                        pinOverlay.style.visibility = 'visible';
-                        document.getElementById('pinInput').focus();
+                    // Show Envelope First after loading
+                    if (envelope) {
+                        envelope.style.opacity = '1';
+                        envelope.style.visibility = 'visible';
                     }
                 }, 7000);
             }
         });
 
+        // Step 1: Clicking mail hides envelope and shows PIN overlay
+        function openSite() {
+            const envelope = document.getElementById('envelopeOverlay');
+            const pinOverlay = document.getElementById('pinOverlay');
+
+            if (envelope) {
+                envelope.style.opacity = '0';
+                envelope.style.visibility = 'hidden';
+            }
+
+            if (pinOverlay) {
+                pinOverlay.style.opacity = '1';
+                pinOverlay.style.visibility = 'visible';
+                document.getElementById('pinInput').focus();
+            }
+        }
+
+        // Step 2: Verifying PIN grants access to the site
         function verifyPin() {
             const userPin = document.getElementById('pinInput').value;
             const errorDiv = document.getElementById('pinError');
             const pinOverlay = document.getElementById('pinOverlay');
-            const envelope = document.getElementById('envelopeOverlay');
 
             if (userPin === correctPin) {
                 pinOverlay.style.opacity = '0';
                 pinOverlay.style.visibility = 'hidden';
 
-                if (envelope) {
-                    envelope.style.opacity = '1';
-                    envelope.style.visibility = 'visible';
-                }
+                document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+                const audio = document.getElementById('bgMusic');
+                if (audio) { audio.play().catch(err => console.log('Audio playback prevented:', err)); }
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#60a5fa', '#3b82f6', '#93c5fd', '#ffffff'] });
             } else {
                 errorDiv.innerText = "Incorrect PIN. Please try again.";
                 document.getElementById('pinInput').value = "";
             }
-        }
-
-        function openSite() {
-            const overlay = document.getElementById('envelopeOverlay');
-            overlay.style.opacity = '0';
-            overlay.style.visibility = 'hidden';
-            document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
-            const audio = document.getElementById('bgMusic');
-            if (audio) { audio.play().catch(err => console.log('Audio playback prevented:', err)); }
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#60a5fa', '#3b82f6', '#93c5fd', '#ffffff'] });
         }
     </script>
 </body>
